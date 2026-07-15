@@ -6,8 +6,25 @@ package build
 import mill.*, scalalib.*, publish.*
 import mill.api.Task.Simple
 import mill.javalib.errorprone.ErrorProneModule
+import scala.util.chaining.*
 
 object pcomb4j extends JavaModule, PublishModule, ErrorProneModule {
+    def javadocOverviewSource: T[PathRef] =
+        Task.Source(this.moduleDir./("overview.md"))
+
+    def javadocOverview: T[Seq[String]] =
+        Task {
+            javadocOverviewSource().pipe { javadocOverviewPath =>
+                if os.exists(javadocOverviewPath.path) then Seq(
+                  "-overview",
+                  javadocOverviewPath.path.toString)
+                else Seq.empty
+            }
+        }
+
+    override def javadocOptions: Simple[Seq[String]] =
+        super.javadocOptions() ++ javadocOverview()
+
     override def publishVersion = "0.0.1"
     override def pomSettings    =
         PomSettings(
