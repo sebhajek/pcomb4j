@@ -1,0 +1,85 @@
+//| mill-version: 1.1.7
+//| mill-jvm-version: liberica:25
+
+package build
+
+import mill.*, scalalib.*, publish.*
+import mill.api.Task.Simple
+import mill.javalib.errorprone.ErrorProneModule
+
+object pcomb4j extends JavaModule, PublishModule, ErrorProneModule {
+    override def publishVersion = "0.0.1"
+    override def pomSettings    =
+        PomSettings(
+          description = "Parser combinator library for modern java.",
+          organization = "io.github.sebhajek",
+          url = "https://github.com/sebhajek/pcomb4j",
+          licenses = Seq(License.`MPL-2.0`),
+          versionControl =
+              VersionControl.github(owner = "sebhajek", repo = "pcomb4j"),
+          developers = Seq(Developer(
+            "sebhajek",
+            "Sebastián Hájek",
+            "https://github.com/sebhajek")),
+        )
+
+    object JdkVersion     {
+        def jvm     = s"${JdkVersion.vendor}:${version}"
+        def vendor  = "liberica-nik"
+        def version = "25.0.2"
+    }
+    object LibraryVersion {
+        def slf4j      = "2.0.17"
+        def jspecify   = "1.0.0"
+        def nullAway   = "0.12.7"
+        def errorProne = "2.39.0"
+    }
+
+    override def jvmId           = JdkVersion.jvm
+    override def jvmIndexVersion = "latest.release"
+    override def sources         = Task { super.sources() }
+    override def resources       = Task { super.resources() }
+
+    override def errorProneUseNullAway = true
+
+    override def errorProneNullAwayVersion = LibraryVersion.nullAway
+    override def errorProneVersion         = LibraryVersion.errorProne
+
+    override def errorProneOptions =
+        Seq(
+          "-Xep:NullAway:ERROR",
+          "-XepOpt:NullAway:JSpecifyMode=true",
+          "-XepOpt:NullAway:OnlyNullMarked")
+
+    override def mvnDeps =
+        super.mvnDeps() ++ Seq(
+          mvn"org.slf4j:slf4j-api:${LibraryVersion.slf4j}",
+          mvn"org.jspecify:jspecify:${LibraryVersion.jspecify}")
+
+    object test extends JavaTests, TestModule.Junit6 {
+
+        override def javacOptions = super.javacOptions
+        object TestVersion {
+            def logback = "1.5.32"
+            def junit   = "6.0.1"
+            def jqwik   = "1.9.3"
+            def assertj = "3.27.7"
+            def mockito = "5.22.0"
+            def jmh     = "1.37"
+        }
+        override def moduleDeps = super.moduleDeps
+        override def jupiterVersion = TestVersion.junit
+        override def mvnDeps        =
+            super.mvnDeps() ++ Seq(
+              mvn"ch.qos.logback:logback-classic:${TestVersion.logback}",
+              mvn"org.assertj:assertj-core:${TestVersion.assertj}",
+              mvn"net.jqwik:jqwik:${TestVersion.jqwik}",
+              mvn"org.mockito:mockito-core:${TestVersion.mockito}",
+              mvn"org.openjdk.jmh:jmh-core:${TestVersion.jmh}",
+              mvn"org.openjdk.jmh:jmh-generator-annprocess:${TestVersion.jmh}",
+              mvn"org.junit.jupiter:junit-jupiter-params:${TestVersion.junit}",
+            )
+    }
+}
+
+// vim: set ft=scala :

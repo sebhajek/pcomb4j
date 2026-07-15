@@ -1,0 +1,8 @@
+.bsp
+.metals
+
+out
+**/bin
+**.project
+**.classpath
+**.settings

@@ -1,0 +1,86 @@
+---
+Language: Java
+BasedOnStyle: Google
+UseTab: ForIndentation
+TabWidth: 4
+ContinuationIndentWidth: 2
+IndentWidth: 4
+ColumnLimit: 80
+
+JavaImportGroups: [java.util,java, com, org, io]
+
+IndentCaseLabels: true
+
+AlignConsecutiveAssignments:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: true
+  AlignCompound: true
+  AlignFunctionDeclarations: true
+  PadOperators: true
+
+AlignConsecutiveDeclarations: 
+    Enabled: true
+    AcrossEmptyLines: false
+    AcrossComments: true
+    AlignCompound: true
+    PadOperators: true
+
+AlignConsecutiveBitFields:
+  Enabled: true
+  AcrossEmptyLines: true
+  AcrossComments: true
+
+AlignConsecutiveMacros:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: true
+
+AlignConsecutiveShortCaseStatements:
+  Enabled: true
+  AcrossEmptyLines: true
+  AcrossComments: true
+  AlignCaseColons: true
+
+AlignTrailingComments:
+  Kind: Always
+  OverEmptyLines: 2
+
+AllowShortFunctionsOnASingleLine: Inline
+AllowAllParametersOfDeclarationOnNextLine: false
+
+PenaltyBreakBeforeFirstCallParameter: 1
+PointerAlignment: Right
+
+AlignAfterOpenBracket: BlockIndent
+BinPackParameters: false
+BinPackArguments: false
+AlignArrayOfStructures: Right
+
+IncludeBlocks: Regroup
+IndentGotoLabels: true
+
+BreakBeforeTernaryOperators: true
+BreakStringLiterals: false
+BreakBeforeBinaryOperators: NonAssignment
+BreakAfterJavaFieldAnnotations: true
+BreakInheritanceList: BeforeComma
+BreakConstructorInitializers: BeforeComma
+
+AllowAllArgumentsOnNextLine: true
+AllowShortBlocksOnASingleLine: Always
+AllowShortCaseExpressionOnASingleLine: true
+AllowShortCaseLabelsOnASingleLine: true
+AllowShortEnumsOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+
+PackConstructorInitializers: CurrentLine
+
+MaxEmptyLinesToKeep: 1
+KeepEmptyLines:
+  AtEndOfFile: false
+  AtStartOfBlock: true
+  AtStartOfFile: false
+
+SortJavaStaticImport: After
+...
