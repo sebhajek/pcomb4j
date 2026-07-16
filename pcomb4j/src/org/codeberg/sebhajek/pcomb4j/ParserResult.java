@@ -36,4 +36,6 @@ public record ParserResult<Output, Input>(
 	public <C> ParserResult<C, Input> with(C newValue) {
 		return new ParserResult<>(newValue, remainder());
 	}
+
+	public static record Sequence<A, B>(A first, B second) {}
 }
