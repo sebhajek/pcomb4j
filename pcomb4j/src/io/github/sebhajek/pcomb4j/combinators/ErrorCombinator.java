@@ -1,0 +1,77 @@
+package io.github.sebhajek.pcomb4j.combinators;
+
+import java.util.function.BiFunction;
+
+import io.github.sebhajek.pcomb4j.ParserError;
+import io.github.sebhajek.pcomb4j.ParserInput;
+import io.github.sebhajek.pcomb4j.interfaces.DelegateParser;
+import io.github.sebhajek.pcomb4j.parsers.ErrorParser;
+
+/**
+ * Combinator that intercepts failures from this parser and replaces or
+ * enriches the thrown {@link ParserError} with a more descriptive one.
+ *
+ * <p>Three variants are provided:
+ * <ul>
+ *   <li>{@link #labelError(String)} — attaches a fixed label string.</li>
+ *   <li>{@link #labelError(BiFunction)} — computes a dynamic label from
+ *       the current input and the original error.</li>
+ *   <li>{@link #withError(BiFunction)} — replaces the error entirely using
+ *       a factory function.</li>
+ * </ul>
+ *
+ * @param <Output>  the type of value produced by a successful parse
+ * @param <Input>   the type of element consumed from the input
+ */
+public interface ErrorCombinator<Output, Input>
+  extends DelegateParser<Output, Input> {
+
+	/**
+	 * Creates a parser that, on failure, wraps the original error in a
+	 * {@link ErrorParser.LabeledError} with the given fixed {@code label}.
+	 *
+	 * @param label a static human-readable description of what was expected
+	 * @return a new {@link ErrorParser.Label} wrapping this parser
+	 */
+	public default ErrorParser.Label<Output, Input> labelError(
+	  final String label
+	) {
+		return new ErrorParser.Label<>(label, getParser(), getLogger());
+	}
+
+	/**
+	 * Creates a parser that, on failure, wraps the original error in a
+	 * {@link ErrorParser.LabeledError} whose message is computed dynamically
+	 * from the current input and the original error.
+	 *
+	 * @param messageFactory a function receiving the current
+	 *                       {@link ParserInput} and the original
+	 *                       {@link ParserError}, returning a message string
+	 * @return a new {@link ErrorParser.Message} wrapping this parser
+	 */
+	public default ErrorParser.Message<Output, Input> labelError(
+	  final BiFunction<ParserInput<Input>, ParserError, String> messageFactory
+	) {
+		return new ErrorParser.Message<>(
+		  messageFactory, getParser(), getLogger()
+		);
+	}
+
+	/**
+	 * Creates a parser that, on failure, replaces the original error using a
+	 * factory function that receives the current input and the original error.
+	 *
+	 * @param errorFactory a function receiving the current {@link ParserInput}
+	 *                     and the original {@link ParserError}, returning the
+	 *                     replacement {@link ParserError} to throw
+	 * @return a new {@link ErrorParser.Supplied} wrapping this parser
+	 */
+	public default ErrorParser.Supplied<Output, Input> withError(
+	  final BiFunction<ParserInput<Input>, ParserError, ParserError>
+	        errorFactory
+	) {
+		return new ErrorParser.Supplied<>(
+		  errorFactory, getParser(), getLogger()
+		);
+	}
+}
