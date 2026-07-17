@@ -7,10 +7,12 @@ import org.slf4j.Logger;
 /**
  * Entry point for constructing basic, ready-made {@link Parser} instances.
  *
- * <p>{@code ParserFactory} aggregates several factory interfaces, giving
+ * <p>
+ * {@code ParserFactory} aggregates several factory interfaces, giving
  * callers a single, convenient object from which to create parsers.
  *
- * <p>Instances are obtained via {@link #withLogger(Logger)}:
+ * <p>
+ * Instances are obtained via {@link #withLogger(Logger)}:
  *
  * <pre>{@code
  * ParserFactory factory = ParserFactory.withLogger(logger);

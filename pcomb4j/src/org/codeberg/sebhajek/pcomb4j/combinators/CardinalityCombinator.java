@@ -4,7 +4,7 @@ import org.codeberg.sebhajek.pcomb4j.interfaces.DelegateParser;
 import org.codeberg.sebhajek.pcomb4j.parsers.CardinalParser;
 
 public interface CardinalityCombinator<Output, Input>
-  extends DelegateParser<Output, Input> {
+		extends DelegateParser<Output, Input> {
 
 	public default CardinalParser<Output, Input> zeroOrMore() {
 		final var logger = getLogger();

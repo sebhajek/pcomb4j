@@ -8,18 +8,22 @@ import org.codeberg.sebhajek.pcomb4j.ParserInput;
 public class ListInput<A> implements ParserInput<A> {
 
 	private final List<A> input;
-	private final int     currentPosition;
+	private final int currentPosition;
 
-	public ListInput(final List<A> input) { this(0, input); }
+	public ListInput(final List<A> input) {
+		this(0, input);
+	}
 
 	private ListInput(final int currentPosition, final List<A> input) {
 		this.currentPosition = currentPosition;
-		this.input           = input;
+		this.input = input;
 	}
 
 	@Override
 	public ParserInput<A> advance() throws ParserError {
-		if (isEmpty()) { throw new ParserInputError.EOF(); }
+		if (isEmpty()) {
+			throw new ParserInputError.EOF();
+		}
 		return new ListInput<>(currentPosition + 1, input);
 	}
 
@@ -30,7 +34,9 @@ public class ListInput<A> implements ParserInput<A> {
 
 	@Override
 	public A getCurrent() throws ParserError {
-		if (isEmpty()) { throw new ParserInputError.EOF(); }
+		if (isEmpty()) {
+			throw new ParserInputError.EOF();
+		}
 		final var element = input.get(currentPosition);
 		return element;
 	}
