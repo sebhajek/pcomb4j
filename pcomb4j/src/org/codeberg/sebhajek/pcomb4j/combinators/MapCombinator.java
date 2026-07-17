@@ -2,48 +2,33 @@ package org.codeberg.sebhajek.pcomb4j.combinators;
 
 import java.util.function.Function;
 
-import org.codeberg.sebhajek.pcomb4j.ParserCombinator;
 import org.codeberg.sebhajek.pcomb4j.interfaces.DelegateParser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.codeberg.sebhajek.pcomb4j.parsers.MapParser;
 
-public interface MapCombinator<A, B> extends DelegateParser<A, B> {
+public interface MapCombinator<Output, Input>
+  extends DelegateParser<Output, Input> {
 
-	public static final Logger LOGGER =
-	  LoggerFactory.getLogger(MapCombinator.class);
-
-	public default<C> ParserCombinator<C, B> pure(final C output) {
-		LOGGER.debug("building `pure` parser");
-		return ParserCombinator.withLogger(getLogger())
-		  .from(getParser())
-		  .map((_) -> output);
-	}
-
-	public default<C> ParserCombinator<C, B> map(
-	  final Function<A, C> transformer
-	) {
-		LOGGER.debug("building `map` parser");
+	public default<OutputMapped> MapParser.Pure<OutputMapped, Output, Input>
+	                             pure(final OutputMapped value) {
 		final var logger = getLogger();
-		return ParserCombinator.withLogger(logger).from((input) -> {
-			final var result      = getParser().parse(input);
-			final var transformed = transformer.apply(result.result());
-			logger.info(
-			  "processing `map` parser: {} -> {}", result.result(), transformed
-			);
-			return result.with(transformed);
-		});
+		logger.debug("building `pure` parser");
+		return new MapParser.Pure<>(getParser(), value, logger);
 	}
 
-	public default<C> ParserCombinator<C, B> widen(Class<C> type) {
-		LOGGER.debug("building `widen` parser to {}", type.getName());
-		return ParserCombinator.withLogger(getLogger()).from(input -> {
-			final var result = getParser().parse(input);
-			getLogger().atInfo().log(() -> {
-				return "processing `widen` parser from %s to %s".formatted(
-				  result.result().getClass().getName(), type.getName()
-				);
-			});
-			return result.with(type.cast(result.result()));
-		});
+	public default<OutputMapped> MapParser
+	  .Transform<OutputMapped, Output, Input>
+	  map(final Function<Output, OutputMapped> mapper) {
+		final var logger = getLogger();
+		logger.debug("building `map` parser");
+		return new MapParser.Transform<>(getParser(), mapper, logger);
+	}
+
+	// this junk should be `Output extends OutputMapped` but java can't model
+	// that correctly with the generics
+	public default<OutputMapped> MapParser.Widen<OutputMapped, Output, Input>
+	                             widen(final Class<OutputMapped> type) {
+		final var logger = getLogger();
+		logger.debug("building `widen` parser to {}", type.getName());
+		return new MapParser.Widen<>(getParser(), type, logger);
 	}
 }

@@ -29,6 +29,7 @@ public interface Parser<Output, Input> {
 	 *   remaining input
 	 * @throws ParserError if the input cannot be parsed
 	 */
-	ParserResult<Output, Input> parse(@NonNull ParserInput<Input> parserInput)
-	  throws ParserError;
+	ParserResult<Output, Input> parse(
+	  @NonNull final ParserInput<Input> parserInput
+	) throws ParserError;
 }

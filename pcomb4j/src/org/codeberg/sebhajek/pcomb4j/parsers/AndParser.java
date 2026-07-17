@@ -5,25 +5,23 @@ import org.codeberg.sebhajek.pcomb4j.ParserError;
 import org.codeberg.sebhajek.pcomb4j.ParserInput;
 import org.codeberg.sebhajek.pcomb4j.ParserResult;
 import org.codeberg.sebhajek.pcomb4j.ParserResult.Sequence;
-import org.codeberg.sebhajek.pcomb4j.interfaces.AbstractParser;
+import org.codeberg.sebhajek.pcomb4j.interfaces.AbstractPairParser;
 import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 
-public class AndParser<OutputLeft, OutputRight, Input> extends AbstractParser<
-  ParserResult.Sequence<OutputLeft, OutputRight>,
-  Input> {
-
-	private final Parser<OutputLeft, Input> parserLeft;
-	private final Parser<OutputRight, Input> parserRight;
+public class AndParser<OutputLeft, OutputRight, Input>
+  extends AbstractPairParser<
+    ParserResult.Sequence<OutputLeft, OutputRight>,
+    OutputLeft,
+    OutputRight,
+    Input> {
 
 	public AndParser(
 	  final Parser<OutputLeft, Input> parserLeft,
 	  final Parser<OutputRight, Input> parserRight,
 	  final Logger                     logger
 	) {
-		super(logger);
-		this.parserLeft  = parserLeft;
-		this.parserRight = parserRight;
+		super(parserLeft, parserRight, logger);
 	}
 
 	@Override
@@ -52,7 +50,7 @@ public class AndParser<OutputLeft, OutputRight, Input> extends AbstractParser<
 	private final ParserResult<OutputRight, Input> getResultRight(
 	  final ParserResult<OutputLeft, Input> resultLeft
 	) throws ParserError {
-		final var resultRight = parserRight.parse(resultLeft.remainder());
+		final var resultRight = getParserRight().parse(resultLeft.remainder());
 		getLogger().debug(
 		  "second of `and` parser succeeded: {}", resultRight.result()
 		);
@@ -62,7 +60,7 @@ public class AndParser<OutputLeft, OutputRight, Input> extends AbstractParser<
 	private final ParserResult<OutputLeft, Input> getResultLeft(
 	  final ParserInput<Input> parserInput
 	) throws ParserError {
-		final var resultLeft = parserLeft.parse(parserInput);
+		final var resultLeft = getParserLeft().parse(parserInput);
 		getLogger().debug(
 		  "first of `and` parser succeeded: {}", resultLeft.result()
 		);

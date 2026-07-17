@@ -28,14 +28,22 @@ public record ParserResult<Output, Input>(
 	 * transform the parsed value while leaving the remaining input untouched.
 	 *
 	 * @param newValue the replacement result value
-	 * @param <C> the type of the replacement value
+	 * @param <OutputNew> the type of the replacement value
 	 * @return a new {@code ParserResult} with {@code newValue} as its result
 	 *   and this result's
 	 *     remainder
 	 */
-	public <C> ParserResult<C, Input> with(C newValue) {
+	public <OutputNew> ParserResult<OutputNew, Input> with(OutputNew newValue) {
 		return new ParserResult<>(newValue, remainder());
 	}
 
-	public static record Sequence<A, B>(A first, B second) {}
+	public static record Sequence<First, Second>(First first, Second second) {}
+
+	public static sealed interface Either<LeftType, RightType> {
+		public static record Left<LeftType, RightType>(LeftType value)
+		  implements Either<LeftType, RightType> {}
+
+		public static record Right<LeftType, RightType>(RightType value)
+		  implements Either<LeftType, RightType> {}
+	}
 }
