@@ -1,13 +1,15 @@
 package io.github.sebhajek.pcomb4j.parsers;
 
-import io.github.sebhajek.pcomb4j.combinators.AndCombinator;
 import io.github.sebhajek.pcomb4j.Parser;
 import io.github.sebhajek.pcomb4j.ParserError;
 import io.github.sebhajek.pcomb4j.ParserInput;
 import io.github.sebhajek.pcomb4j.ParserResult;
 import io.github.sebhajek.pcomb4j.ParserResult.Sequence;
+import io.github.sebhajek.pcomb4j.combinators.AndCombinator;
 import io.github.sebhajek.pcomb4j.interfaces.AbstractPairParser;
+
 import org.jspecify.annotations.NonNull;
+
 import org.slf4j.Logger;
 
 /**
@@ -15,13 +17,13 @@ import org.slf4j.Logger;
  * results as a {@link Sequence}.
  *
  * <p>The left parser is applied first; if it succeeds its remainder is passed
- * to the right parser. Both results are then combined into a
- * {@link Sequence}{@code <OutputLeft, OutputRight>}. If either parser fails
- * the error is propagated immediately.
+ * to the right parser. Both results are then combined into a {@link
+ * Sequence}{@code <OutputLeft, OutputRight>}. If either parser fails the error
+ * is propagated immediately.
  *
- * @param <OutputLeft>   the type of value produced by the left parser
- * @param <OutputRight>  the type of value produced by the right parser
- * @param <Input>        the type of element consumed from the input
+ * @param <OutputLeft> the type of value produced by the left parser
+ * @param <OutputRight> the type of value produced by the right parser
+ * @param <Input> the type of element consumed from the input
  */
 public class AndParser<OutputLeft, OutputRight, Input>
   extends AbstractPairParser<
@@ -33,9 +35,9 @@ public class AndParser<OutputLeft, OutputRight, Input>
 	/**
 	 * Creates a new {@code AndParser}.
 	 *
-	 * @param parserLeft   the first parser to apply; never {@code null}
-	 * @param parserRight  the second parser to apply; never {@code null}
-	 * @param logger       the logger used for debug output; never {@code null}
+	 * @param parserLeft the first parser to apply; never {@code null}
+	 * @param parserRight the second parser to apply; never {@code null}
+	 * @param logger the logger used for debug output; never {@code null}
 	 */
 	public AndParser(
 	  final Parser<OutputLeft, Input> parserLeft,
@@ -50,8 +52,9 @@ public class AndParser<OutputLeft, OutputRight, Input>
 	 * and combines both results into a {@link Sequence}.
 	 *
 	 * @param parserInput the input to parse; never {@code null}
-	 * @return a {@link ParserResult} whose result is a
-	 *         {@link Sequence}{@code <OutputLeft, OutputRight>}
+	 * @return a {@link ParserResult} whose result is a {@link Sequence}{@code
+	 *   <OutputLeft,
+	 *     OutputRight>}
 	 * @throws ParserError if either parser fails
 	 */
 	@Override
@@ -100,9 +103,8 @@ public class AndParser<OutputLeft, OutputRight, Input>
 	/**
 	 * Returns the second element of {@code pair}, discarding the first.
 	 *
-	 * <p>Used by {@link
-	 * AndCombinator#andSecond(Parser)}
-	 * to keep only the right result.
+	 * <p>Used by {@link AndCombinator#andSecond(Parser)} to keep only the right
+	 * result.
 	 *
 	 * @param pair the sequence to extract from; never {@code null}
 	 * @return the right value
@@ -118,9 +120,8 @@ public class AndParser<OutputLeft, OutputRight, Input>
 	/**
 	 * Returns the first element of {@code pair}, discarding the second.
 	 *
-	 * <p>Used by {@link
-	 * AndCombinator#andFirst(Parser)}
-	 * to keep only the left result.
+	 * <p>Used by {@link AndCombinator#andFirst(Parser)} to keep only the left
+	 * result.
 	 *
 	 * @param pair the sequence to extract from; never {@code null}
 	 * @return the left value

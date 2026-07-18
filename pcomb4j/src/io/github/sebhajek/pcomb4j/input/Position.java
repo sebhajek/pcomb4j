@@ -4,22 +4,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Immutable value object that tracks a character's position in a source
- * string, used by {@link StringInput} to report where in the input a parse
- * is taking place.
+ * Immutable value object that tracks a character's position in a source string,
+ * used by {@link StringInput} to report where in the input a parse is taking
+ * place.
  *
  * <p>A {@code Position} records three coordinates:
+ *
  * <ul>
- *   <li>{@link #getIndex()} — the zero-based character offset from the start
- *       of the string.</li>
- *   <li>{@link #getLine()} — the one-based line number (increments on every
- *       {@code '\n'} character).</li>
- *   <li>{@link #getCharacter()} — the one-based column within the current
- *       line (resets to 1 on every newline).</li>
+ *   <li>{@link #getIndex()} the zero-based character offset from the start of
+ * the string. <li>{@link #getLine()} the one-based line number (increments on
+ * every {@code '\n'} character). <li>{@link #getCharacter()} the one-based
+ * column within the current line (resets to 1 on every newline).
  * </ul>
  *
- * <p>Use {@link #getZero()} to obtain the initial position at the very start
- * of a string, then call {@link #advance(char)} for each character consumed.
+ * <p>Use {@link #getZero()} to obtain the initial position at the very start of
+ * a string, then call
+ * {@link #advance(char)} for each character consumed.
  */
 public final class Position {
 
@@ -46,8 +46,8 @@ public final class Position {
 	}
 
 	/**
-	 * Returns a string representation of this position in the form
-	 * {@code (index,line,column)}.
+	 * Returns a string representation of this position in the form {@code
+	 * (index,line,column)}.
 	 *
 	 * @return a human-readable position string
 	 */
@@ -78,8 +78,8 @@ public final class Position {
 	public final int getCharacter() { return character; }
 
 	/**
-	 * Returns a new {@code Position} representing the position after
-	 * consuming {@code inputCharacter}.
+	 * Returns a new {@code Position} representing the position after consuming
+	 * {@code inputCharacter}.
 	 *
 	 * <p>If {@code inputCharacter} is {@code '\n'}, the line counter is
 	 * incremented and the column resets to 1; otherwise only the index and

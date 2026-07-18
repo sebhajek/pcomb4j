@@ -1,26 +1,28 @@
 package io.github.sebhajek.pcomb4j.parsers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import io.github.sebhajek.pcomb4j.Parser;
 import io.github.sebhajek.pcomb4j.ParserError;
 import io.github.sebhajek.pcomb4j.ParserInput;
 import io.github.sebhajek.pcomb4j.ParserResult;
 import io.github.sebhajek.pcomb4j.interfaces.AbstractParser;
+
 import org.jspecify.annotations.NonNull;
+
 import org.slf4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A {@link Parser} that applies a fixed, ordered list of parsers in sequence,
  * collecting all of their results into a {@link List}.
  *
- * <p>Unlike {@link CardinalParser}, the parsers in the chain may be
- * different instances, but they must all share the same output and input
- * types. The list is built in encounter order and returned as-is (mutable).
+ * <p>Unlike {@link CardinalParser}, the parsers in the chain may be different
+ * instances, but they must all share the same output and input types. The list
+ * is built in encounter order and returned as-is (mutable).
  *
- * @param <Output>  the output type shared by all parsers in the chain
- * @param <Input>   the type of element consumed from the input
+ * @param <Output> the output type shared by all parsers in the chain
+ * @param <Input> the type of element consumed from the input
  */
 public class ChainParser<Output, Input>
   extends AbstractParser<List<Output>, Input> {
@@ -30,9 +32,10 @@ public class ChainParser<Output, Input>
 	/**
 	 * Creates a new {@code ChainParser}.
 	 *
-	 * @param parsersList an ordered list of parsers to apply; never
-	 *                    {@code null} and should not be empty
-	 * @param logger      the logger used for debug output; never {@code null}
+	 * @param parsersList an ordered list of parsers to apply; never {@code
+	 *   null} and should not be
+	 *     empty
+	 * @param logger the logger used for debug output; never {@code null}
 	 */
 	public ChainParser(List<Parser<Output, Input>> parsersList, Logger logger) {
 		super(logger);
@@ -44,7 +47,7 @@ public class ChainParser<Output, Input>
 	 *
 	 * @param parserInput the input to parse; never {@code null}
 	 * @return a {@link ParserResult} whose result is the list of all parsed
-	 *         values in order
+	 *   values in order
 	 * @throws ParserError if any parser in the chain fails
 	 */
 	@Override

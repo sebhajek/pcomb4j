@@ -1,10 +1,11 @@
 package io.github.sebhajek.pcomb4j.combinators;
 
-import java.util.function.Predicate;
-
+import io.github.sebhajek.pcomb4j.Parser;
+import io.github.sebhajek.pcomb4j.ParserCombinator;
 import io.github.sebhajek.pcomb4j.interfaces.DelegateParser;
 import io.github.sebhajek.pcomb4j.parsers.FilterParser;
-import io.github.sebhajek.pcomb4j.parsers.MapParser;
+
+import java.util.function.Predicate;
 
 /**
  * Combinator that forwards this parser's result only when a predicate is
@@ -25,7 +26,7 @@ public interface FilterCombinator<Output, Input>
 	 *   {@code null}
 	 * @return a new {@link FilterParser} wrapping this parser
 	 */
-	public default FilterParser<Output, Input> filter(
+	public default Parser<Output, Input> filter(
 	  final Predicate<Output> predicate
 	) {
 		final var logger = getLogger();
@@ -33,13 +34,14 @@ public interface FilterCombinator<Output, Input>
 		return new FilterParser<>(getParser(), predicate, logger);
 	}
 
-	public default FilterParser<Output, Input> filterValue(Output value) {
+	public default Parser<Output, Input> filterValue(Output value) {
 		return filter(value::equals);
 	}
 
-	public default<OutputNarrow extends Output> MapParser
-	  .Cast<OutputNarrow, Output, Input>
-	  filterType(Class<OutputNarrow> type) {
-		return filter(type::isInstance).cast(type);
+	public default<OutputNarrow extends Output> Parser<OutputNarrow, Input>
+	filterType(Class<OutputNarrow> type) {
+		return ParserCombinator.withLogger(getLogger())
+		  .from(filter(type::isInstance))
+		  .cast(type);
 	}
 }

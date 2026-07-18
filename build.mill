@@ -25,7 +25,7 @@ object pcomb4j extends JavaModule, PublishModule, ErrorProneModule {
     override def javadocOptions: Simple[Seq[String]] =
         super.javadocOptions() ++ javadocOverview()
 
-    override def publishVersion = "0.0.1"
+    override def publishVersion = sys.env.getOrElse("VERSION", "0.0.0-SNAPSHOT")
     override def pomSettings    =
         PomSettings(
           description = "Parser combinator library for modern java.",
@@ -67,6 +67,8 @@ object pcomb4j extends JavaModule, PublishModule, ErrorProneModule {
           "-Xep:NullAway:ERROR",
           "-XepOpt:NullAway:JSpecifyMode=true",
           "-XepOpt:NullAway:OnlyNullMarked")
+
+    override def javacOptions = super.javacOptions() ++ Seq("-Xlint:unchecked")
 
     override def mvnDeps =
         super.mvnDeps() ++ Seq(

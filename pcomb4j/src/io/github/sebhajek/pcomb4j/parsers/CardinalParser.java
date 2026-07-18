@@ -1,31 +1,34 @@
 package io.github.sebhajek.pcomb4j.parsers;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import io.github.sebhajek.pcomb4j.Parser;
 import io.github.sebhajek.pcomb4j.ParserError;
 import io.github.sebhajek.pcomb4j.ParserInput;
 import io.github.sebhajek.pcomb4j.ParserResult;
 import io.github.sebhajek.pcomb4j.interfaces.AbstractSourcedParser;
+
 import org.jspecify.annotations.NonNull;
+
 import org.slf4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Abstract base for parsers that apply an inner parser repeatedly, collecting
  * all results into an unmodifiable {@link List}.
  *
  * <p>Two concrete subclasses define the cardinality policy:
+ *
  * <ul>
- *   <li>{@link ZeroOrMore} — succeeds even when the inner parser never
- *       matches, returning an empty list.</li>
- *   <li>{@link OneOrMore} — requires at least one successful match; the
- *       first parse is mandatory and any failure there propagates.</li>
+ *   <li>{@link ZeroOrMore} — succeeds even when the inner parser never matches,
+ * returning an empty list. <li>{@link OneOrMore} — requires at least one
+ * successful match; the first parse is mandatory and any failure there
+ * propagates.
  * </ul>
  *
- * @param <Output>  the element type produced by each individual parse
- * @param <Input>   the type of element consumed from the input
+ * @param <Output> the element type produced by each individual parse
+ * @param <Input> the type of element consumed from the input
  */
 public abstract class CardinalParser<Output, Input>
   extends AbstractSourcedParser<List<Output>, Output, Input> {
@@ -37,8 +40,8 @@ public abstract class CardinalParser<Output, Input>
 	 * <p>Parsing stops as soon as the inner parser fails, without itself
 	 * failing. If the inner parser never matches, an empty list is returned.
 	 *
-	 * @param <Output>  the element type produced by each parse
-	 * @param <Input>   the type of element consumed from the input
+	 * @param <Output> the element type produced by each parse
+	 * @param <Input> the type of element consumed from the input
 	 */
 	public static class ZeroOrMore<Output, Input>
 	  extends CardinalParser<Output, Input> {
@@ -47,8 +50,7 @@ public abstract class CardinalParser<Output, Input>
 		 * Creates a new {@code ZeroOrMore} parser.
 		 *
 		 * @param elementParser the inner parser to repeat; never {@code null}
-		 * @param logger        the logger used for debug output; never
-		 *                      {@code null}
+		 * @param logger the logger used for debug output; never {@code null}
 		 */
 		public ZeroOrMore(
 		  final Parser<Output, Input> elementParser,
@@ -80,15 +82,15 @@ public abstract class CardinalParser<Output, Input>
 	}
 
 	/**
-	 * A {@link CardinalParser} that applies the inner parser one or more
-	 * times, collecting all results.
+	 * A {@link CardinalParser} that applies the inner parser one or more times,
+	 * collecting all results.
 	 *
 	 * <p>The first application is mandatory: if it fails, the error is
 	 * propagated. Subsequent applications stop as soon as the inner parser
 	 * fails.
 	 *
-	 * @param <Output>  the element type produced by each parse
-	 * @param <Input>   the type of element consumed from the input
+	 * @param <Output> the element type produced by each parse
+	 * @param <Input> the type of element consumed from the input
 	 */
 	public static class OneOrMore<Output, Input>
 	  extends CardinalParser<Output, Input> {
@@ -97,8 +99,7 @@ public abstract class CardinalParser<Output, Input>
 		 * Creates a new {@code OneOrMore} parser.
 		 *
 		 * @param parserElement the inner parser to repeat; never {@code null}
-		 * @param logger        the logger used for debug output; never
-		 *                      {@code null}
+		 * @param logger the logger used for debug output; never {@code null}
 		 */
 		public OneOrMore(
 		  final Parser<Output, Input> parserElement,
@@ -114,7 +115,7 @@ public abstract class CardinalParser<Output, Input>
 		 * @param parserInput the input to parse; never {@code null}
 		 * @return a {@link ParserResult} with a non-empty list
 		 * @throws ParserError if the first application of the inner parser
-		 *                     fails
+		 *   fails
 		 */
 		@Override
 		public ParserResult<List<Output>, Input> parse(
@@ -146,7 +147,7 @@ public abstract class CardinalParser<Output, Input>
 	 * Creates a new {@code CardinalParser}.
 	 *
 	 * @param parserSource the inner parser to repeat; never {@code null}
-	 * @param logger       the logger used for debug output; never {@code null}
+	 * @param logger the logger used for debug output; never {@code null}
 	 */
 	public CardinalParser(
 	  final Parser<Output, Input> parserSource,
@@ -157,9 +158,10 @@ public abstract class CardinalParser<Output, Input>
 
 	/**
 	 * Repeatedly applies the inner parser on {@code input} until it fails,
-	 * appending each result to {@code results}.
+	 * appending each result to
+	 * {@code results}.
 	 *
-	 * @param input   the input to start from; never {@code null}
+	 * @param input the input to start from; never {@code null}
 	 * @param results the list to append results to; never {@code null}
 	 * @return the input position after the last successful application
 	 */

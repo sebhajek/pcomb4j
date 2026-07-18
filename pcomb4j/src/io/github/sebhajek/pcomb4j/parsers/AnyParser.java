@@ -5,7 +5,9 @@ import io.github.sebhajek.pcomb4j.ParserError;
 import io.github.sebhajek.pcomb4j.ParserInput;
 import io.github.sebhajek.pcomb4j.ParserResult;
 import io.github.sebhajek.pcomb4j.interfaces.AbstractParser;
+
 import org.jspecify.annotations.NonNull;
+
 import org.slf4j.Logger;
 
 /**

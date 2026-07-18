@@ -9,23 +9,23 @@ import java.util.List;
  * Base class for all errors raised while parsing with pcomb4j.
  *
  * <p>The hierarchy is sealed into three abstract subclasses:
+ *
  * <ul>
  *   <li>{@link Leaf} — a terminal error with a simple message and no child
- *       errors (e.g. "literal not matched", "end of file").</li>
- *   <li>{@link Branch} — a composite error that records <em>two</em> child
- *       errors, typically from the left and right branches of an alternation
- *       ({@code or}).</li>
- *   <li>{@link Wrapped} — a wrapper error that adds a contextual message
- *       around a single inner error (e.g. a label applied via
- *       {@code labelError}).</li>
+ * errors (e.g. "literal not matched", "end of file"). <li>{@link Branch} — a
+ * composite error that records <em>two</em> child errors, typically from the
+ * left and right branches of an alternation ({@code or}). <li>{@link Wrapped} —
+ * a wrapper error that adds a contextual message around a single inner error
+ * (e.g. a label applied via {@code labelError}).
  * </ul>
  *
  * <p>Concrete parser implementations should extend {@link Leaf} for simple
- * terminal failures and {@link Branch} or {@link Wrapped} when the error
- * relates to child parse attempts.
+ * terminal failures and
+ * {@link Branch} or {@link Wrapped} when the error relates to child parse
+ * attempts.
  *
- * <p>The full error tree can be traversed in depth-first order via
- * {@link #traverse()}.
+ * <p>The full error tree can be traversed in depth-first order via {@link
+ * #traverse()}.
  */
 public abstract sealed class ParserError extends Exception {
 
@@ -52,8 +52,8 @@ public abstract sealed class ParserError extends Exception {
 	/**
 	 * Abstract base for composite errors that record two child errors.
 	 *
-	 * <p>Typically used by alternation combinators ({@code or}) to preserve
-	 * the errors from both branches for diagnostic purposes.
+	 * <p>Typically used by alternation combinators ({@code or}) to preserve the
+	 * errors from both branches for diagnostic purposes.
 	 */
 	public abstract static
 	  /* clang-format off */
@@ -66,8 +66,8 @@ public abstract sealed class ParserError extends Exception {
 		/**
 		 * Creates a new {@code Branch} error.
 		 *
-		 * @param message    a human-readable description of the composite failure
-		 * @param errorLeft  the error produced by the left (first-tried) branch
+		 * @param message a human-readable description of the composite failure
+		 * @param errorLeft the error produced by the left (first-tried) branch
 		 * @param errorRight the error produced by the right (fallback) branch
 		 */
 		public Branch(
@@ -112,8 +112,8 @@ public abstract sealed class ParserError extends Exception {
 		/**
 		 * Creates a new {@code Wrapped} error.
 		 *
-		 * @param message    a human-readable description of the context in which
-		 *                   the inner error occurred
+		 * @param message a human-readable description of the context in which
+		 *   the inner error occurred
 		 * @param errorInner the underlying error being wrapped
 		 */
 		public Wrapped(final String message, final ParserError errorInner) {
@@ -133,7 +133,7 @@ public abstract sealed class ParserError extends Exception {
 	 * Creates a new {@code ParserError} with the given message and cause.
 	 *
 	 * @param message a human-readable description of the failure
-	 * @param cause   the underlying throwable that triggered this error
+	 * @param cause the underlying throwable that triggered this error
 	 */
 	public ParserError(final String message, final Throwable cause) {
 		super(message, cause);

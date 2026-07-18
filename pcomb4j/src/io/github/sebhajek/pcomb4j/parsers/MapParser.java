@@ -1,14 +1,16 @@
 package io.github.sebhajek.pcomb4j.parsers;
 
-import java.util.function.Function;
-
 import io.github.sebhajek.pcomb4j.Parser;
 import io.github.sebhajek.pcomb4j.ParserError;
 import io.github.sebhajek.pcomb4j.ParserInput;
 import io.github.sebhajek.pcomb4j.ParserResult;
 import io.github.sebhajek.pcomb4j.interfaces.AbstractSourcedParser;
+
 import org.jspecify.annotations.NonNull;
+
 import org.slf4j.Logger;
+
+import java.util.function.Function;
 
 /**
  * Abstract base for parsers that delegate to an inner parser and then transform

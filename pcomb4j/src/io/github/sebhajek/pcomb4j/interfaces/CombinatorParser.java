@@ -12,17 +12,17 @@ import io.github.sebhajek.pcomb4j.combinators.OrCombinator;
 
 /**
  * A mixin interface that assembles all combinator interfaces into a single
- * type, providing the complete fluent combinator API available on a
- * {@link ParserCombinator}.
+ * type, providing the complete fluent combinator API available on a {@link
+ * ParserCombinator}.
  *
- * <p>By implementing this interface (typically by extending
- * {@link AbstractParser}), a parser gains default implementations of
- * {@code map}, {@code flatMap}, {@code filter}, {@code and}, {@code or},
+ * <p>By implementing this interface (typically by extending {@link
+ * AbstractParser}), a parser gains default implementations of {@code map},
+ * {@code flatMap}, {@code filter}, {@code and}, {@code or},
  * {@code optional}, {@code zeroOrMore}, {@code oneOrMore}, {@code labelError},
  * and more.
  *
- * @param <Output>  the type of value produced by a successful parse
- * @param <Input>   the type of element consumed from the input
+ * @param <Output> the type of value produced by a successful parse
+ * @param <Input> the type of element consumed from the input
  */
 public interface CombinatorParser<Output, Input>
   extends FilterCombinator<Output, Input>, MapCombinator<Output, Input>,

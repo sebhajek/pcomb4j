@@ -1,9 +1,10 @@
 package io.github.sebhajek.pcomb4j.combinators;
 
-import java.util.function.Function;
-
+import io.github.sebhajek.pcomb4j.Parser;
 import io.github.sebhajek.pcomb4j.interfaces.DelegateParser;
 import io.github.sebhajek.pcomb4j.parsers.MapParser;
+
+import java.util.function.Function;
 
 /**
  * Combinator that transforms the value produced by this parser.
@@ -32,8 +33,9 @@ public interface MapCombinator<Output, Input>
 	 * @param <OutputMapped> the type of the constant value
 	 * @return a new {@link MapParser.Pure}
 	 */
-	public default<OutputMapped> MapParser.Pure<OutputMapped, Output, Input>
-	                             pure(final OutputMapped value) {
+	public default<OutputMapped> Parser<OutputMapped, Input> pure(
+	  final OutputMapped value
+	) {
 		final var logger = getLogger();
 		logger.debug("building `pure` parser");
 		return new MapParser.Pure<>(getParser(), value, logger);
@@ -49,9 +51,9 @@ public interface MapCombinator<Output, Input>
 	 * @param <OutputMapped> the type of the transformed value
 	 * @return a new {@link MapParser.Transform}
 	 */
-	public default<OutputMapped> MapParser
-	  .Transform<OutputMapped, Output, Input>
-	  map(final Function<Output, OutputMapped> mapper) {
+	public default<OutputMapped> Parser<OutputMapped, Input> map(
+	  final Function<Output, OutputMapped> mapper
+	) {
 		final var logger = getLogger();
 		logger.debug("building `map` parser");
 		return new MapParser.Transform<>(getParser(), mapper, logger);
@@ -70,8 +72,9 @@ public interface MapCombinator<Output, Input>
 	 * @param <OutputMapped> the supertype to widen to
 	 * @return a new {@link MapParser.Cast}
 	 */
-	public default<OutputMapped> MapParser.Cast<OutputMapped, Output, Input>
-	                             cast(final Class<OutputMapped> type) {
+	public default<OutputMapped> Parser<OutputMapped, Input> cast(
+	  final Class<OutputMapped> type
+	) {
 		final var logger = getLogger();
 		logger.debug("building `cast` parser to {}", type.getName());
 		return new MapParser.Cast<>(getParser(), type, logger);

@@ -1,10 +1,11 @@
 package io.github.sebhajek.pcomb4j;
 
-import java.util.List;
-
 import io.github.sebhajek.pcomb4j.input.ListInput;
 import io.github.sebhajek.pcomb4j.input.StringInput;
+
 import org.jspecify.annotations.NonNull;
+
+import java.util.List;
 
 /**
  * Represents the (immutable) input stream consumed by a {@link Parser}.

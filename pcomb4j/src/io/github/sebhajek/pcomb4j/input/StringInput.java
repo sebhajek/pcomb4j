@@ -1,7 +1,8 @@
 package io.github.sebhajek.pcomb4j.input;
 
-import io.github.sebhajek.pcomb4j.ParserInput;
 import io.github.sebhajek.pcomb4j.ParserError;
+import io.github.sebhajek.pcomb4j.ParserInput;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,13 +10,12 @@ import org.slf4j.LoggerFactory;
  * An immutable {@link ParserInput} backed by a {@link String}.
  *
  * <p>The current position within the string is tracked as a {@link Position}
- * value (index, line, column), which is updated on each call to
- * {@link #advance()} by consuming the character at the current index.
+ * value (index, line, column), which is updated on each call to {@link
+ * #advance()} by consuming the character at the current index.
  *
- * <p>Use {@link ParserInput#fromString(String)}
- * as the preferred factory method; this constructor is public only to allow
- * construction from an existing {@link Position} (e.g. when resuming from a
- * known offset).
+ * <p>Use {@link ParserInput#fromString(String)} as the preferred factory
+ * method; this constructor is public only to allow construction from an
+ * existing {@link Position} (e.g. when resuming from a known offset).
  */
 public final class StringInput implements ParserInput<Character> {
 
@@ -26,10 +26,10 @@ public final class StringInput implements ParserInput<Character> {
 	private final Position currentPosition;
 
 	/**
-	 * Creates a {@code StringInput} positioned at the given
-	 * {@code currentPosition} within {@code input}.
+	 * Creates a {@code StringInput} positioned at the given {@code
+	 * currentPosition} within {@code input}.
 	 *
-	 * @param input           the string to parse; never {@code null}
+	 * @param input the string to parse; never {@code null}
 	 * @param currentPosition the position to start from; never {@code null}
 	 */
 	public StringInput(String input, Position currentPosition) {
@@ -38,8 +38,8 @@ public final class StringInput implements ParserInput<Character> {
 	}
 
 	/**
-	 * Creates a {@code StringInput} positioned at the very start of
-	 * {@code input} (line 1, column 1).
+	 * Creates a {@code StringInput} positioned at the very start of {@code
+	 * input} (line 1, column 1).
 	 *
 	 * @param input the string to parse; never {@code null}
 	 */

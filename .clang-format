@@ -7,7 +7,19 @@ ContinuationIndentWidth: 2
 IndentWidth: 4
 ColumnLimit: 80
 
-JavaImportGroups: [java.util,java, com, org, io]
+JavaImportGroups: [
+  io.github.sebhajek.pcomb4j,
+  io.github.sebhajek,
+  org.jspecify,
+  org.slf4j,
+  java.util,
+  java.util.function,
+  java.util.concurrent,
+  java,
+  io,
+  com,
+  org
+]
 
 IndentCaseLabels: true
 
