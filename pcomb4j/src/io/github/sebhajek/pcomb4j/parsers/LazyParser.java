@@ -27,7 +27,28 @@ import java.util.function.Supplier;
  */
 public class LazyParser<Output, Input> extends AbstractParser<Output, Input> {
 
+	public static class Memoized<Output, Input>
+	  extends LazyParser<Output, Input> {
+
+		private Parser<Output, Input> parser;
+
+		public Memoized(
+		  Supplier<Parser<Output, Input>> supplier,
+		  Logger                          logger
+		) {
+			super(supplier, logger);
+		}
+
+		@Override
+		public Parser<Output, Input> getParser() {
+			if (this.parser == null) { this.parser = getSupplier().get(); }
+			return this.parser;
+		}
+	}
+
 	private final Supplier<Parser<Output, Input>> supplier;
+
+	protected Supplier<Parser<Output, Input>> getSupplier() { return supplier; }
 
 	/**
 	 * Creates a new {@code LazyParser}.
@@ -48,7 +69,7 @@ public class LazyParser<Output, Input> extends AbstractParser<Output, Input> {
 	 */
 	@Override
 	public Parser<Output, Input> getParser() {
-		return this.supplier.get();
+		return getSupplier().get();
 	}
 
 	/**

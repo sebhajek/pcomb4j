@@ -1,6 +1,7 @@
 package io.github.sebhajek.pcomb4j;
 
 import io.github.sebhajek.pcomb4j.interfaces.CombinatorParser;
+import io.github.sebhajek.pcomb4j.interfaces.DelegateParser;
 
 import org.jspecify.annotations.NonNull;
 
@@ -51,7 +52,7 @@ public class ParserCombinator<Output, Input>
 		}
 
 		public final <Output, Input> ParserCombinator<Output, Input> from(
-		  @NonNull final ParserCombinator<Output, Input> parser
+		  @NonNull final DelegateParser<Output, Input> parser
 		) {
 			return from(parser.getParser());
 		}

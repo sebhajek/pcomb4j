@@ -9,6 +9,7 @@ import io.github.sebhajek.pcomb4j.combinators.FlatMapCombinator;
 import io.github.sebhajek.pcomb4j.combinators.MapCombinator;
 import io.github.sebhajek.pcomb4j.combinators.OptionalCombinator;
 import io.github.sebhajek.pcomb4j.combinators.OrCombinator;
+import io.github.sebhajek.pcomb4j.combinators.TraceCombinator;
 
 /**
  * A mixin interface that assembles all combinator interfaces into a single
@@ -28,5 +29,5 @@ public interface CombinatorParser<Output, Input>
   extends FilterCombinator<Output, Input>, MapCombinator<Output, Input>,
           FlatMapCombinator<Output, Input>, AndCombinator<Output, Input>,
           OrCombinator<Output, Input>, OptionalCombinator<Output, Input>,
-          CardinalityCombinator<Output, Input>,
-          ErrorCombinator<Output, Input> {}
+          CardinalityCombinator<Output, Input>, ErrorCombinator<Output, Input>,
+          TraceCombinator<Output, Input> {}
