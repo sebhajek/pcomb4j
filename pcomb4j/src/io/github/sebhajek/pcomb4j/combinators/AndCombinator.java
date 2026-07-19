@@ -3,6 +3,7 @@ package io.github.sebhajek.pcomb4j.combinators;
 import io.github.sebhajek.pcomb4j.Parser;
 import io.github.sebhajek.pcomb4j.ParserResult;
 import io.github.sebhajek.pcomb4j.ParserResult.Sequence;
+import io.github.sebhajek.pcomb4j.interfaces.CombinatorParser;
 import io.github.sebhajek.pcomb4j.interfaces.DelegateParser;
 import io.github.sebhajek.pcomb4j.parsers.AndParser;
 import io.github.sebhajek.pcomb4j.parsers.MapParser;
@@ -34,9 +35,8 @@ public interface AndCombinator<OutputLeft, Input>
 	 *     OutputRight>}
 	 */
 	public default<OutputRight>
-	  Parser<ParserResult.Sequence<OutputLeft, OutputRight>, Input> and(
-	    final Parser<OutputRight, Input> parserOther
-	  ) {
+	  CombinatorParser<ParserResult.Sequence<OutputLeft, OutputRight>, Input>
+	  and(final Parser<OutputRight, Input> parserOther) {
 		final var logger = getLogger();
 		logger.debug("building `and` parser");
 		return new AndParser<>(getParser(), parserOther, logger);
@@ -51,7 +51,7 @@ public interface AndCombinator<OutputLeft, Input>
 	 *   (discarded)
 	 * @return a {@link MapParser.Transform} that produces {@code OutputLeft}
 	 */
-	public default<OutputRight> Parser<OutputLeft, Input> andFirst(
+	public default<OutputRight> CombinatorParser<OutputLeft, Input> andFirst(
 	  final Parser<OutputRight, Input> parserOther
 	) {
 		final var andParser = this.and(parserOther);
@@ -70,7 +70,7 @@ public interface AndCombinator<OutputLeft, Input>
 	 * @param <OutputRight> the type of value produced by the second parser
 	 * @return a {@link MapParser.Transform} that produces {@code OutputRight}
 	 */
-	public default<OutputRight> Parser<OutputRight, Input> andSecond(
+	public default<OutputRight> CombinatorParser<OutputRight, Input> andSecond(
 	  final Parser<OutputRight, Input> parserOther
 	) {
 		final var andParser = this.and(parserOther);

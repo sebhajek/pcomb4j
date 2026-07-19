@@ -33,7 +33,10 @@ public abstract class AbstractParser<Output, Input>
 	 *
 	 * @return this parser
 	 */
-	public Parser<Output, Input> getParser() { return this; }
+	@Override
+	public Parser<Output, Input> getParser() {
+		return this;
+	}
 
 	/** {@inheritDoc} */
 	@Override

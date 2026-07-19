@@ -1,6 +1,6 @@
 package io.github.sebhajek.pcomb4j.combinators;
 
-import io.github.sebhajek.pcomb4j.Parser;
+import io.github.sebhajek.pcomb4j.interfaces.CombinatorParser;
 import io.github.sebhajek.pcomb4j.interfaces.DelegateParser;
 import io.github.sebhajek.pcomb4j.parsers.OptionalParser;
 
@@ -26,7 +26,7 @@ public interface OptionalCombinator<Output, Input>
 	 *
 	 * @return a new {@link OptionalParser}
 	 */
-	public default Parser<Optional<Output>, Input> optional() {
+	public default CombinatorParser<Optional<Output>, Input> optional() {
 		final var logger = getLogger();
 		logger.debug("building `optional` parser");
 		return new OptionalParser<>(getParser(), logger);

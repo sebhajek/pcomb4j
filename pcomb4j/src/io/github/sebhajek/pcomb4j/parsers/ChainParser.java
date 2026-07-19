@@ -63,7 +63,7 @@ public class ChainParser<Output, Input>
 
 	private static final <A, B> ParserInput<B> applyChain(
 	  final ParserInput<B> input,
-	  final ArrayList<A> results,
+	  final List<A> results,
 	  final List<Parser<A, B>> parsersList
 	) throws ParserError {
 		var currentInput = input;

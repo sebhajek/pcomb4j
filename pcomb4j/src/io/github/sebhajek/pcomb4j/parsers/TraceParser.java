@@ -1,15 +1,17 @@
 package io.github.sebhajek.pcomb4j.parsers;
 
-import java.util.Optional;
-
-import org.jspecify.annotations.NonNull;
-import org.slf4j.Logger;
-
 import io.github.sebhajek.pcomb4j.Parser;
 import io.github.sebhajek.pcomb4j.ParserError;
 import io.github.sebhajek.pcomb4j.ParserInput;
 import io.github.sebhajek.pcomb4j.ParserResult;
 import io.github.sebhajek.pcomb4j.interfaces.AbstractSourcedParser;
+
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
+
+import org.slf4j.Logger;
+
+import java.util.Optional;
 
 public class TraceParser<Output, Input>
   extends AbstractSourcedParser<Output, Output, Input> {
@@ -34,8 +36,8 @@ public class TraceParser<Output, Input>
 	}
 
 	public TraceParser(
-	  final String message,
-	  final Logger loggerDedicated,
+	  final @Nullable String message,
+	  final @Nullable Logger loggerDedicated,
 	  final Parser<Output, Input> parserSource,
 	  final Logger                logger
 	) {

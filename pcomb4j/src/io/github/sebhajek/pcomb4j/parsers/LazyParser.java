@@ -10,6 +10,8 @@ import org.jspecify.annotations.NonNull;
 
 import org.slf4j.Logger;
 
+import java.util.Optional;
+
 import java.util.function.Supplier;
 
 /**
@@ -30,19 +32,19 @@ public class LazyParser<Output, Input> extends AbstractParser<Output, Input> {
 	public static class Memoized<Output, Input>
 	  extends LazyParser<Output, Input> {
 
-		private Parser<Output, Input> parser;
+		private Optional<Parser<Output, Input>> parser;
 
 		public Memoized(
 		  Supplier<Parser<Output, Input>> supplier,
 		  Logger                          logger
 		) {
 			super(supplier, logger);
+			this.parser = Optional.empty();
 		}
 
 		@Override
 		public Parser<Output, Input> getParser() {
-			if (this.parser == null) { this.parser = getSupplier().get(); }
-			return this.parser;
+			return parser.orElseGet(getSupplier()::get);
 		}
 	}
 

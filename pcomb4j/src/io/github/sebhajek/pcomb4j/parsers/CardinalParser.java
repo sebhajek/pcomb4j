@@ -10,7 +10,6 @@ import org.jspecify.annotations.NonNull;
 
 import org.slf4j.Logger;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -133,7 +132,7 @@ public abstract class CardinalParser<Output, Input>
 
 		private @NonNull ParserInput<Input> getFirstInput(
 		  final ParserInput<Input> parserInput,
-		  final ArrayList<Output> results
+		  final List<Output> results
 		) throws ParserError {
 			getLogger().debug("processing a first of a series");
 			final var firstResult = getParserSource().parse(parserInput);
@@ -165,10 +164,8 @@ public abstract class CardinalParser<Output, Input>
 	 * @param results the list to append results to; never {@code null}
 	 * @return the input position after the last successful application
 	 */
-	protected ParserInput<Input> getLastInput(
-	  final ParserInput<Input> input,
-	  final ArrayList<Output> results
-	) {
+	protected ParserInput<Input>
+	getLastInput(final ParserInput<Input> input, final List<Output> results) {
 		var logger       = getLogger();
 		var currentInput = input;
 		logger.debug("processing a series");
@@ -184,8 +181,8 @@ public abstract class CardinalParser<Output, Input>
 	}
 
 	private ParserInput<Input> processNext(
-	  final ArrayList<Output> results,
-	  ParserInput<Input>      currentInput
+	  final List<Output> results,
+	  ParserInput<Input> currentInput
 	) throws ParserError {
 		final var result = getParserSource().parse(currentInput);
 		results.addLast(result.result());

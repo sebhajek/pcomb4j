@@ -2,6 +2,7 @@ package io.github.sebhajek.pcomb4j.combinators;
 
 import io.github.sebhajek.pcomb4j.Parser;
 import io.github.sebhajek.pcomb4j.ParserResult;
+import io.github.sebhajek.pcomb4j.interfaces.CombinatorParser;
 import io.github.sebhajek.pcomb4j.interfaces.DelegateParser;
 import io.github.sebhajek.pcomb4j.parsers.OrParser;
 
@@ -36,7 +37,7 @@ public interface OrCombinator<OutputLeft, Input>
 	 * @return a left-associative chain of {@link OrParser.Or} instances
 	 * @throws IllegalArgumentException if {@code parserOthers} is empty
 	 */
-	public default Parser<OutputLeft, Input> or(
+	public default CombinatorParser<OutputLeft, Input> or(
 	  @SuppressWarnings("unchecked")
 	  final Parser<OutputLeft, Input>... parserOthers
 	) {
@@ -59,7 +60,7 @@ public interface OrCombinator<OutputLeft, Input>
 	 * @param parserOther the fallback parser; never {@code null}
 	 * @return a new {@link OrParser.Or}
 	 */
-	public default Parser<OutputLeft, Input> or(
+	public default CombinatorParser<OutputLeft, Input> or(
 	  final Parser<OutputLeft, Input> parserOther
 	) {
 		final var logger = getLogger();
@@ -78,9 +79,8 @@ public interface OrCombinator<OutputLeft, Input>
 	 * @return a new {@link OrParser.Either}
 	 */
 	public default<OutputRight>
-	  Parser<ParserResult.Either<OutputLeft, OutputRight>, Input> orElse(
-	    final Parser<OutputRight, Input> parserOther
-	  ) {
+	  CombinatorParser<ParserResult.Either<OutputLeft, OutputRight>, Input>
+	  orElse(final Parser<OutputRight, Input> parserOther) {
 		final var logger = getLogger();
 		logger.debug("building `orElse` parser");
 		return new OrParser.Either<>(getParser(), parserOther, logger);

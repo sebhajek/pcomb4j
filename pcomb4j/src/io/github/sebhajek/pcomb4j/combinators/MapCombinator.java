@@ -1,6 +1,6 @@
 package io.github.sebhajek.pcomb4j.combinators;
 
-import io.github.sebhajek.pcomb4j.Parser;
+import io.github.sebhajek.pcomb4j.interfaces.CombinatorParser;
 import io.github.sebhajek.pcomb4j.interfaces.DelegateParser;
 import io.github.sebhajek.pcomb4j.parsers.MapParser;
 
@@ -33,7 +33,7 @@ public interface MapCombinator<Output, Input>
 	 * @param <OutputMapped> the type of the constant value
 	 * @return a new {@link MapParser.Pure}
 	 */
-	public default<OutputMapped> Parser<OutputMapped, Input> pure(
+	public default<OutputMapped> CombinatorParser<OutputMapped, Input> pure(
 	  final OutputMapped value
 	) {
 		final var logger = getLogger();
@@ -51,7 +51,7 @@ public interface MapCombinator<Output, Input>
 	 * @param <OutputMapped> the type of the transformed value
 	 * @return a new {@link MapParser.Transform}
 	 */
-	public default<OutputMapped> Parser<OutputMapped, Input> map(
+	public default<OutputMapped> CombinatorParser<OutputMapped, Input> map(
 	  final Function<Output, OutputMapped> mapper
 	) {
 		final var logger = getLogger();
@@ -72,7 +72,7 @@ public interface MapCombinator<Output, Input>
 	 * @param <OutputMapped> the supertype to widen to
 	 * @return a new {@link MapParser.Cast}
 	 */
-	public default<OutputMapped> Parser<OutputMapped, Input> cast(
+	public default<OutputMapped> CombinatorParser<OutputMapped, Input> cast(
 	  final Class<OutputMapped> type
 	) {
 		final var logger = getLogger();

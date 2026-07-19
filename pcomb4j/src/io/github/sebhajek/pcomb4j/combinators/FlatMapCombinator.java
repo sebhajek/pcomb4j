@@ -1,6 +1,7 @@
 package io.github.sebhajek.pcomb4j.combinators;
 
 import io.github.sebhajek.pcomb4j.Parser;
+import io.github.sebhajek.pcomb4j.interfaces.CombinatorParser;
 import io.github.sebhajek.pcomb4j.interfaces.DelegateParser;
 import io.github.sebhajek.pcomb4j.parsers.FlatMapParser;
 
@@ -30,7 +31,7 @@ public interface FlatMapCombinator<Output, Input>
 	 * @param <OutputNext> the type produced by the second parser
 	 * @return a new {@link FlatMapParser}
 	 */
-	public default<OutputNext> Parser<OutputNext, Input> flatMap(
+	public default<OutputNext> CombinatorParser<OutputNext, Input> flatMap(
 	  final Function<Output, Parser<OutputNext, Input>> binder
 	) {
 		final var logger = getLogger();

@@ -1,7 +1,7 @@
 package io.github.sebhajek.pcomb4j.combinators;
 
-import io.github.sebhajek.pcomb4j.Parser;
 import io.github.sebhajek.pcomb4j.ParserCombinator;
+import io.github.sebhajek.pcomb4j.interfaces.CombinatorParser;
 import io.github.sebhajek.pcomb4j.interfaces.DelegateParser;
 import io.github.sebhajek.pcomb4j.parsers.FilterParser;
 
@@ -26,7 +26,7 @@ public interface FilterCombinator<Output, Input>
 	 *   {@code null}
 	 * @return a new {@link FilterParser} wrapping this parser
 	 */
-	public default Parser<Output, Input> filter(
+	public default CombinatorParser<Output, Input> filter(
 	  final Predicate<Output> predicate
 	) {
 		final var logger = getLogger();
@@ -34,12 +34,16 @@ public interface FilterCombinator<Output, Input>
 		return new FilterParser<>(getParser(), predicate, logger);
 	}
 
-	public default Parser<Output, Input> filterValue(Output value) {
+	public default CombinatorParser<Output, Input> filterValue(
+	  final Output value
+	) {
 		return filter(value::equals);
 	}
 
-	public default<OutputNarrow extends Output> Parser<OutputNarrow, Input>
-	filterType(Class<OutputNarrow> type) {
+	public default<OutputNarrow extends Output>
+	  CombinatorParser<OutputNarrow, Input> filterType(
+	    final Class<OutputNarrow> type
+	  ) {
 		return ParserCombinator.withLogger(getLogger())
 		  .from(filter(type::isInstance))
 		  .cast(type);

@@ -1,8 +1,8 @@
 package io.github.sebhajek.pcomb4j.combinators;
 
-import io.github.sebhajek.pcomb4j.Parser;
 import io.github.sebhajek.pcomb4j.ParserError;
 import io.github.sebhajek.pcomb4j.ParserInput;
+import io.github.sebhajek.pcomb4j.interfaces.CombinatorParser;
 import io.github.sebhajek.pcomb4j.interfaces.DelegateParser;
 import io.github.sebhajek.pcomb4j.parsers.ErrorParser;
 
@@ -34,7 +34,9 @@ public interface ErrorCombinator<Output, Input>
 	 * @param label a static human-readable description of what was expected
 	 * @return a new {@link ErrorParser.Label} wrapping this parser
 	 */
-	public default Parser<Output, Input> labelError(final String label) {
+	public default CombinatorParser<Output, Input> labelError(
+	  final String label
+	) {
 		return new ErrorParser.Label<>(label, getParser(), getLogger());
 	}
 
@@ -48,7 +50,7 @@ public interface ErrorCombinator<Output, Input>
 	 *     {@link ParserError}, returning a message string
 	 * @return a new {@link ErrorParser.Message} wrapping this parser
 	 */
-	public default Parser<Output, Input> labelError(
+	public default CombinatorParser<Output, Input> labelError(
 	  final BiFunction<ParserInput<Input>, ParserError, String> messageFactory
 	) {
 		return new ErrorParser.Message<>(
@@ -66,7 +68,7 @@ public interface ErrorCombinator<Output, Input>
 	 * throw
 	 * @return a new {@link ErrorParser.Supplied} wrapping this parser
 	 */
-	public default Parser<Output, Input> withError(
+	public default CombinatorParser<Output, Input> withError(
 	  final BiFunction<ParserInput<Input>, ParserError, ParserError>
 	        errorFactory
 	) {

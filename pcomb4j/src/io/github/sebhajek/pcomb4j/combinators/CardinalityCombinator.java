@@ -1,7 +1,7 @@
 package io.github.sebhajek.pcomb4j.combinators;
 
-import io.github.sebhajek.pcomb4j.Parser;
 import io.github.sebhajek.pcomb4j.ParserError;
+import io.github.sebhajek.pcomb4j.interfaces.CombinatorParser;
 import io.github.sebhajek.pcomb4j.interfaces.DelegateParser;
 import io.github.sebhajek.pcomb4j.parsers.CardinalParser;
 
@@ -26,7 +26,7 @@ public interface CardinalityCombinator<Output, Input>
 	 *
 	 * @return a new {@link CardinalParser} that always succeeds
 	 */
-	public default Parser<List<Output>, Input> zeroOrMore() {
+	public default CombinatorParser<List<Output>, Input> zeroOrMore() {
 		final var logger = getLogger();
 		logger.debug("building `zeroOrMore` parser");
 		return new CardinalParser.ZeroOrMore<>(getParser(), logger);
@@ -42,7 +42,7 @@ public interface CardinalityCombinator<Output, Input>
 	 *
 	 * @return a new {@link CardinalParser} that requires at least one match
 	 */
-	public default Parser<List<Output>, Input> oneOrMore() {
+	public default CombinatorParser<List<Output>, Input> oneOrMore() {
 		final var logger = getLogger();
 		logger.debug("building `oneOrMore` parser");
 		return new CardinalParser.OneOrMore<>(getParser(), logger);
