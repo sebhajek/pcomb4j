@@ -55,6 +55,17 @@ public class ParserCombinator<Output, Input>
 			});
 		}
 
+		/**
+		 * Wraps the given {@link DelegateParser} in a new {@link
+		 * ParserCombinator} by unwrapping it first and wrapping its inner
+		 * parser.
+		 *
+		 * @param parser the delegate parser to wrap; never {@code null}
+		 * @param <Output> the type of value produced by a successful parse
+		 * @param <Input> the type of element consumed from the input
+		 * @return a new {@link ParserCombinator} wrapping the inner parser of
+		 *   {@code parser}
+		 */
 		public final <Output, Input> ParserCombinator<Output, Input> from(
 		  @NonNull final DelegateParser<Output, Input> parser
 		) {
@@ -76,8 +87,10 @@ public class ParserCombinator<Output, Input>
 		return new ParserCombinator.Builder(logger);
 	}
 
+	/** The logger used for debug output during parsing. */
 	protected final @NonNull Logger logger;
 
+	/** The underlying parser to which parsing is delegated. */
 	protected final @NonNull Parser<Output, Input> parser;
 
 	/**

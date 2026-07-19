@@ -148,7 +148,7 @@ public abstract class MapParser<OutputMapped, Output, Input>
 		private final Class<OutputMapped> type;
 
 		/**
-		 * Creates a new {@code Widen} parser.
+		 * Creates a new {@code Cast} parser.
 		 *
 		 * @param parserSource the inner parser; never {@code null}
 		 * @param type the target type token; never {@code null}
@@ -176,7 +176,7 @@ public abstract class MapParser<OutputMapped, Output, Input>
 		  final ParserResult<Output, Input> result
 		) {
 			getLogger().atInfo().log(() -> {
-				return "processing `widen` parser: %s -> %s".formatted(
+				return "processing `cast` parser: %s -> %s".formatted(
 				  result.result().getClass().getName(), getType().getName()
 				);
 			});

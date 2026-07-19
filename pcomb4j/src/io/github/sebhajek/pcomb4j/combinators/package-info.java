@@ -8,8 +8,7 @@
  * assembled into the unified {@link
  * io.github.sebhajek.pcomb4j.interfaces.CombinatorParser} mixin, which is
  * implemented by {@link io.github.sebhajek.pcomb4j.ParserCombinator} and all
- * concrete parsers in the {@code org.codeberg.sebhajek.pcomb4j.parsers}
- * package.
+ * concrete parsers in the {@code io.github.sebhajek.pcomb4j.parsers} package.
  *
  * <p>All types in this package are null-marked; see {@link
  * org.jspecify.annotations.NullMarked}.

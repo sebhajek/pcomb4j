@@ -60,7 +60,10 @@ public abstract sealed class ParserError extends Exception {
   non-sealed
 	  /* clang-format on */
 	  class Branch extends ParserError {
+		/** Error from the left (first-tried) branch. */
 		private final ParserError errorLeft;
+
+		/** Error from the right (fallback) branch. */
 		private final ParserError errorRight;
 
 		/**
@@ -107,6 +110,7 @@ public abstract sealed class ParserError extends Exception {
   non-sealed
 	  /* clang-format on */
 	  class Wrapped extends ParserError {
+		/** The underlying error being wrapped. */
 		private final ParserError errorInner;
 
 		/**

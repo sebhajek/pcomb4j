@@ -29,11 +29,28 @@ import java.util.function.Supplier;
  */
 public class LazyParser<Output, Input> extends AbstractParser<Output, Input> {
 
+	/**
+	 * A {@link LazyParser} variant that evaluates the supplier on the first
+	 * parse call and caches the result for all subsequent calls.
+	 *
+	 * <p>This is useful when the inner parser is expensive to construct or when
+	 * it should be created exactly once.
+	 *
+	 * @param <Output> the type of value produced by a successful parse
+	 * @param <Input> the type of element consumed from the input
+	 */
 	public static class Memoized<Output, Input>
 	  extends LazyParser<Output, Input> {
 
 		private Optional<Parser<Output, Input>> parser;
 
+		/**
+		 * Creates a new {@code Memoized} lazy parser.
+		 *
+		 * @param supplier a supplier that produces the inner parser on first
+		 *   call; never {@code null}
+		 * @param logger the logger used for debug output; never {@code null}
+		 */
 		public Memoized(
 		  Supplier<Parser<Output, Input>> supplier,
 		  Logger                          logger
@@ -42,17 +59,26 @@ public class LazyParser<Output, Input> extends AbstractParser<Output, Input> {
 			this.parser = Optional.empty();
 		}
 
+		/**
+		 * Returns the inner parser, evaluating the supplier on the first call
+		 * and caching the result.
+		 *
+		 * @return the inner parser; never {@code null}
+		 */
 		@Override
 		public Parser<Output, Input> getParser() {
-			if (parser.isEmpty()) {
-				parser = Optional.of(getSupplier().get());
-			}
+			if (parser.isEmpty()) { parser = Optional.of(getSupplier().get()); }
 			return parser.get();
 		}
 	}
 
 	private final Supplier<Parser<Output, Input>> supplier;
 
+	/**
+	 * Returns the supplier that produces the inner parser.
+	 *
+	 * @return the supplier; never {@code null}
+	 */
 	protected Supplier<Parser<Output, Input>> getSupplier() { return supplier; }
 
 	/**

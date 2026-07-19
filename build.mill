@@ -28,7 +28,7 @@ object pcomb4j extends JavaModule, PublishModule, ErrorProneModule {
     override def publishVersion = sys.env.getOrElse("VERSION", "0.0.0-SNAPSHOT")
     override def pomSettings    =
         PomSettings(
-          description = "Parser combinator library for modern java.",
+          description = "A lightweight, type-safe parser combinator library for modern Java.",
           organization = "io.github.sebhajek",
           url = "https://github.com/sebhajek/pcomb4j",
           licenses = Seq(License.`MPL-2.0`),

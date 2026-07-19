@@ -37,8 +37,8 @@ public interface OrCombinator<OutputLeft, Input>
 	 * @return a left-associative chain of {@link OrParser.Or} instances
 	 * @throws IllegalArgumentException if {@code parserOthers} is empty
 	 */
+	@SuppressWarnings("unchecked")
 	public default CombinatorParser<OutputLeft, Input> or(
-	  @SuppressWarnings("unchecked")
 	  final Parser<OutputLeft, Input>... parserOthers
 	) {
 		if (parserOthers.length <= 0) {

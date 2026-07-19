@@ -13,12 +13,30 @@ import org.slf4j.Logger;
 
 import java.util.Optional;
 
+/**
+ * A {@link Parser} that logs a trace message before delegating to an inner
+ * parser, useful for debugging parse progress.
+ *
+ * <p>The trace message is logged at info level using either a dedicated {@link
+ * Logger} or the parser's own logger.
+ *
+ * @param <Output> the type of value produced by a successful parse
+ * @param <Input> the type of element consumed from the input
+ */
 public class TraceParser<Output, Input>
   extends AbstractSourcedParser<Output, Output, Input> {
 
 	private final Optional<Logger> loggerDedicated;
 	private final Optional<String> message;
 
+	/**
+	 * Creates a new {@code TraceParser} that logs a fixed message using the
+	 * parser's own logger.
+	 *
+	 * @param message the message to log; never {@code null}
+	 * @param parserSource the inner parser to delegate to; never {@code null}
+	 * @param logger the logger used for debug output; never {@code null}
+	 */
 	public TraceParser(
 	  final String message,
 	  final Parser<Output, Input> parserSource,
@@ -27,6 +45,14 @@ public class TraceParser<Output, Input>
 		this(message, null, parserSource, logger);
 	}
 
+	/**
+	 * Creates a new {@code TraceParser} that logs using a dedicated logger.
+	 *
+	 * @param loggerDedicated the logger to use for trace output; never {@code
+	 *   null}
+	 * @param parserSource the inner parser to delegate to; never {@code null}
+	 * @param logger the logger used for debug output; never {@code null}
+	 */
 	public TraceParser(
 	  final Logger loggerDedicated,
 	  final Parser<Output, Input> parserSource,
@@ -35,6 +61,14 @@ public class TraceParser<Output, Input>
 		this(null, loggerDedicated, parserSource, logger);
 	}
 
+	/**
+	 * Creates a new {@code TraceParser} with full configuration.
+	 *
+	 * @param message the optional message to log; may be {@code null}
+	 * @param loggerDedicated the optional dedicated logger; may be {@code null}
+	 * @param parserSource the inner parser to delegate to; never {@code null}
+	 * @param logger the logger used for debug output; never {@code null}
+	 */
 	public TraceParser(
 	  final @Nullable String message,
 	  final @Nullable Logger loggerDedicated,
@@ -46,10 +80,28 @@ public class TraceParser<Output, Input>
 		this.loggerDedicated = Optional.ofNullable(loggerDedicated);
 	}
 
+	/**
+	 * Returns the dedicated logger, if any.
+	 *
+	 * @return an {@link Optional} containing the dedicated logger, or empty
+	 */
 	protected Optional<Logger> getLoggerDedicated() { return loggerDedicated; }
 
+	/**
+	 * Returns the trace message, if any.
+	 *
+	 * @return an {@link Optional} containing the message, or empty
+	 */
 	protected Optional<String> getMessage() { return message; }
 
+	/**
+	 * Logs the trace message (if configured) and delegates parsing to the inner
+	 * parser.
+	 *
+	 * @param parserInput the input to parse; never {@code null}
+	 * @return the result produced by the inner parser
+	 * @throws ParserError if the inner parser fails
+	 */
 	@Override
 	public ParserResult<Output, Input> parse(
 	  @NonNull final ParserInput<Input> parserInput

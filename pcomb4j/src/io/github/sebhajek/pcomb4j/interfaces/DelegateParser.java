@@ -21,6 +21,20 @@ import org.slf4j.Logger;
  */
 public interface DelegateParser<Output, Input> extends Parser<Output, Input> {
 
+	/**
+	 * Unwraps a parser if it is a {@link DelegateParser}, returning its inner
+	 * delegate; otherwise returns the parser unchanged.
+	 *
+	 * <p>This is used by combinator default methods to avoid nesting
+	 * unnecessary layers of delegation.
+	 *
+	 * @param parser the parser to unwrap; never {@code null}
+	 * @param <Output> the output type
+	 * @param <Input> the input type
+	 * @return the inner delegate if {@code parser} is a {@code DelegateParser},
+	 *   otherwise {@code
+	 *     parser} itself
+	 */
 	public static <Output, Input> Parser<Output, Input> getDelegate(
 	  Parser<Output, Input> parser
 	) {

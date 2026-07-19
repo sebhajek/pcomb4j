@@ -12,7 +12,7 @@ import org.jspecify.annotations.NonNull;
  * <p>Being a {@link FunctionalInterface}, a {@code Parser} can be implemented
  * with a lambda expression or method reference, and can be composed with other
  * parsers via the combinators found in the {@code
- * org.codeberg.sebhajek.pcomb4j.combinators} package (see {@link
+ * io.github.sebhajek.pcomb4j.combinators} package (see {@link
  * ParserCombinator}).
  *
  * @param <Output> the type of value produced by a successful parse

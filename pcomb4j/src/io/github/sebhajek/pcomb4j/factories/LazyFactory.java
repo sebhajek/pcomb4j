@@ -34,6 +34,15 @@ public interface LazyFactory extends LoggedFactory {
 		return new LazyParser<>(supplier, logger);
 	}
 
+	/**
+	 * Creates a {@link LazyParser.Memoized} whose inner parser is obtained from
+	 * {@code supplier} on the first parse call and cached thereafter.
+	 *
+	 * @param supplier a supplier of the actual parser; never {@code null}
+	 * @param <Output> the output type of the inner parser
+	 * @param <Input> the type of element consumed from the input
+	 * @return a new {@link LazyParser.Memoized}
+	 */
 	public default<Output, Input> LazyParser<Output, Input> lazyMemoized(
 	  final Supplier<Parser<Output, Input>> supplier
 	) {
