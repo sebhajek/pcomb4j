@@ -34,14 +34,12 @@ public interface FilterCombinator<Output, Input>
 		return new FilterParser<>(getParser(), predicate, logger);
 	}
 
-	public default CombinatorParser<Output, Input> filterValue(
-	  final Output value
-	) {
+	public default CombinatorParser<Output, Input> filter(final Output value) {
 		return filter(value::equals);
 	}
 
 	public default<OutputNarrow extends Output>
-	  CombinatorParser<OutputNarrow, Input> filterType(
+	  CombinatorParser<OutputNarrow, Input> filter(
 	    final Class<OutputNarrow> type
 	  ) {
 		return ParserCombinator.withLogger(getLogger())
