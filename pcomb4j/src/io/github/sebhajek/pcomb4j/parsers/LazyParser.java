@@ -44,7 +44,10 @@ public class LazyParser<Output, Input> extends AbstractParser<Output, Input> {
 
 		@Override
 		public Parser<Output, Input> getParser() {
-			return parser.orElseGet(getSupplier()::get);
+			if (parser.isEmpty()) {
+				parser = Optional.of(getSupplier().get());
+			}
+			return parser.get();
 		}
 	}
 
