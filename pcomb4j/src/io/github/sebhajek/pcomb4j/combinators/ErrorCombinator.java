@@ -37,7 +37,9 @@ public interface ErrorCombinator<Output, Input>
 	public default CombinatorParser<Output, Input> labelError(
 	  final String label
 	) {
-		return new ErrorParser.Label<>(label, getParser(), getLogger());
+		return new ErrorParser.Label<>(
+		  label, DelegateParser.getDelegate(getParser()), getLogger()
+		);
 	}
 
 	/**
@@ -54,7 +56,7 @@ public interface ErrorCombinator<Output, Input>
 	  final BiFunction<ParserInput<Input>, ParserError, String> messageFactory
 	) {
 		return new ErrorParser.Message<>(
-		  messageFactory, getParser(), getLogger()
+		  messageFactory, DelegateParser.getDelegate(getParser()), getLogger()
 		);
 	}
 
@@ -73,7 +75,7 @@ public interface ErrorCombinator<Output, Input>
 	        errorFactory
 	) {
 		return new ErrorParser.Supplied<>(
-		  errorFactory, getParser(), getLogger()
+		  errorFactory, DelegateParser.getDelegate(getParser()), getLogger()
 		);
 	}
 }

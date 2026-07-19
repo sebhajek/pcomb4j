@@ -48,7 +48,11 @@ public class ParserCombinator<Output, Input>
 		public final <Output, Input> ParserCombinator<Output, Input> from(
 		  @NonNull final Parser<Output, Input> parser
 		) {
-			return new ParserCombinator<>(logger, parser);
+			return new ParserCombinator<>(logger, switch (parser) {
+				case ParserCombinator<Output, Input> p -> p.getParser();
+				case DelegateParser<Output, Input>   p ->   p.getParser();
+				default ->                                parser;
+			});
 		}
 
 		public final <Output, Input> ParserCombinator<Output, Input> from(

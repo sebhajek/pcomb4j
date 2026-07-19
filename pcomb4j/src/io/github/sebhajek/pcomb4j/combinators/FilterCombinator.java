@@ -31,7 +31,9 @@ public interface FilterCombinator<Output, Input>
 	) {
 		final var logger = getLogger();
 		logger.debug("building `filter` parser");
-		return new FilterParser<>(getParser(), predicate, logger);
+		return new FilterParser<>(
+		  DelegateParser.getDelegate(getParser()), predicate, logger
+		);
 	}
 
 	public default CombinatorParser<Output, Input> filter(final Output value) {

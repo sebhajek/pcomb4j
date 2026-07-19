@@ -13,7 +13,12 @@ public interface TraceCombinator<Output, Input>
 	trace(String message, Logger loggerDedicated) {
 		final var logger = getLogger();
 		logger.debug("building `trace` parser");
-		return new TraceParser<>(message, loggerDedicated, getParser(), logger);
+		return new TraceParser<>(
+		  message,
+		  loggerDedicated,
+		  DelegateParser.getDelegate(getParser()),
+		  logger
+		);
 	}
 
 	public default CombinatorParser<Output, Input> trace(
@@ -21,12 +26,16 @@ public interface TraceCombinator<Output, Input>
 	) {
 		final var logger = getLogger();
 		logger.debug("building `trace` parser");
-		return new TraceParser<>(loggerDedicated, getParser(), logger);
+		return new TraceParser<>(
+		  loggerDedicated, DelegateParser.getDelegate(getParser()), logger
+		);
 	}
 
 	public default CombinatorParser<Output, Input> trace(String message) {
 		final var logger = getLogger();
 		logger.debug("building `trace` parser");
-		return new TraceParser<>(message, getParser(), logger);
+		return new TraceParser<>(
+		  message, DelegateParser.getDelegate(getParser()), logger
+		);
 	}
 }

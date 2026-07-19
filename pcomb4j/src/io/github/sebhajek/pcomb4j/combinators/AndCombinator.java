@@ -39,7 +39,11 @@ public interface AndCombinator<OutputLeft, Input>
 	  and(final Parser<OutputRight, Input> parserOther) {
 		final var logger = getLogger();
 		logger.debug("building `and` parser");
-		return new AndParser<>(getParser(), parserOther, logger);
+		return new AndParser<>(
+		  DelegateParser.getDelegate(getParser()),
+		  DelegateParser.getDelegate(parserOther),
+		  logger
+		);
 	}
 
 	/**

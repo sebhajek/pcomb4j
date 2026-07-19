@@ -21,6 +21,14 @@ import org.slf4j.Logger;
  */
 public interface DelegateParser<Output, Input> extends Parser<Output, Input> {
 
+	public static <Output, Input> Parser<Output, Input> getDelegate(
+	  Parser<Output, Input> parser
+	) {
+		return parser instanceof DelegateParser<Output, Input> delegateParser
+		  ? delegateParser
+		  : parser;
+	}
+
 	/**
 	 * Returns the underlying parser to which parsing is delegated.
 	 *

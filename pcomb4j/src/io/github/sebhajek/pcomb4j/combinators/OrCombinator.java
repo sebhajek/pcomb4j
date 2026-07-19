@@ -46,9 +46,15 @@ public interface OrCombinator<OutputLeft, Input>
 		}
 		final var logger = getLogger();
 		logger.debug("building `or` parser");
-		var orParser = new OrParser.Or<>(getParser(), parserOthers[0], logger);
+		var orParser = new OrParser.Or<>(
+		  DelegateParser.getDelegate(getParser()),
+		  DelegateParser.getDelegate(parserOthers[0]),
+		  logger
+		);
 		for (var idx = 1; idx < parserOthers.length; ++idx) {
-			orParser = new OrParser.Or<>(orParser, parserOthers[idx], logger);
+			orParser = new OrParser.Or<>(
+			  orParser, DelegateParser.getDelegate(parserOthers[idx]), logger
+			);
 		}
 		return orParser;
 	}
@@ -65,7 +71,11 @@ public interface OrCombinator<OutputLeft, Input>
 	) {
 		final var logger = getLogger();
 		logger.debug("building `or` parser");
-		return new OrParser.Or<>(getParser(), parserOther, logger);
+		return new OrParser.Or<>(
+		  DelegateParser.getDelegate(getParser()),
+		  DelegateParser.getDelegate(parserOther),
+		  logger
+		);
 	}
 
 	/**
@@ -83,6 +93,10 @@ public interface OrCombinator<OutputLeft, Input>
 	  orElse(final Parser<OutputRight, Input> parserOther) {
 		final var logger = getLogger();
 		logger.debug("building `orElse` parser");
-		return new OrParser.Either<>(getParser(), parserOther, logger);
+		return new OrParser.Either<>(
+		  DelegateParser.getDelegate(getParser()),
+		  DelegateParser.getDelegate(parserOther),
+		  logger
+		);
 	}
 }

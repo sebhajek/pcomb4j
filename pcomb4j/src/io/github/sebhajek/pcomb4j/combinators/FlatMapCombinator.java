@@ -36,6 +36,8 @@ public interface FlatMapCombinator<Output, Input>
 	) {
 		final var logger = getLogger();
 		logger.debug("building `flatMap` parser");
-		return new FlatMapParser<>(getParser(), binder, logger);
+		return new FlatMapParser<>(
+		  DelegateParser.getDelegate(getParser()), binder, logger
+		);
 	}
 }
