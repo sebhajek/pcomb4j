@@ -7,7 +7,7 @@ import java.util.function.Supplier;
 
 public interface FailureFactory extends LoggedFactory {
 
-	public default<Output, Input> FailureParser<Output, Input> alwaysFails(
+	public default<Input> FailureParser<Input, Input> alwaysFails(
 	  final Supplier<ParserError> supplier
 	) {
 		final var logger = getLogger();
