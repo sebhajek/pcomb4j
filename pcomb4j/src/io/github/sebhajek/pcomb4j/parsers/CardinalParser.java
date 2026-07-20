@@ -72,7 +72,7 @@ public abstract class CardinalParser<Output, Input>
 		) throws ParserError {
 			final var logger  = getLogger();
 			final var results = new java.util.ArrayList<Output>();
-			logger.info("processing `zeroOrMore` parser");
+			logger.debug("processing `zeroOrMore` parser");
 			final var lastInput = getLastInput(parserInput, results);
 			return new ParserResult<>(
 			  Collections.unmodifiableList(results), lastInput
@@ -122,7 +122,7 @@ public abstract class CardinalParser<Output, Input>
 		) throws ParserError {
 			final var logger  = getLogger();
 			final var results = new java.util.ArrayList<Output>();
-			logger.info("processing `oneOrMore` parser");
+			logger.debug("processing `oneOrMore` parser");
 			final var firstInput = getFirstInput(parserInput, results);
 			final var lastInput  = getLastInput(firstInput, results);
 			return new ParserResult<>(
@@ -134,7 +134,7 @@ public abstract class CardinalParser<Output, Input>
 		  final ParserInput<Input> parserInput,
 		  final List<Output> results
 		) throws ParserError {
-			getLogger().debug("processing a first of a series");
+			getLogger().trace("processing a first of a series");
 			final var firstResult = getParserSource().parse(parserInput);
 			results.addFirst(firstResult.result());
 			final var firstInput = firstResult.remainder();
@@ -168,12 +168,12 @@ public abstract class CardinalParser<Output, Input>
 	getLastInput(final ParserInput<Input> input, final List<Output> results) {
 		var logger       = getLogger();
 		var currentInput = input;
-		logger.debug("processing a series");
+		logger.trace("processing a series");
 		while (!currentInput.isEmpty()) {
 			try {
 				currentInput = processNext(results, currentInput);
 			} catch (final ParserError err) {
-				logger.debug("encountered end of series: {}", results);
+				logger.trace("encountered end of series: {}", results);
 				break;
 			}
 		}
@@ -184,6 +184,7 @@ public abstract class CardinalParser<Output, Input>
 	  final List<Output> results,
 	  ParserInput<Input> currentInput
 	) throws ParserError {
+		getLogger().trace("processing next of a series");
 		final var result = getParserSource().parse(currentInput);
 		results.addLast(result.result());
 		currentInput = result.remainder();

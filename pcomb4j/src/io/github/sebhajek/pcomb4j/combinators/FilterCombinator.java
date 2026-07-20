@@ -30,7 +30,7 @@ public interface FilterCombinator<Output, Input>
 	  final Predicate<Output> predicate
 	) {
 		final var logger = getLogger();
-		logger.debug("building `filter` parser");
+		logger.info("building `filter` parser");
 		return new FilterParser<>(
 		  DelegateParser.getDelegate(getParser()), predicate, logger
 		);

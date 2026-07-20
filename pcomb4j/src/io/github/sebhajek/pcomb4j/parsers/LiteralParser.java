@@ -94,10 +94,10 @@ public class LiteralParser<Input> extends AbstractParser<Input, Input> {
 		  ? comparator.orElseThrow().compare(current, literal) == 0
 		  : literal.equals(current);
 		if (comparison) {
-			logger.debug("getting `literal`: {} == {}", current, literal);
+			logger.trace("getting `literal`: {} == {}", current, literal);
 			return new ParserResult<>(current, parserInput.advance());
 		} else {
-			logger.debug("getting `literal`: {} != {}", current, literal);
+			logger.trace("getting `literal`: {} != {}", current, literal);
 			throw new LiteralNotMatched();
 		}
 	}

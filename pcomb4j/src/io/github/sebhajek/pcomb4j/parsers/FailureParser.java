@@ -58,6 +58,7 @@ public class FailureParser<Output, Input>
 	public ParserResult<Output, Input> parse(
 	  @NonNull ParserInput<Input> parserInput
 	) throws ParserError {
+		getLogger().trace("processing `failure` parser");
 		throw getSupplier().get();
 	}
 }

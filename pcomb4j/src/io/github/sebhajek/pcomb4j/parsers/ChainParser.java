@@ -56,7 +56,7 @@ public class ChainParser<Output, Input>
 	) throws ParserError {
 		var       logger  = getLogger();
 		final var results = new ArrayList<Output>(parsersList.size());
-		logger.info("applying `chain`");
+		logger.debug("applying `chain`");
 		final var chainResult = applyChain(parserInput, results, parsersList);
 		return new ParserResult<>(results, chainResult);
 	}

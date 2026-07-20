@@ -39,7 +39,7 @@ public final class Position {
 	private final int character;
 
 	private Position(final int index, final int line, final int character) {
-		LOGGER.debug("building new position: {},{},{}", index, line, character);
+		LOGGER.trace("building new position: {},{},{}", index, line, character);
 		this.index     = index;
 		this.line      = line;
 		this.character = character;
@@ -89,7 +89,7 @@ public final class Position {
 	 * @return the next position
 	 */
 	public final Position advance(final char inputCharacter) {
-		LOGGER.debug("advancing position {} on `{}`", this, inputCharacter);
+		LOGGER.trace("advancing position {} on `{}`", this, inputCharacter);
 		return new Position(
 		  getIndex() + 1,
 		  (inputCharacter == '\n') ? getLine() + 1 : getLine(),

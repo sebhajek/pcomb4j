@@ -33,6 +33,7 @@ public final class StringInput implements ParserInput<Character> {
 	 * @param currentPosition the position to start from; never {@code null}
 	 */
 	public StringInput(String input, Position currentPosition) {
+		LOGGER.info("building `StringInput`");
 		this.input           = input;
 		this.currentPosition = currentPosition;
 	}
@@ -66,7 +67,7 @@ public final class StringInput implements ParserInput<Character> {
 	 */
 	@Override
 	public ParserInput<Character> advance() throws ParserError {
-		LOGGER.debug("advancing input");
+		LOGGER.trace("advancing input");
 		if (isEmpty()) { throw new ParserInputError.EOF(); }
 		return new StringInput(
 		  getInput(), getCurrentPosition().advance(getCurrent())
@@ -88,7 +89,7 @@ public final class StringInput implements ParserInput<Character> {
 	public Character getCurrent() throws ParserError {
 		if (isEmpty()) { throw new ParserInputError.EOF(); }
 		final var charAt = getInput().charAt(getCurrentPosition().getIndex());
-		LOGGER.debug("getting current character: {}", charAt);
+		LOGGER.trace("getting current character: {}", charAt);
 		return charAt;
 	}
 }

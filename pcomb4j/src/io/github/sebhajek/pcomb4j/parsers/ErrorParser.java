@@ -85,6 +85,7 @@ public abstract class ErrorParser<Output, Input>
 		public ParserResult<Output, Input> parse(
 		  @NonNull final ParserInput<Input> parserInput
 		) throws ParserError {
+			getLogger().debug("processing `error` (supplied) parser");
 			try {
 				return getParserSource().parse(parserInput);
 			} catch (final ParserError errorInner) {
@@ -138,6 +139,7 @@ public abstract class ErrorParser<Output, Input>
 		public ParserResult<Output, Input> parse(
 		  @NonNull final ParserInput<Input> parserInput
 		) throws ParserError {
+			getLogger().debug("processing `error` (message) parser");
 			try {
 				return getParserSource().parse(parserInput);
 			} catch (final ParserError errorInner) {
@@ -191,6 +193,7 @@ public abstract class ErrorParser<Output, Input>
 		public ParserResult<Output, Input> parse(
 		  @NonNull final ParserInput<Input> parserInput
 		) throws ParserError {
+			getLogger().debug("processing `error` (label) parser");
 			try {
 				return getParserSource().parse(parserInput);
 			} catch (final ParserError errorInner) {

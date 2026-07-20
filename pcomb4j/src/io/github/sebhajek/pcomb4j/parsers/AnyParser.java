@@ -41,7 +41,7 @@ public class AnyParser<Input> extends AbstractParser<Input, Input> {
 	  @NonNull ParserInput<Input> parserInput
 	) throws ParserError {
 		final var current = parserInput.getCurrent();
-		getLogger().debug("getting `any`: {}", current);
+		getLogger().trace("getting `any`: {}", current);
 		return new ParserResult<Input, Input>(current, parserInput.advance());
 	}
 }

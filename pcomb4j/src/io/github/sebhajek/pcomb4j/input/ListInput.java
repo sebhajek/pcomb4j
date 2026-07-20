@@ -3,6 +3,9 @@ package io.github.sebhajek.pcomb4j.input;
 import io.github.sebhajek.pcomb4j.ParserError;
 import io.github.sebhajek.pcomb4j.ParserInput;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 
 /**
@@ -17,6 +20,9 @@ import java.util.List;
  */
 public class ListInput<A> implements ParserInput<A> {
 
+	private static final Logger LOGGER =
+	  LoggerFactory.getLogger(ListInput.class);
+
 	private final List<A> input;
 	private final int     currentPosition;
 
@@ -29,6 +35,7 @@ public class ListInput<A> implements ParserInput<A> {
 	public ListInput(final List<A> input) { this(0, input); }
 
 	private ListInput(final int currentPosition, final List<A> input) {
+		LOGGER.info("building `ListInput`");
 		this.currentPosition = currentPosition;
 		this.input           = input;
 	}

@@ -37,7 +37,7 @@ public interface MapCombinator<Output, Input>
 	  final OutputMapped value
 	) {
 		final var logger = getLogger();
-		logger.debug("building `pure` parser");
+		logger.info("building `pure` parser");
 		return new MapParser.Pure<>(
 		  DelegateParser.getDelegate(getParser()), value, logger
 		);
@@ -57,7 +57,7 @@ public interface MapCombinator<Output, Input>
 	  final Function<Output, OutputMapped> mapper
 	) {
 		final var logger = getLogger();
-		logger.debug("building `map` parser");
+		logger.info("building `map` parser");
 		return new MapParser.Transform<>(
 		  DelegateParser.getDelegate(getParser()), mapper, logger
 		);
@@ -80,7 +80,7 @@ public interface MapCombinator<Output, Input>
 	  final Class<OutputMapped> type
 	) {
 		final var logger = getLogger();
-		logger.debug("building `cast` parser to {}", type.getName());
+		logger.info("building `cast` parser to {}", type.getName());
 		return new MapParser.Cast<>(
 		  DelegateParser.getDelegate(getParser()), type, logger
 		);

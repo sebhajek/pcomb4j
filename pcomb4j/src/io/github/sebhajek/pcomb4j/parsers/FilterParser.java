@@ -66,7 +66,7 @@ public class FilterParser<Output, Input>
 	  @NonNull final ParserInput<Input> parserInput
 	) throws ParserError {
 		final var logger = getLogger();
-		logger.info("processing `filter` parser");
+		logger.debug("processing `filter` parser");
 		final var parserResult = getParserSource().parse(parserInput);
 		if (getPredicate().test(parserResult.result())) {
 			logger.debug(

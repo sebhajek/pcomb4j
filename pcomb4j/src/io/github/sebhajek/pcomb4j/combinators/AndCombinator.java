@@ -38,7 +38,7 @@ public interface AndCombinator<OutputLeft, Input>
 	  CombinatorParser<ParserResult.Sequence<OutputLeft, OutputRight>, Input>
 	  and(final Parser<OutputRight, Input> parserOther) {
 		final var logger = getLogger();
-		logger.debug("building `and` parser");
+		logger.info("building `and` parser");
 		return new AndParser<>(
 		  DelegateParser.getDelegate(getParser()),
 		  DelegateParser.getDelegate(parserOther),

@@ -74,7 +74,7 @@ public abstract class MapParser<OutputMapped, Output, Input>
 		  final ParserResult<Output, Input> result
 		) {
 			final var valueMapped = getMapper().apply(result.result());
-			getLogger().info(
+			getLogger().debug(
 			  "processing `map` parser: {} -> {}", result.result(), valueMapped
 			);
 			return valueMapped;
@@ -125,7 +125,7 @@ public abstract class MapParser<OutputMapped, Output, Input>
 		protected OutputMapped getValueMapped(
 		  final ParserResult<Output, Input> result
 		) {
-			getLogger().info("processing `pure` parser: -> {}", getValue());
+			getLogger().debug("processing `pure` parser: -> {}", getValue());
 			return getValue();
 		}
 	}
@@ -175,7 +175,7 @@ public abstract class MapParser<OutputMapped, Output, Input>
 		protected OutputMapped getValueMapped(
 		  final ParserResult<Output, Input> result
 		) {
-			getLogger().atInfo().log(() -> {
+			getLogger().atDebug().log(() -> {
 				return "processing `cast` parser: %s -> %s".formatted(
 				  result.result().getClass().getName(), getType().getName()
 				);

@@ -115,7 +115,7 @@ public class LazyParser<Output, Input> extends AbstractParser<Output, Input> {
 	public ParserResult<Output, Input> parse(
 	  @NonNull ParserInput<Input> parserInput
 	) throws ParserError {
-		getLogger().info("evaluating `lazy` parser");
+		getLogger().debug("evaluating `lazy` parser");
 		return this.getParser().parse(parserInput);
 	}
 }

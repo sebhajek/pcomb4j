@@ -28,7 +28,7 @@ public interface ChainFactory extends LoggedFactory {
 	  final List<Parser<Output, Input>> parsersList
 	) {
 		final var logger = getLogger();
-		logger.debug("building `chain` of parsers");
+		logger.info("building `chain` of parsers");
 		return new ChainParser<>(parsersList, logger);
 	}
 }

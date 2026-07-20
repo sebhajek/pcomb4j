@@ -36,7 +36,7 @@ public interface TraceCombinator<Output, Input>
 	public default CombinatorParser<Output, Input>
 	trace(String message, Logger loggerDedicated) {
 		final var logger = getLogger();
-		logger.debug("building `trace` parser");
+		logger.info("building `trace` parser");
 		return new TraceParser<>(
 		  message,
 		  loggerDedicated,
@@ -57,7 +57,7 @@ public interface TraceCombinator<Output, Input>
 	  Logger loggerDedicated
 	) {
 		final var logger = getLogger();
-		logger.debug("building `trace` parser");
+		logger.info("building `trace` parser");
 		return new TraceParser<>(
 		  loggerDedicated, DelegateParser.getDelegate(getParser()), logger
 		);
@@ -71,7 +71,7 @@ public interface TraceCombinator<Output, Input>
 	 */
 	public default CombinatorParser<Output, Input> trace(String message) {
 		final var logger = getLogger();
-		logger.debug("building `trace` parser");
+		logger.info("building `trace` parser");
 		return new TraceParser<>(
 		  message, DelegateParser.getDelegate(getParser()), logger
 		);

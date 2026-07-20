@@ -114,9 +114,9 @@ public class TraceParser<Output, Input>
 		final var logger  = getLoggerDedicated().orElseGet(this::getLogger);
 		final var message = getMessage();
 		if (message.isPresent()) {
-			logger.info("parser: `{}` @ {}", message.orElse(""), parserInput);
+			logger.trace("parser: `{}` @ {}", message.orElse(""), parserInput);
 		} else {
-			logger.info("parser @ {}", parserInput);
+			logger.trace("parser @ {}", parserInput);
 		}
 	}
 }

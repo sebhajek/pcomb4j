@@ -51,7 +51,7 @@ public class OptionalParser<Output, Input>
 	  @NonNull ParserInput<Input> parserInput
 	) throws ParserError {
 		var logger = getLogger();
-		logger.info("processing `optional` parser");
+		logger.debug("processing `optional` parser");
 		try {
 			final var result = getParserSource().parse(parserInput);
 			logger.debug("`optional` parser succeeded: {}", result.result());

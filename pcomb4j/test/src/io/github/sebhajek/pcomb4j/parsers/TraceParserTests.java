@@ -24,7 +24,7 @@ class TraceParserTests {
 		final var result = parser.parse(input);
 
 		assertThat(result.result()).isEqualTo('a');
-		verify(mockLogger).info(eq("parser: `{}` @ {}"), eq("test"), any());
+		verify(mockLogger).trace(eq("parser: `{}` @ {}"), eq("test"), any());
 	}
 
 	@Test
@@ -38,8 +38,8 @@ class TraceParserTests {
 		final var result = parser.parse(input);
 
 		assertThat(result.result()).isEqualTo('a');
-		verify(mockDedicatedLogger).info(eq("parser @ {}"), (Object) any());
-		verify(mockLogger, never()).info(eq("parser @ {}"), (Object) any());
+		verify(mockDedicatedLogger).trace(eq("parser @ {}"), (Object) any());
+		verify(mockLogger, never()).trace(eq("parser @ {}"), (Object) any());
 	}
 
 	@Test
@@ -55,8 +55,8 @@ class TraceParserTests {
 
 		assertThat(result.result()).isEqualTo('a');
 		verify(mockDedicatedLogger)
-		  .info(eq("parser: `{}` @ {}"), eq("custom message"), any());
+		  .trace(eq("parser: `{}` @ {}"), eq("custom message"), any());
 		verify(mockLogger, never())
-		  .info(eq("parser: `{}` @ {}"), eq("custom message"), any());
+		  .trace(eq("parser: `{}` @ {}"), eq("custom message"), any());
 	}
 }

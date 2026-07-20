@@ -28,7 +28,7 @@ public interface OptionalCombinator<Output, Input>
 	 */
 	public default CombinatorParser<Optional<Output>, Input> optional() {
 		final var logger = getLogger();
-		logger.debug("building `optional` parser");
+		logger.info("building `optional` parser");
 		return new OptionalParser<>(
 		  DelegateParser.getDelegate(getParser()), logger
 		);

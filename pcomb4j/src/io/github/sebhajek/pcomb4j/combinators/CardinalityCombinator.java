@@ -28,7 +28,7 @@ public interface CardinalityCombinator<Output, Input>
 	 */
 	public default CombinatorParser<List<Output>, Input> zeroOrMore() {
 		final var logger = getLogger();
-		logger.debug("building `zeroOrMore` parser");
+		logger.info("building `zeroOrMore` parser");
 		return new CardinalParser.ZeroOrMore<>(
 		  DelegateParser.getDelegate(getParser()), logger
 		);
@@ -46,7 +46,7 @@ public interface CardinalityCombinator<Output, Input>
 	 */
 	public default CombinatorParser<List<Output>, Input> oneOrMore() {
 		final var logger = getLogger();
-		logger.debug("building `oneOrMore` parser");
+		logger.info("building `oneOrMore` parser");
 		return new CardinalParser.OneOrMore<>(
 		  DelegateParser.getDelegate(getParser()), logger
 		);

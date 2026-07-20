@@ -19,7 +19,7 @@ public interface AnyFactory extends LoggedFactory {
 	 */
 	public default<Input> AnyParser<Input> any() {
 		final var logger = getLogger();
-		logger.debug("building `any` parser");
+		logger.info("building `any` parser");
 		return new AnyParser<>(logger);
 	}
 }

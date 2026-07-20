@@ -45,7 +45,7 @@ public interface OrCombinator<OutputLeft, Input>
 			throw new IllegalArgumentException("Expected at least one parser");
 		}
 		final var logger = getLogger();
-		logger.debug("building `or` parser");
+		logger.info("building `or` parser");
 		var orParser = new OrParser.Or<>(
 		  DelegateParser.getDelegate(getParser()),
 		  DelegateParser.getDelegate(parserOthers[0]),
@@ -70,7 +70,7 @@ public interface OrCombinator<OutputLeft, Input>
 	  final Parser<OutputLeft, Input> parserOther
 	) {
 		final var logger = getLogger();
-		logger.debug("building `or` parser");
+		logger.info("building `or` parser");
 		return new OrParser.Or<>(
 		  DelegateParser.getDelegate(getParser()),
 		  DelegateParser.getDelegate(parserOther),
@@ -92,7 +92,7 @@ public interface OrCombinator<OutputLeft, Input>
 	  CombinatorParser<ParserResult.Either<OutputLeft, OutputRight>, Input>
 	  orElse(final Parser<OutputRight, Input> parserOther) {
 		final var logger = getLogger();
-		logger.debug("building `orElse` parser");
+		logger.info("building `orElse` parser");
 		return new OrParser.Either<>(
 		  DelegateParser.getDelegate(getParser()),
 		  DelegateParser.getDelegate(parserOther),

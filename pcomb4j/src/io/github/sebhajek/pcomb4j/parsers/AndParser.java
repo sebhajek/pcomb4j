@@ -61,7 +61,7 @@ public class AndParser<OutputLeft, OutputRight, Input>
 	public ParserResult<Sequence<OutputLeft, OutputRight>, Input> parse(
 	  @NonNull final ParserInput<Input> parserInput
 	) throws ParserError {
-		getLogger().info("processing `and` parser");
+		getLogger().debug("processing `and` parser");
 		final var resultLeft  = getResultLeft(parserInput);
 		final var resultRight = getResultRight(resultLeft);
 		return getResult(resultLeft, resultRight);
@@ -111,7 +111,7 @@ public class AndParser<OutputLeft, OutputRight, Input>
 	 */
 	public final OutputRight
 	discardFirst(final ParserResult.Sequence<OutputLeft, OutputRight> pair) {
-		getLogger().debug(
+		getLogger().trace(
 		  "discarding the second part of `and` sequence: {}", pair
 		);
 		return pair.second();
@@ -128,7 +128,7 @@ public class AndParser<OutputLeft, OutputRight, Input>
 	 */
 	public final OutputLeft
 	discardSecond(final Sequence<OutputLeft, OutputRight> pair) {
-		getLogger().debug(
+		getLogger().trace(
 		  "discarding the second part of `and` sequence: {}", pair
 		);
 		return pair.first();

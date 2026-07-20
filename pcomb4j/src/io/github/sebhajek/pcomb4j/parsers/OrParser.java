@@ -94,7 +94,7 @@ public abstract class OrParser<Output, OutputLeft, OutputRight, Input>
 		public ParserResult<Output, Input> parse(
 		  @NonNull final ParserInput<Input> input
 		) throws ParserError {
-			getLogger().info("processing `or` parser");
+			getLogger().debug("processing `or` parser");
 			try {
 				return getResultLeft(input);
 			} catch (final ParserError errorLeft) {
@@ -173,7 +173,7 @@ public abstract class OrParser<Output, OutputLeft, OutputRight, Input>
 		@Override
 		public ParserResult<ParserResult.Either<OutputLeft, OutputRight>, Input>
 		parse(@NonNull final ParserInput<Input> input) throws ParserError {
-			getLogger().info("processing `orElse` parser");
+			getLogger().debug("processing `orElse` parser");
 			try {
 				return getResultLeft(input);
 			} catch (final ParserError errorLeft) {
