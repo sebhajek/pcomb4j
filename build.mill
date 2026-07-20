@@ -10,7 +10,7 @@ import scala.util.chaining.*
 
 object pcomb4j extends JavaModule, PublishModule, ErrorProneModule {
     def javadocOverviewSource: T[PathRef] =
-        Task.Source(this.moduleDir./("overview.md"))
+        Task.Source(this.moduleDir./("README.md"))
 
     def javadocOverview: T[Seq[String]] =
         Task {
@@ -28,7 +28,8 @@ object pcomb4j extends JavaModule, PublishModule, ErrorProneModule {
     override def publishVersion = sys.env.getOrElse("VERSION", "0.0.0-SNAPSHOT")
     override def pomSettings    =
         PomSettings(
-          description = "A lightweight, type-safe parser combinator library for modern Java.",
+          description =
+              "A lightweight, type-safe parser combinator library for modern Java.",
           organization = "io.github.sebhajek",
           url = "https://github.com/sebhajek/pcomb4j",
           licenses = Seq(License.`MPL-2.0`),
@@ -101,4 +102,5 @@ object pcomb4j extends JavaModule, PublishModule, ErrorProneModule {
     }
 }
 
+// vim: set ft=scala :
 // vim: set ft=scala :
