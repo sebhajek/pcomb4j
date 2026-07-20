@@ -41,4 +41,3 @@ class OptionalParserTests {
 		assertThat(result.remainder().isEmpty()).isTrue();
 	}
 }
-

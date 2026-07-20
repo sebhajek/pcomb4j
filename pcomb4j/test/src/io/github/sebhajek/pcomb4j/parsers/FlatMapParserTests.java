@@ -30,4 +30,3 @@ class FlatMapParserTests {
 		assertThat(result.remainder().isEmpty()).isTrue();
 	}
 }
-

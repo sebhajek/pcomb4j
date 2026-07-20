@@ -28,15 +28,14 @@ AlignConsecutiveAssignments:
   AcrossEmptyLines: false
   AcrossComments: true
   AlignCompound: true
-  AlignFunctionDeclarations: true
   PadOperators: true
 
 AlignConsecutiveDeclarations: 
-    Enabled: true
-    AcrossEmptyLines: false
-    AcrossComments: true
-    AlignCompound: true
-    PadOperators: true
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: true
+  AlignCompound: true
+  PadOperators: true
 
 AlignConsecutiveBitFields:
   Enabled: true

@@ -53,11 +53,12 @@ jobs:
     needs: compile
     if: github.ref_type == 'tag'
     runs-on: ubuntu-latest
+    container: fedora:latest
     steps:
       - uses: actions/checkout@v4
 
       - name: Install clang-format
-        run: sudo apt-get update && sudo apt-get install -y clang-format
+        run: dnf install -y clang-tools-extra
 
       - name: Check formatting
         run: find . -name '*.java' -exec clang-format -n --Werror {} +

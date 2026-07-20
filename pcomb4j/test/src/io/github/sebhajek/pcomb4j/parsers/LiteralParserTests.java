@@ -51,4 +51,3 @@ class LiteralParserTests {
 		assertThat(result.remainder().getCurrent()).isEqualTo(1);
 	}
 }
-

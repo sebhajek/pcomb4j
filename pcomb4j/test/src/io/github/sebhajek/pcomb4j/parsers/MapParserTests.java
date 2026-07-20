@@ -48,4 +48,3 @@ class MapParserTests {
 		assertThat(result.result()).isEqualTo('a');
 	}
 }
-

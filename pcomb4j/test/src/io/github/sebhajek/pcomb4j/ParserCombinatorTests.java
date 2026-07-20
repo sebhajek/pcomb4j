@@ -28,4 +28,3 @@ class ParserCombinatorTests {
 		assertThat(result.remainder().getCurrent()).isEqualTo('b');
 	}
 }
-

@@ -6,9 +6,9 @@ import io.github.sebhajek.pcomb4j.ParserInput;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.junit.jupiter.api.Test;
-
 import java.util.function.Supplier;
+
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -25,7 +25,7 @@ class LazyParserTests {
 	void lazyViaFactory() throws Exception {
 		final var supplier = mock(Supplier.class);
 		when(supplier.get()).thenReturn(PARSER_FACTORY.any());
-		final var lazy = PARSER_FACTORY.lazy(supplier);
+		final var lazy  = PARSER_FACTORY.lazy(supplier);
 		final var input = ParserInput.fromString("abc");
 
 		final var result1 = lazy.parse(input);
@@ -42,7 +42,7 @@ class LazyParserTests {
 		final var supplier = mock(Supplier.class);
 		when(supplier.get()).thenReturn(PARSER_FACTORY.any());
 		final var lazyMemoized = PARSER_FACTORY.lazyMemoized(supplier);
-		final var input = ParserInput.fromString("abc");
+		final var input        = ParserInput.fromString("abc");
 
 		final var result1 = lazyMemoized.parse(input);
 		final var result2 = lazyMemoized.parse(result1.remainder());

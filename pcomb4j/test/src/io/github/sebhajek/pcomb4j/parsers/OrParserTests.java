@@ -98,4 +98,3 @@ class OrParserTests {
 		  .isThrownBy(() -> orParser.parse(input));
 	}
 }
-
