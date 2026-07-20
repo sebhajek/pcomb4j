@@ -1,0 +1,158 @@
+name: CI/CD
+
+on:
+  push:
+    branches: ['**']
+    tags: ['v*', 'rc*']
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '25'
+          distribution: 'liberica'
+
+      - uses: actions/cache@v4
+        with:
+          path: ~/.mill
+          key: mill-${{ hashFiles('build.mill') }}
+
+      - run: ./mill __.compile
+
+  test:
+    needs: compile
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '25'
+          distribution: 'liberica'
+
+      - uses: actions/cache@v4
+        with:
+          path: ~/.mill
+          key: mill-${{ hashFiles('build.mill') }}
+
+      - name: Set VERSION
+        run: echo "VERSION=$(echo '${{ github.ref_name }}' | sed 's/^rc//; s/^v//')" >> $GITHUB_ENV
+
+      - run: ./mill __.test
+
+  format:
+    needs: compile
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install clang-format
+        run: sudo apt-get update && sudo apt-get install -y clang-format
+
+      - name: Check formatting
+        run: find . -name '*.java' -exec clang-format -n --Werror {} +
+
+  publish:
+    needs: [test, format]
+    if: startsWith(github.ref_name, 'v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '25'
+          distribution: 'liberica'
+
+      - uses: actions/cache@v4
+        with:
+          path: ~/.mill
+          key: mill-${{ hashFiles('build.mill') }}
+
+      - name: Set VERSION
+        run: echo "VERSION=$(echo '${{ github.ref_name }}' | sed 's/^v//')" >> $GITHUB_ENV
+
+      - name: Import GPG key
+        run: echo '${{ secrets.GPG_PRIVATE_KEY }}' | gpg --batch --import
+
+      - run: ./mill __.publish
+        env:
+          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+          PGP_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+
+  pages:
+    needs: [test, format]
+    if: startsWith(github.ref_name, 'v')
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '25'
+          distribution: 'liberica'
+
+      - uses: actions/cache@v4
+        with:
+          path: ~/.mill
+          key: mill-${{ hashFiles('build.mill') }}
+
+      - name: Set VERSION
+        run: echo "VERSION=$(echo '${{ github.ref_name }}' | sed 's/^v//')" >> $GITHUB_ENV
+
+      - run: ./mill pcomb4j.javadocGenerated
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out/pcomb4j/javadocGenerated.dest/javadoc
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+  release:
+    needs: [test, format]
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '25'
+          distribution: 'liberica'
+
+      - uses: actions/cache@v4
+        with:
+          path: ~/.mill
+          key: mill-${{ hashFiles('build.mill') }}
+
+      - name: Set VERSION
+        run: echo "VERSION=$(echo '${{ github.ref_name }}' | sed 's/^rc//; s/^v//')" >> $GITHUB_ENV
+
+      - run: ./mill pcomb4j.assembly
+
+      - name: Compress
+        run: xz -9e ./out/pcomb4j/assembly.dest/out.jar
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: ./out/pcomb4j/assembly.dest/out.jar.xz
