@@ -83,14 +83,12 @@ jobs:
       - name: Set VERSION
         run: echo "VERSION=$(echo '${{ github.ref_name }}' | sed 's/^v//')" >> $GITHUB_ENV
 
-      - name: Import GPG key
-        run: echo '${{ secrets.GPG_PRIVATE_KEY }}' | gpg --batch --import
-
-      - run: ./mill __.publish
+      - run: ./mill mill.javalib.SonatypeCentralPublishModule/
         env:
-          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
-          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
-          PGP_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          MILL_PGP_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          MILL_PGP_SECRET_BASE64: ${{ secrets.GPG_PRIVATE_KEY }}
+          MILL_SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+          MILL_SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
 
   pages:
     needs: [test, format]
