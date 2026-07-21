@@ -65,4 +65,24 @@ public interface FilterCombinator<Output, Input>
 		  .from(filter(type::isInstance))
 		  .cast(type);
 	}
+
+	public default CombinatorParser<Output, Input> filterLookAhead(
+	  final Predicate<Input> predicate
+	) {
+		final var logger = getLogger();
+		logger.info("building `filterLookAhead` parser");
+		return new FilterParser.LookAhead<>(
+		  DelegateParser.getDelegate(getParser()), predicate, logger
+		);
+	}
+
+	public default CombinatorParser<Output, Input> filterLookAhead(
+	  final Input value
+	) {
+		final var logger = getLogger();
+		logger.info("building `filterLookAhead` parser");
+		return new FilterParser.LookAhead<>(
+		  DelegateParser.getDelegate(getParser()), value::equals, logger
+		);
+	}
 }

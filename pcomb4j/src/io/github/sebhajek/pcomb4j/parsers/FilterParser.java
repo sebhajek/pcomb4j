@@ -33,6 +33,45 @@ public class FilterParser<Output, Input>
 		public NotSatisfied() { super("Not satisfied"); }
 	}
 
+	public static class LookAhead<Output, Input>
+	  extends AbstractSourcedParser<Output, Output, Input> {
+		private final Predicate<Input> predicate;
+
+		public LookAhead(
+		  final Parser<Output, Input> parserSource,
+		  final Predicate<Input> predicate,
+		  final Logger           logger
+		) {
+
+			super(parserSource, logger);
+			this.predicate = predicate;
+		}
+
+		@Override
+		public ParserResult<Output, Input> parse(
+		  @NonNull final ParserInput<Input> parserInput
+		) throws ParserError {
+			final var logger = getLogger();
+			logger.debug("processing `filterLookAhead` parser");
+			final var parserResult = getParserSource().parse(parserInput);
+			if (getPredicate().test(parserResult.remainder().getCurrent())) {
+				logger.trace(
+				  "`filterLookAhead` parser succeeded: {}",
+				  parserResult.remainder()
+				);
+				return parserResult;
+			} else {
+				logger.trace(
+				  "`filterLookAhead` parser failed: {}",
+				  parserResult.remainder().getCurrent()
+				);
+				throw new NotSatisfied();
+			}
+		}
+
+		private Predicate<Input> getPredicate() { return predicate; }
+	}
+
 	private final Predicate<Output> predicate;
 
 	/**
