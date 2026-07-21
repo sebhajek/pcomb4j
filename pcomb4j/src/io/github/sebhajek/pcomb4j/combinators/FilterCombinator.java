@@ -66,6 +66,18 @@ public interface FilterCombinator<Output, Input>
 		  .cast(type);
 	}
 
+	/**
+	 * Creates a parser that succeeds when this parser succeeds <em>and</em> the
+	 * <strong>next</strong> input element (the first unconsumed element after
+	 * this parser's match) satisfies {@code predicate}.
+	 *
+	 * <p>The look-ahead element is <strong>not</strong> consumed; only the
+	 * inner parser's match is consumed from the input.
+	 *
+	 * @param predicate the condition the next input element must satisfy; never
+	 *   {@code null}
+	 * @return a new {@link FilterParser.LookAhead} wrapping this parser
+	 */
 	public default CombinatorParser<Output, Input> filterLookAhead(
 	  final Predicate<Input> predicate
 	) {
@@ -76,6 +88,16 @@ public interface FilterCombinator<Output, Input>
 		);
 	}
 
+	/**
+	 * Creates a parser that succeeds when this parser succeeds <em>and</em> the
+	 * <strong>next</strong> input element equals {@code value}.
+	 *
+	 * <p>Convenience overload of {@link #filterLookAhead(Predicate)} for
+	 * equality checks.
+	 *
+	 * @param value the exact value the next input element must match
+	 * @return a new {@link FilterParser.LookAhead} wrapping this parser
+	 */
 	public default CombinatorParser<Output, Input> filterLookAhead(
 	  final Input value
 	) {

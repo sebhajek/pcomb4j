@@ -33,10 +33,34 @@ public class FilterParser<Output, Input>
 		public NotSatisfied() { super("Not satisfied"); }
 	}
 
+	/**
+	 * A {@link Parser} that delegates to an inner parser and then checks the
+	 * <em>next</em> input element (the first unconsumed element after the inner
+	 * parse) against a predicate, without consuming it.
+	 *
+	 * <p>This is a <em>look-ahead</em> filter: the inner parser runs normally
+	 * and advances the input; the element immediately following the inner
+	 * parser's match is tested. If the predicate holds the inner result is
+	 * returned unchanged (the look-ahead element is <strong>not</strong>
+	 * consumed). If the predicate fails, a {@link NotSatisfied} error is thrown.
+	 *
+	 * @param <Output> the type of value produced by both the inner and this
+	 *   parser
+	 * @param <Input> the type of element consumed from the input
+	 */
 	public static class LookAhead<Output, Input>
 	  extends AbstractSourcedParser<Output, Output, Input> {
 		private final Predicate<Input> predicate;
 
+		/**
+		 * Creates a new {@code LookAhead} parser.
+		 *
+		 * @param parserSource the inner parser that produces the base result;
+		 *   never {@code null}
+		 * @param predicate the condition the <em>next</em> input element must
+		 *   satisfy; never {@code null}
+		 * @param logger the logger used for debug output; never {@code null}
+		 */
 		public LookAhead(
 		  final Parser<Output, Input> parserSource,
 		  final Predicate<Input> predicate,

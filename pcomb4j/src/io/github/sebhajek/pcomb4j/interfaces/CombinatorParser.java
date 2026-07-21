@@ -19,7 +19,7 @@ import io.github.sebhajek.pcomb4j.combinators.TraceCombinator;
  *
  * <p>By implementing this interface (typically by extending {@link
  * AbstractParser}), a parser gains default implementations of {@code map},
- * {@code flatMap}, {@code filter}, {@code and}, {@code or},
+ * {@code flatMap}, {@code filter}, {@code filterLookAhead}, {@code and}, {@code or},
  * {@code optional}, {@code zeroOrMore}, {@code oneOrMore}, {@code labelError},
  * and more.
  *
