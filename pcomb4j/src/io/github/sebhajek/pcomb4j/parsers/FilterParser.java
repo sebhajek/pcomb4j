@@ -69,12 +69,12 @@ public class FilterParser<Output, Input>
 		logger.debug("processing `filter` parser");
 		final var parserResult = getParserSource().parse(parserInput);
 		if (getPredicate().test(parserResult.result())) {
-			logger.debug(
+			logger.trace(
 			  "`filter` parser succeeded: {}", parserResult.result()
 			);
 			return parserResult;
 		} else {
-			logger.debug(
+			logger.trace(
 			  "`filter` parser failed: {}", parserInput.getCurrent()
 			);
 			throw new NotSatisfied();
