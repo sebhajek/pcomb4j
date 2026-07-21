@@ -7,6 +7,7 @@ import io.github.sebhajek.pcomb4j.combinators.ErrorCombinator;
 import io.github.sebhajek.pcomb4j.combinators.FilterCombinator;
 import io.github.sebhajek.pcomb4j.combinators.FlatMapCombinator;
 import io.github.sebhajek.pcomb4j.combinators.MapCombinator;
+import io.github.sebhajek.pcomb4j.combinators.NotCombinator;
 import io.github.sebhajek.pcomb4j.combinators.OptionalCombinator;
 import io.github.sebhajek.pcomb4j.combinators.OrCombinator;
 import io.github.sebhajek.pcomb4j.combinators.TraceCombinator;
@@ -30,4 +31,4 @@ public interface CombinatorParser<Output, Input>
           FlatMapCombinator<Output, Input>, AndCombinator<Output, Input>,
           OrCombinator<Output, Input>, OptionalCombinator<Output, Input>,
           CardinalityCombinator<Output, Input>, ErrorCombinator<Output, Input>,
-          TraceCombinator<Output, Input> {}
+          TraceCombinator<Output, Input>, NotCombinator<Output, Input> {}
