@@ -9,6 +9,6 @@ import io.github.sebhajek.pcomb4j.ParserFactory;
  * <p>{@link ParserFactory} implements this interface to provide a one-stop shop
  * for constructing all built-in parsers.
  */
-public interface AbstractFactory extends AnyFactory, ChainFactory, LazyFactory,
-                                         LiteralFactory, FailureFactory,
-                                         SetFactory {}
+public interface AbstractFactory extends AnyFactory, ChainFactory, EofFactory,
+                                         LazyFactory, LiteralFactory,
+                                         FailureFactory, SetFactory {}
