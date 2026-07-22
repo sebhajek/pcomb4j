@@ -33,4 +33,14 @@ public interface OptionalCombinator<Output, Input>
 		  DelegateParser.getDelegate(getParser()), logger
 		);
 	}
+
+	public default CombinatorParser<Output, Input> optionalDefault(
+	  final Output defaultValue
+	) {
+		final var logger = getLogger();
+		logger.info("building `optionalDefault` parser");
+		return new OptionalParser.Default<>(
+		  DelegateParser.getDelegate(getParser()), defaultValue, logger
+		);
+	}
 }

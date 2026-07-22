@@ -27,6 +27,40 @@ import java.util.Optional;
 public class OptionalParser<Output, Input>
   extends AbstractSourcedParser<Optional<Output>, Output, Input> {
 
+	public static class Default<Output, Input>
+	  extends AbstractSourcedParser<Output, Output, Input> {
+		private final Output defaultValue;
+
+		public Default(
+		  final Parser<Output, Input> parserSource,
+		  final Output                defaultValue,
+		  final Logger                logger
+		) {
+			super(parserSource, logger);
+			this.defaultValue = defaultValue;
+		}
+
+		@Override
+		public ParserResult<Output, Input> parse(
+		  @NonNull final ParserInput<Input> parserInput
+		) throws ParserError {
+			final var logger = getLogger();
+			logger.debug("processing `optionalDefault` parser");
+			try {
+				final var result = getParserSource().parse(parserInput);
+				logger.trace(
+				  "`optionalDefault` parser succeeded: {}", result.result()
+				);
+				return result;
+			} catch (final ParserError err) {
+				logger.trace("`optionalDefault` parser failed");
+				return new ParserResult<>(getDefaultValue(), parserInput);
+			}
+		}
+
+		protected Output getDefaultValue() { return defaultValue; }
+	}
+
 	/**
 	 * Creates a new {@code OptionalParser}.
 	 *
