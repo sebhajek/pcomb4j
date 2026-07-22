@@ -2,6 +2,7 @@ package io.github.sebhajek.pcomb4j.interfaces;
 
 import io.github.sebhajek.pcomb4j.ParserCombinator;
 import io.github.sebhajek.pcomb4j.combinators.AndCombinator;
+import io.github.sebhajek.pcomb4j.combinators.AssociativeChainCombinator;
 import io.github.sebhajek.pcomb4j.combinators.CardinalityCombinator;
 import io.github.sebhajek.pcomb4j.combinators.ErrorCombinator;
 import io.github.sebhajek.pcomb4j.combinators.FilterCombinator;
@@ -35,4 +36,5 @@ public interface CombinatorParser<Output, Input>
           CardinalityCombinator<Output, Input>, ErrorCombinator<Output, Input>,
           TraceCombinator<Output, Input>, NotCombinator<Output, Input>,
           LookAheadCombinator<Output, Input>,
-          SurroundCombinator<Output, Input> {}
+          SurroundCombinator<Output, Input>,
+          AssociativeChainCombinator<Output, Input> {}
