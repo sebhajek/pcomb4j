@@ -26,9 +26,8 @@ import java.util.List;
  *   <li>{@link ZeroOrMore} — {@code element (separator element)*}
  *   <li>{@link OneOrMore} — {@code element (separator element)*}
  *   <li>{@link ZeroOrMoreTrailing} — {@code element (separator element)*
- *   separator?}
- *   <li>{@link OneOrMoreTrailing} — {@code element (separator element)*
- *   separator?}
+ * separator?} <li>{@link OneOrMoreTrailing} — {@code element (separator
+ * element)* separator?}
  * </ul>
  *
  * @param <Output> the type of value produced by the element parser
@@ -276,7 +275,8 @@ public abstract
 	 * @param parserInput the input to parse; never {@code null}
 	 * @return a {@link ParserResult} with the collected elements
 	 * @throws ParserError if the first element is mandatory and cannot be
-	 *   parsed, or if a separator is found without a following element
+	 *   parsed, or if a separator
+	 *     is found without a following element
 	 */
 	@Override
 	public ParserResult<List<Output>, Input> parse(

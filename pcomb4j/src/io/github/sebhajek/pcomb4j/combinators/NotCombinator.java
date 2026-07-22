@@ -22,8 +22,7 @@ public interface NotCombinator<Output, Input>
 	 * Creates a parser that succeeds only when this parser succeeds
 	 * <em>and</em> {@code parserNegative} fails on the same input.
 	 *
-	 * <p>If the negative parser succeeds, a {@link
-	 * NotParser.NegativeParserSuccess} error is thrown.
+	 * <p>If the negative parser succeeds, a {@code NegativeParserSuccess} error is thrown.
 	 *
 	 * @param parserNegative the parser that must fail; never {@code null}
 	 * @param <OutputNegative> the output type of the negative parser
