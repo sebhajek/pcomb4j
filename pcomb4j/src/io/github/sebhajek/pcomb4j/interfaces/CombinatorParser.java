@@ -11,6 +11,7 @@ import io.github.sebhajek.pcomb4j.combinators.MapCombinator;
 import io.github.sebhajek.pcomb4j.combinators.NotCombinator;
 import io.github.sebhajek.pcomb4j.combinators.OptionalCombinator;
 import io.github.sebhajek.pcomb4j.combinators.OrCombinator;
+import io.github.sebhajek.pcomb4j.combinators.SurroundCombinator;
 import io.github.sebhajek.pcomb4j.combinators.TraceCombinator;
 
 /**
@@ -33,4 +34,5 @@ public interface CombinatorParser<Output, Input>
           OrCombinator<Output, Input>, OptionalCombinator<Output, Input>,
           CardinalityCombinator<Output, Input>, ErrorCombinator<Output, Input>,
           TraceCombinator<Output, Input>, NotCombinator<Output, Input>,
-          LookAheadCombinator<Output, Input> {}
+          LookAheadCombinator<Output, Input>,
+          SurroundCombinator<Output, Input> {}
