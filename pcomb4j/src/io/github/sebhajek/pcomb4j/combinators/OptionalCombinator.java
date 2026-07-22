@@ -34,6 +34,13 @@ public interface OptionalCombinator<Output, Input>
 		);
 	}
 
+	/**
+	 * Creates an {@link OptionalParser.Default} that returns the given {@code
+	 * defaultValue} when this parser fails, never failing.
+	 *
+	 * @param defaultValue the value to return when this parser fails
+	 * @return a new {@link OptionalParser.Default}
+	 */
 	public default CombinatorParser<Output, Input> optionalDefault(
 	  final Output defaultValue
 	) {

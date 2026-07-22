@@ -40,4 +40,28 @@ class OptionalParserTests {
 		assertThat(result.result()).isEqualTo(Optional.empty());
 		assertThat(result.remainder().isEmpty()).isTrue();
 	}
+
+	@Test
+	void optionalDefaultReturnsParsedValueOnSuccess() throws ParserError {
+		final var parser =
+		  PARSER_FACTORY.<Character>any().optionalDefault('x');
+		final var input = ParserInput.fromString("abc");
+
+		final var result = parser.parse(input);
+
+		assertThat(result.result()).isEqualTo('a');
+		assertThat(result.remainder().getCurrent()).isEqualTo('b');
+	}
+
+	@Test
+	void optionalDefaultReturnsDefaultOnFailure() throws ParserError {
+		final var parser =
+		  PARSER_FACTORY.<Character>any().optionalDefault('x');
+		final var input = ParserInput.fromString("");
+
+		final var result = parser.parse(input);
+
+		assertThat(result.result()).isEqualTo('x');
+		assertThat(result.remainder().isEmpty()).isTrue();
+	}
 }

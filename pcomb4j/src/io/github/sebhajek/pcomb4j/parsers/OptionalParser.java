@@ -27,10 +27,29 @@ import java.util.Optional;
 public class OptionalParser<Output, Input>
   extends AbstractSourcedParser<Optional<Output>, Output, Input> {
 
+	/**
+	 * A {@link Parser} that falls back to a default value when the inner parser
+	 * fails, never failing.
+	 *
+	 * <p>If the inner parser succeeds, its result is returned directly. If the
+	 * inner parser throws a
+	 * {@link ParserError}, the error is silently swallowed and {@code
+	 * defaultValue} is returned instead — leaving the input unchanged.
+	 *
+	 * @param <Output> the type of value produced by the inner parser
+	 * @param <Input> the type of element consumed from the input
+	 */
 	public static class Default<Output, Input>
 	  extends AbstractSourcedParser<Output, Output, Input> {
 		private final Output defaultValue;
 
+		/**
+		 * Creates a new {@code Default} parser.
+		 *
+		 * @param parserSource the inner parser to try; never {@code null}
+		 * @param defaultValue the value to return when the inner parser fails
+		 * @param logger the logger used for debug output; never {@code null}
+		 */
 		public Default(
 		  final Parser<Output, Input> parserSource,
 		  final Output                defaultValue,
@@ -40,6 +59,14 @@ public class OptionalParser<Output, Input>
 			this.defaultValue = defaultValue;
 		}
 
+		/**
+		 * Tries the inner parser; on success returns the result directly, on
+		 * failure returns {@code defaultValue} without consuming any input.
+		 *
+		 * @param parserInput the input to parse; never {@code null}
+		 * @return a {@link ParserResult} whose value is always non-null
+		 * @throws ParserError never — this parser always succeeds
+		 */
 		@Override
 		public ParserResult<Output, Input> parse(
 		  @NonNull final ParserInput<Input> parserInput
@@ -58,6 +85,11 @@ public class OptionalParser<Output, Input>
 			}
 		}
 
+		/**
+		 * Returns the default value used when the inner parser fails.
+		 *
+		 * @return the default value
+		 */
 		protected Output getDefaultValue() { return defaultValue; }
 	}
 
