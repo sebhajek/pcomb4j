@@ -33,7 +33,10 @@ public class OptionalParser<Output, Input>
 	 * @param parserSource the inner parser to try; never {@code null}
 	 * @param logger the logger used for debug output; never {@code null}
 	 */
-	public OptionalParser(Parser<Output, Input> parserSource, Logger logger) {
+	public OptionalParser(
+	  final Parser<Output, Input> parserSource,
+	  final Logger                logger
+	) {
 		super(parserSource, logger);
 	}
 
@@ -48,16 +51,16 @@ public class OptionalParser<Output, Input>
 	 */
 	@Override
 	public ParserResult<Optional<Output>, Input> parse(
-	  @NonNull ParserInput<Input> parserInput
+	  @NonNull final ParserInput<Input> parserInput
 	) throws ParserError {
-		var logger = getLogger();
+		final var logger = getLogger();
 		logger.debug("processing `optional` parser");
 		try {
 			final var result = getParserSource().parse(parserInput);
-			logger.debug("`optional` parser succeeded: {}", result.result());
+			logger.trace("`optional` parser succeeded: {}", result.result());
 			return result.with(Optional.of(result.result()));
 		} catch (final ParserError err) {
-			logger.debug("`optional` parser failed");
+			logger.trace("`optional` parser failed");
 			return new ParserResult<>(Optional.empty(), parserInput);
 		}
 	}
