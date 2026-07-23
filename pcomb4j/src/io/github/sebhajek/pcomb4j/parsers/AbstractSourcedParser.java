@@ -19,7 +19,7 @@ import org.slf4j.Logger;
  * @param <Input> the type of element consumed from the input
  */
 public abstract class AbstractSourcedParser<Output, OutputSource, Input>
-  extends AbstractParser<Output, Input> {
+  extends AbstractParser<Output, Input> implements SourcedParser<Output,OutputSource, Input> {
 
 	private final Parser<OutputSource, Input> parserSource;
 
@@ -38,12 +38,8 @@ public abstract class AbstractSourcedParser<Output, OutputSource, Input>
 		this.parserSource = parserSource;
 	}
 
-	/**
-	 * Returns the inner source parser.
-	 *
-	 * @return the source parser; never {@code null}
-	 */
-	protected Parser<OutputSource, Input> getParserSource() {
+	@Override
+	public Parser<OutputSource, Input> getParserSource() {
 		return parserSource;
 	}
 }
