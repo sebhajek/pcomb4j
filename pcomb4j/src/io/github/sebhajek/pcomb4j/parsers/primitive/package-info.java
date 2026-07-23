@@ -2,11 +2,11 @@
  * Provides primitive parser implementations.
  *
  * <ul>
- *   <li>{@link AnyParser} — consumes any single input element unconditionally.
- *   <li>{@link EofParser} — succeeds only when the input is exhausted.
- *   <li>{@link FailureParser} — always fails with a supplied error.
- *   <li>{@link LiteralParser} — matches an exact value.
- *   <li>{@link SetParser} — base for {@link SetParserAny} and {@link
+ *   <li>{@link AnyParser} -- consumes any single input element unconditionally.
+ *   <li>{@link EofParser} -- succeeds only when the input is exhausted.
+ *   <li>{@link FailureParser} -- always fails with a supplied error.
+ *   <li>{@link LiteralParser} -- matches an exact value.
+ *   <li>{@link SetParser} -- base for {@link SetParserAny} and {@link
  *       SetParserNone} which match based on set membership.
  * </ul>
  *

@@ -14,9 +14,9 @@ import io.github.sebhajek.pcomb4j.parsers.choice.OrParser;
  * <p>Two variants are provided:
  *
  * <ul>
- *   <li>{@link #or(Parser)} / {@link #or(Parser[])} — all alternatives must
+ *   <li>{@link #or(Parser)} / {@link #or(Parser[])} -- all alternatives must
  * produce the <em>same</em> output type; the result is just {@code Output}.
- *   <li>{@link #orElse(Parser)} — the two branches may produce
+ *   <li>{@link #orElse(Parser)} -- the two branches may produce
  * <em>different</em> output types; the result is wrapped in a {@link
  * ParserResult.Either}.
  * </ul>

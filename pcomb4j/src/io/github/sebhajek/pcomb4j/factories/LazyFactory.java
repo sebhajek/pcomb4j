@@ -14,7 +14,7 @@ import java.util.function.Supplier;
  * recursive grammar definitions, since a
  * {@link Supplier} can capture an outer variable that is not yet initialised at
  * the point where
- * {@code lazy(…)} is called.
+ * {@code lazy(...)} is called.
  */
 public interface LazyFactory extends LoggedFactory {
 

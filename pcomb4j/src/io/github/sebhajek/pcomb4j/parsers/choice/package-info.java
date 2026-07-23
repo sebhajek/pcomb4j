@@ -2,13 +2,13 @@
  * Provides parsers for ordered choice (alternation).
  *
  * <ul>
- *   <li>{@link OrParser} — tries the left parser first; on failure tries the
+ *   <li>{@link OrParser} -- tries the left parser first; on failure tries the
  *       right parser on the same input; both branches produce the same output
  *       type.
- *   <li>{@link EitherParser} — like {@link OrParser} but the branches may
+ *   <li>{@link EitherParser} -- like {@link OrParser} but the branches may
  *       produce different output types; the result is wrapped in a {@link
  *       io.github.sebhajek.pcomb4j.ParserResult.Either}.
- *   <li>{@link NeitherWasSuccessful} — error thrown when both branches fail,
+ *   <li>{@link NeitherWasSuccessful} -- error thrown when both branches fail,
  *       preserving both child errors.
  * </ul>
  *

@@ -18,14 +18,14 @@ import java.util.function.Predicate;
  * time.
  *
  * <p>Usage: {@code
- * CardinalParserBuilder.of(element).logger(logger).zeroOrMore()…}
+ * CardinalParserBuilder.of(element).logger(logger).zeroOrMore()...}
  *
  * <p>The stages are:
  * <ol>
- *   <li>{@link Start} — receive the element parser
- *   <li>{@link CardinalityStage} — choose cardinality
- *   <li>{@link SeparatorOptional} — optionally add a separator, then build
- *   <li>{@link SeparatorFixed} — separator already chosen, only build remains
+ *   <li>{@link Start} -- receive the element parser
+ *   <li>{@link CardinalityStage} -- choose cardinality
+ *   <li>{@link SeparatorOptional} -- optionally add a separator, then build
+ *   <li>{@link SeparatorFixed} -- separator already chosen, only build remains
  * </ol>
  */
 public final class CardinalParserBuilder {
@@ -49,7 +49,7 @@ public final class CardinalParserBuilder {
 	}
 
 	/**
-	 * Stage 1 — holds the element parser; the only method exposes the logger.
+	 * Stage 1 -- holds the element parser; the only method exposes the logger.
 	 *
 	 * @param <Output> the type of value produced by the element parser
 	 * @param <Input> the type of element consumed from the input
@@ -74,7 +74,7 @@ public final class CardinalParserBuilder {
 	}
 
 	/**
-	 * Stage 2 — choose the repetition cardinality.
+	 * Stage 2 -- choose the repetition cardinality.
 	 *
 	 * @param <Output> the type of value produced by the element parser
 	 * @param <Input> the type of element consumed from the input
@@ -220,7 +220,7 @@ public final class CardinalParserBuilder {
 	}
 
 	/**
-	 * Stage 3 — separator choice is still optional; you may call {@code
+	 * Stage 3 -- separator choice is still optional; you may call {@code
 	 * separatedBy}, {@code separatedByTrailing}, or go straight to {@code
 	 * build} / {@code buildDiscarding}.
 	 *
@@ -317,7 +317,7 @@ public final class CardinalParserBuilder {
 	}
 
 	/**
-	 * Stage 4 — separator already chosen; only {@link #build} and {@link
+	 * Stage 4 -- separator already chosen; only {@link #build} and {@link
 	 * #buildDiscarding} remain.
 	 *
 	 * @param <Output> the type of value produced by the element parser

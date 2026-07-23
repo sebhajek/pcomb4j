@@ -2,17 +2,17 @@
  * Provides the cardinality parser engine and its configuration policies.
  *
  * <ul>
- *   <li>{@link CardinalParser} — the single unified engine that applies an
+ *   <li>{@link CardinalParser} -- the single unified engine that applies an
  *       element parser repeatedly, governed by a {@link Cardinality} policy
  *       and a {@link Separator} policy.
- *   <li>{@link Cardinality} — sealed interface with policies {@link
+ *   <li>{@link Cardinality} -- sealed interface with policies {@link
  *       CardinalityZeroOrMore}, {@link CardinalityOneOrMore}, {@link
  *       CardinalityExactly}, and {@link CardinalityUntil}.
- *   <li>{@link Separator} — sealed interface with policies {@link
+ *   <li>{@link Separator} -- sealed interface with policies {@link
  *       SeparatorNone} and {@link SeparatorBetween}.
- *   <li>{@link Sentinel} — sealed interface for sentinel-based termination
+ *   <li>{@link Sentinel} -- sealed interface for sentinel-based termination
  *       ({@link SentinelPredicateBased}, {@link SentinelParserBased}).
- *   <li>{@link CardinalParserBuilder} — type-safe staged builder for
+ *   <li>{@link CardinalParserBuilder} -- type-safe staged builder for
  *       constructing {@link CardinalParser} instances.
  * </ul>
  *

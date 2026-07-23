@@ -3,8 +3,8 @@
  * for left- or right-associative chains of binary operators.
  *
  * <ul>
- *   <li>{@link ChainParser} — applies an ordered list of parsers, collecting
- * all results. <li>{@link AssociativeChainParser} — base for {@link
+ *   <li>{@link ChainParser} -- applies an ordered list of parsers, collecting
+ * all results. <li>{@link AssociativeChainParser} -- base for {@link
  * ChainParserLeft} and
  *       {@link ChainParserRight} which parse {@code term (operator term)*} and
  *       fold left or right respectively.

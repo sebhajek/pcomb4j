@@ -17,9 +17,9 @@ import java.util.function.BiFunction;
  * <p>Three variants are provided:
  *
  * <ul>
- *   <li>{@link #labelError(String)} — attaches a fixed label string.
- *   <li>{@link #labelError(BiFunction)} — computes a dynamic label from the
- * current input and the original error. <li>{@link #withError(BiFunction)} —
+ *   <li>{@link #labelError(String)} -- attaches a fixed label string.
+ *   <li>{@link #labelError(BiFunction)} -- computes a dynamic label from the
+ * current input and the original error. <li>{@link #withError(BiFunction)} --
  * replaces the error entirely using a factory function.
  * </ul>
  *

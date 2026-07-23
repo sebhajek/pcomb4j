@@ -17,10 +17,10 @@ import org.slf4j.Logger;
  * <p>Three concrete subclasses define how the transformation is computed:
  *
  * <ul>
- *   <li>{@link MapParserTransform} — applies a {@link Function}.
- *   <li>{@link MapParserPure} — ignores the parsed value and returns a
+ *   <li>{@link MapParserTransform} -- applies a {@link Function}.
+ *   <li>{@link MapParserPure} -- ignores the parsed value and returns a
  *       constant.
- *   <li>{@link MapParserCast} — casts the value to a supertype via
+ *   <li>{@link MapParserCast} -- casts the value to a supertype via
  *       {@link Class#cast(Object)}.
  * </ul>
  *

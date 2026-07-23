@@ -15,9 +15,9 @@ import java.util.Set;
  * <p>Two concrete subclasses are provided:
  *
  * <ul>
- *   <li>{@link SetParserAny} — succeeds when the current element <em>is</em>
+ *   <li>{@link SetParserAny} -- succeeds when the current element <em>is</em>
  *       in the set
- *   <li>{@link SetParserNone} — succeeds when the current element
+ *   <li>{@link SetParserNone} -- succeeds when the current element
  *       <em>is not</em> in the set
  * </ul>
  *

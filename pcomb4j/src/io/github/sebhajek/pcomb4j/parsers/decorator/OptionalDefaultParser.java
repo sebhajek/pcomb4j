@@ -16,7 +16,7 @@ import org.slf4j.Logger;
  *
  * <p>If the inner parser succeeds, its result is returned directly. If the
  * inner parser throws a {@link ParserError}, the error is silently swallowed
- * and {@code defaultValue} is returned instead — leaving the input unchanged.
+ * and {@code defaultValue} is returned instead -- leaving the input unchanged.
  *
  * @param <Output> the type of value produced by the inner parser
  * @param <Input>  the type of element consumed from the input
@@ -48,7 +48,7 @@ public class OptionalDefaultParser<Output, Input>
 	 *
 	 * @param parserInput the input to parse; never {@code null}
 	 * @return a {@link ParserResult} whose value is always non-null
-	 * @throws ParserError never — this parser always succeeds
+	 * @throws ParserError never -- this parser always succeeds
 	 */
 	@Override
 	public ParserResult<Output, Input> parse(

@@ -15,7 +15,7 @@ import io.github.sebhajek.pcomb4j.parsers.chain.AssociativeChainParserRight;
  * chainLeft} parses {@code term (operator term)*} and folds the sequence left,
  * while {@code chainRight} folds it right.
  *
- * <p>Example — parsing a sum of digits with {@code +} (left fold):
+ * <p>Example -- parsing a sum of digits with {@code +} (left fold):
  *
  * <pre>{@code
  * Parser<Integer, Character> digit = /* ... *\/;

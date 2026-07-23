@@ -7,33 +7,33 @@
  * io.github.sebhajek.pcomb4j.combinators} package:
  *
  * <ul>
- *   <li>{@link io.github.sebhajek.pcomb4j.parsers.primitive.AnyParser} —
+ *   <li>{@link io.github.sebhajek.pcomb4j.parsers.primitive.AnyParser} --
  * consumes any single element. <li>{@link
- * io.github.sebhajek.pcomb4j.parsers.primitive.LiteralParser} — matches an
+ * io.github.sebhajek.pcomb4j.parsers.primitive.LiteralParser} -- matches an
  * exact value. <li>{@link
- * io.github.sebhajek.pcomb4j.parsers.filter.FilterParser} — forwards the inner
+ * io.github.sebhajek.pcomb4j.parsers.filter.FilterParser} -- forwards the inner
  * result only if a predicate is satisfied. <li>{@link
- * io.github.sebhajek.pcomb4j.parsers.map.MapParser} — transforms the parsed
- * value. <li>{@link io.github.sebhajek.pcomb4j.parsers.map.FlatMapParser} —
+ * io.github.sebhajek.pcomb4j.parsers.map.MapParser} -- transforms the parsed
+ * value. <li>{@link io.github.sebhajek.pcomb4j.parsers.map.FlatMapParser} --
  * sequences parsers whose choice depends on a prior parse result. <li>{@link
- * io.github.sebhajek.pcomb4j.parsers.sequence.AndParser} — sequences two
+ * io.github.sebhajek.pcomb4j.parsers.sequence.AndParser} -- sequences two
  * parsers and collects both results. <li>{@link
- * io.github.sebhajek.pcomb4j.parsers.choice.OrParser} — tries the left parser
+ * io.github.sebhajek.pcomb4j.parsers.choice.OrParser} -- tries the left parser
  * first, falling back to the right on failure. <li>{@link
- * io.github.sebhajek.pcomb4j.parsers.decorator.OptionalParser} — wraps a
+ * io.github.sebhajek.pcomb4j.parsers.decorator.OptionalParser} -- wraps a
  * parser's result in an
  *       {@link java.util.Optional}.
- *   <li>{@link io.github.sebhajek.pcomb4j.parsers.CardinalParser} — applies a
+ *   <li>{@link io.github.sebhajek.pcomb4j.parsers.CardinalParser} -- applies a
  * parser zero-or-more or one-or-more times. <li>{@link
- * io.github.sebhajek.pcomb4j.parsers.chain.ChainParser} — applies a fixed
+ * io.github.sebhajek.pcomb4j.parsers.chain.ChainParser} -- applies a fixed
  * sequence of parsers in order. <li>{@link
- * io.github.sebhajek.pcomb4j.parsers.decorator.LazyParser} — defers parser
+ * io.github.sebhajek.pcomb4j.parsers.decorator.LazyParser} -- defers parser
  * construction for recursive grammars. <li>{@link
- * io.github.sebhajek.pcomb4j.parsers.decorator.ErrorParser} — intercepts
+ * io.github.sebhajek.pcomb4j.parsers.decorator.ErrorParser} -- intercepts
  * failures and wraps them with a richer error message. <li>{@link
- * io.github.sebhajek.pcomb4j.parsers.primitive.FailureParser} — always fails
+ * io.github.sebhajek.pcomb4j.parsers.primitive.FailureParser} -- always fails
  * with a supplied error, regardless of input. <li>{@link
- * io.github.sebhajek.pcomb4j.parsers.decorator.TraceParser} — logs a trace
+ * io.github.sebhajek.pcomb4j.parsers.decorator.TraceParser} -- logs a trace
  * message before delegating to an inner parser.
  * </ul>
  *
@@ -41,21 +41,21 @@
  * org.jspecify.annotations.NullMarked}.
  *
  * Provides abstract base classes and mixin interfaces for building parser
- *  implementations.
+ * implementations.
  *
- *  <p>The central element is {@link
- *  io.github.sebhajek.pcomb4j.parsers.CombinatorParser}, a mixin that
- *  assembles all combinator interfaces ({@code map}, {@code flatMap}, {@code
- *  filter}, {@code and}, {@code or}, etc.) into a single type.
+ * <p>The central element is {@link
+ * io.github.sebhajek.pcomb4j.parsers.CombinatorParser} -- a mixin that
+ * assembles all combinator interfaces ({@code map}, {@code flatMap}, {@code
+ * filter}, {@code and}, {@code or}, etc.) into a single type.
  *
  *  <p>Concrete parsers typically extend one of the abstract classes:
  *
  *  <ul>
- *    <li>{@link io.github.sebhajek.pcomb4j.parsers.AbstractParser} — for
+ *    <li>{@link io.github.sebhajek.pcomb4j.parsers.AbstractParser} -- for
  *  standalone parsers. <li>{@link
- *  io.github.sebhajek.pcomb4j.parsers.AbstractSourcedParser} — for parsers
+ *  io.github.sebhajek.pcomb4j.parsers.AbstractSourcedParser} -- for parsers
  *  that delegate to a single inner parser. <li>{@link
- *  io.github.sebhajek.pcomb4j.parsers.AbstractPairParser} — for parsers that
+ *  io.github.sebhajek.pcomb4j.parsers.AbstractPairParser} -- for parsers that
  *  combine two inner parsers.
  *  </ul>
  *

@@ -12,9 +12,9 @@ import org.slf4j.Logger;
  * <p>Three variants are provided:
  *
  * <ul>
- *   <li>{@link #trace(String)} — logs a fixed message at info level.
- *   <li>{@link #trace(Logger)} — logs to a dedicated logger.
- *   <li>{@link #trace(String, Logger)} — logs a fixed message to a dedicated
+ *   <li>{@link #trace(String)} -- logs a fixed message at info level.
+ *   <li>{@link #trace(Logger)} -- logs to a dedicated logger.
+ *   <li>{@link #trace(String, Logger)} -- logs a fixed message to a dedicated
  * logger.
  * </ul>
  *

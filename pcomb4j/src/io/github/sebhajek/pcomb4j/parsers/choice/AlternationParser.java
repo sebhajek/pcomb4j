@@ -11,14 +11,14 @@ import org.slf4j.Logger;
  *
  * <p>The left parser is tried first; if it fails the right parser is tried on
  * the <em>same</em> (unchanged) input. If both fail a {@link
- * NeitherWasSuccessful} error — containing both child errors — is thrown.
+ * NeitherWasSuccessful} error -- containing both child errors -- is thrown.
  *
  * <p>Two concrete subclasses are provided:
  *
  * <ul>
- *   <li>{@link OrParser} — both branches must produce the same output type; the
+ *   <li>{@link OrParser} -- both branches must produce the same output type; the
  * result is just {@code Output}.
- *   <li>{@link EitherParser} — the branches may produce different types; the
+ *   <li>{@link EitherParser} -- the branches may produce different types; the
  * result is a {@link io.github.sebhajek.pcomb4j.ParserResult.Either}.
  * </ul>
  *

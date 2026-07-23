@@ -14,9 +14,9 @@ import java.util.function.Function;
  * <p>Three variants are provided:
  *
  * <ul>
- *   <li>{@link #map(Function)} — applies an arbitrary mapping function.
- *   <li>{@link #pure(Object)} — ignores the parsed value and always returns a
- * fixed constant. <li>{@link #cast(Class)} — unsafely casts the result to a
+ *   <li>{@link #map(Function)} -- applies an arbitrary mapping function.
+ *   <li>{@link #pure(Object)} -- ignores the parsed value and always returns a
+ * fixed constant. <li>{@link #cast(Class)} -- unsafely casts the result to a
  * supertype (useful where Java's type system cannot express the subtype
  * relationship).
  * </ul>

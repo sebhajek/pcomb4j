@@ -15,8 +15,8 @@ import org.slf4j.Logger;
  * associativity:
  *
  * <ul>
- *   <li>{@link AssociativeChainParserLeft} — left-associative: combines terms
- * as they are parsed (left fold). <li>{@link AssociativeChainParserRight} —
+ *   <li>{@link AssociativeChainParserLeft} -- left-associative: combines terms
+ * as they are parsed (left fold). <li>{@link AssociativeChainParserRight} --
  * right-associative: collects all terms and operators, then folds from the
  * right.
  * </ul>

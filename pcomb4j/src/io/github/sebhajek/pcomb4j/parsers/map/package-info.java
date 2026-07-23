@@ -2,11 +2,11 @@
  * Provides parsers that transform parse results.
  *
  * <ul>
- *   <li>{@link MapParserTransform} — applies a {@link
+ *   <li>{@link MapParserTransform} -- applies a {@link
  * java.util.function.Function} to the inner parser's result. <li>{@link
- * MapParserPure} — ignores the inner result and returns a constant. <li>{@link
- * MapParserCast} — casts the inner result to a supertype. <li>{@link
- * FlatMapParser} — sequences parsers where the second parser depends on the
+ * MapParserPure} -- ignores the inner result and returns a constant. <li>{@link
+ * MapParserCast} -- casts the inner result to a supertype. <li>{@link
+ * FlatMapParser} -- sequences parsers where the second parser depends on the
  * first parser's result (monadic bind).
  * </ul>
  *

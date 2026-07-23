@@ -10,7 +10,7 @@ import org.slf4j.Logger;
  *
  * <p>Examples of such parsers are {@code MapParser}, {@code FilterParser},
  * {@code FlatMapParser},
- * {@code OptionalParser}, and {@code ErrorParser} — all of which parse via an
+ * {@code OptionalParser}, and {@code ErrorParser} -- all of which parse via an
  * inner "source" parser and transform or guard the result.
  *
  * @param <Output> the type of value produced by this parser after
