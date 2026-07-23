@@ -7,8 +7,8 @@
  * io.github.sebhajek.pcomb4j.combinators} package:
  *
  * <ul>
- *   <li>{@link io.github.sebhajek.pcomb4j.parsers.AnyParser} — consumes any
- * single element. <li>{@link io.github.sebhajek.pcomb4j.parsers.LiteralParser}
+ *   <li>{@link io.github.sebhajek.pcomb4j.parsers.primitive.AnyParser} — consumes any
+ * single element. <li>{@link io.github.sebhajek.pcomb4j.parsers.primitive.LiteralParser}
  * — matches an exact value. <li>{@link
  * io.github.sebhajek.pcomb4j.parsers.FilterParser} — forwards the inner result
  * only if a predicate is satisfied. <li>{@link
@@ -30,7 +30,7 @@
  * construction for recursive grammars. <li>{@link
  * io.github.sebhajek.pcomb4j.parsers.ErrorParser} — intercepts failures and
  * wraps them with a richer error message. <li>{@link
- * io.github.sebhajek.pcomb4j.parsers.FailureParser} — always fails with a
+ * io.github.sebhajek.pcomb4j.parsers.primitive.FailureParser} — always fails with a
  * supplied error, regardless of input. <li>{@link
  * io.github.sebhajek.pcomb4j.parsers.TraceParser} — logs a trace message before
  *       delegating to an inner parser.

@@ -1,6 +1,6 @@
 package io.github.sebhajek.pcomb4j.factories;
 
-import io.github.sebhajek.pcomb4j.parsers.AnyParser;
+import io.github.sebhajek.pcomb4j.parsers.primitive.AnyParser;
 
 /**
  * Factory mix-in that creates {@link AnyParser} instances.

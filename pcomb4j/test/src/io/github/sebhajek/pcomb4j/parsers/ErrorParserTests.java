@@ -4,6 +4,7 @@ import io.github.sebhajek.pcomb4j.ParserError;
 import io.github.sebhajek.pcomb4j.ParserFactory;
 import io.github.sebhajek.pcomb4j.ParserInput;
 
+import io.github.sebhajek.pcomb4j.parsers.primitive.LiteralParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

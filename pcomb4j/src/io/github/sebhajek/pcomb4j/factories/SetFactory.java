@@ -1,6 +1,6 @@
 package io.github.sebhajek.pcomb4j.factories;
 
-import io.github.sebhajek.pcomb4j.parsers.SetParser;
+import io.github.sebhajek.pcomb4j.parsers.primitive.SetParser;
 
 import java.util.Arrays;
 import java.util.Collection;

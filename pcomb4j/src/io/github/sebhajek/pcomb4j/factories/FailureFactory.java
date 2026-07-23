@@ -1,7 +1,7 @@
 package io.github.sebhajek.pcomb4j.factories;
 
 import io.github.sebhajek.pcomb4j.ParserError;
-import io.github.sebhajek.pcomb4j.parsers.FailureParser;
+import io.github.sebhajek.pcomb4j.parsers.primitive.FailureParser;
 
 import java.util.function.Supplier;
 

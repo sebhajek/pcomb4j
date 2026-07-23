@@ -1,6 +1,6 @@
 package io.github.sebhajek.pcomb4j.factories;
 
-import io.github.sebhajek.pcomb4j.parsers.LiteralParser;
+import io.github.sebhajek.pcomb4j.parsers.primitive.LiteralParser;
 
 import org.jspecify.annotations.Nullable;
 

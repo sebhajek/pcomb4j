@@ -1,4 +1,4 @@
-package io.github.sebhajek.pcomb4j.parsers;
+package io.github.sebhajek.pcomb4j.parsers.primitive;
 
 import io.github.sebhajek.pcomb4j.Parser;
 import io.github.sebhajek.pcomb4j.ParserError;

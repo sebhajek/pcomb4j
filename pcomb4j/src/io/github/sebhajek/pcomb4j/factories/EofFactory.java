@@ -1,6 +1,6 @@
 package io.github.sebhajek.pcomb4j.factories;
 
-import io.github.sebhajek.pcomb4j.parsers.EofParser;
+import io.github.sebhajek.pcomb4j.parsers.primitive.EofParser;
 
 /**
  * Factory mix-in that creates {@link EofParser} instances.
