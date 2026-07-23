@@ -15,7 +15,7 @@
  * io.github.sebhajek.pcomb4j.parsers.MapParser} — transforms the parsed value.
  *   <li>{@link io.github.sebhajek.pcomb4j.parsers.FlatMapParser} — sequences
  * parsers whose choice depends on a prior parse result. <li>{@link
- * io.github.sebhajek.pcomb4j.parsers.AndParser} — sequences two parsers and
+ * io.github.sebhajek.pcomb4j.parsers.sequence.AndParser} — sequences two parsers and
  * collects both results. <li>{@link
  * io.github.sebhajek.pcomb4j.parsers.OrParser} — tries the left parser first,
  * falling back to the right on failure. <li>{@link
@@ -24,7 +24,7 @@
  *       {@link java.util.Optional}.
  *   <li>{@link io.github.sebhajek.pcomb4j.parsers.CardinalParser} — applies a
  * parser zero-or-more or one-or-more times. <li>{@link
- * io.github.sebhajek.pcomb4j.parsers.ChainParser} — applies a fixed sequence of
+ * io.github.sebhajek.pcomb4j.parsers.sequence.ChainParser} — applies a fixed sequence of
  *       parsers in order.
  *   <li>{@link io.github.sebhajek.pcomb4j.parsers.LazyParser} — defers parser
  * construction for recursive grammars. <li>{@link

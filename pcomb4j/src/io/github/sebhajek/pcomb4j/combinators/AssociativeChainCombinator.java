@@ -3,7 +3,7 @@ package io.github.sebhajek.pcomb4j.combinators;
 import io.github.sebhajek.pcomb4j.Parser;
 import io.github.sebhajek.pcomb4j.interfaces.CombinatorParser;
 import io.github.sebhajek.pcomb4j.interfaces.DelegateParser;
-import io.github.sebhajek.pcomb4j.parsers.AssociativeChainParser;
+import io.github.sebhajek.pcomb4j.parsers.sequence.AssociativeChainParser;
 
 /**
  * Combinator that parses a left-associative or right-associative chain of

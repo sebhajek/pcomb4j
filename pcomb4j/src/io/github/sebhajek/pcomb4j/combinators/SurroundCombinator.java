@@ -3,7 +3,7 @@ package io.github.sebhajek.pcomb4j.combinators;
 import io.github.sebhajek.pcomb4j.Parser;
 import io.github.sebhajek.pcomb4j.interfaces.CombinatorParser;
 import io.github.sebhajek.pcomb4j.interfaces.DelegateParser;
-import io.github.sebhajek.pcomb4j.parsers.SurroundParser;
+import io.github.sebhajek.pcomb4j.parsers.sequence.SurroundParser;
 
 /**
  * Combinator that wraps this parser's result with surrounding delimiters,

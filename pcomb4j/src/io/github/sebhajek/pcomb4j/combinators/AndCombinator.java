@@ -5,7 +5,7 @@ import io.github.sebhajek.pcomb4j.ParserResult;
 import io.github.sebhajek.pcomb4j.ParserResult.Sequence;
 import io.github.sebhajek.pcomb4j.interfaces.CombinatorParser;
 import io.github.sebhajek.pcomb4j.interfaces.DelegateParser;
-import io.github.sebhajek.pcomb4j.parsers.AndParser;
+import io.github.sebhajek.pcomb4j.parsers.sequence.AndParser;
 import io.github.sebhajek.pcomb4j.parsers.MapParser;
 
 /**
