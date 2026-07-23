@@ -151,7 +151,7 @@ class FilterParserTests {
 		final var parser = PARSER_FACTORY.<Character>literal('a')
 		                     .cast(Object.class)
 		                     .filter(Integer.class);
-		final var input = ParserInput.fromString("a");
+		final var input  = ParserInput.fromString("a");
 
 		assertThatExceptionOfType(ParserError.class)
 		  .isThrownBy(() -> parser.parse(input));

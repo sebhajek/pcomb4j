@@ -82,8 +82,8 @@ public class LiteralParser<Input> extends AbstractParser<Input, Input> {
 		final var current    = parserInput.getCurrent();
 		var       logger     = getLogger();
 		var       comparison = comparator.isPresent()
-		        ? comparator.orElseThrow().compare(current, literal) == 0
-		        : literal.equals(current);
+		  ? comparator.orElseThrow().compare(current, literal) == 0
+		  : literal.equals(current);
 		if (comparison) {
 			logger.trace("getting `literal`: {} == {}", current, literal);
 			return new ParserResult<>(current, parserInput.advance());

@@ -61,8 +61,9 @@ public interface AndCombinator<OutputLeft, Input>
 	  final Parser<OutputRight, Input> parserOther
 	) {
 		final var andParser = this.and(parserOther);
-		if (andParser
-		    instanceof AndParser<OutputLeft, OutputRight, Input> parser) {
+		if (
+		  andParser instanceof AndParser<OutputLeft, OutputRight, Input> parser
+		) {
 			return parser.map(parser::discardSecond);
 		} else throw new IllegalStateException();
 	}
@@ -81,8 +82,9 @@ public interface AndCombinator<OutputLeft, Input>
 	  final Parser<OutputRight, Input> parserOther
 	) {
 		final var andParser = this.and(parserOther);
-		if (andParser
-		    instanceof AndParser<OutputLeft, OutputRight, Input> parser) {
+		if (
+		  andParser instanceof AndParser<OutputLeft, OutputRight, Input> parser
+		) {
 			return parser.map(parser::discardFirst);
 		} else throw new IllegalStateException();
 	}

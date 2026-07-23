@@ -91,8 +91,10 @@ public final class CardinalParser<Output, OutputSeparator, Input>
 			final boolean isFirst        = results.isEmpty();
 			var           afterSeparator = current;
 
-			if (!isFirst
-			    && (separator instanceof final Separator.Between<OutputSeparator, Input> between)) {
+			if (
+			  !isFirst
+			  && (separator instanceof final Separator.Between<OutputSeparator, Input> between)
+			) {
 				try {
 					afterSeparator =
 					  between.parser().parse(current).remainder();
@@ -110,8 +112,10 @@ public final class CardinalParser<Output, OutputSeparator, Input>
 				lastElementError = null;
 			} catch (final ParserError elementError) {
 				lastElementError = elementError;
-				if (!isFirst
-				    && (separator instanceof final Separator.Between<OutputSeparator, Input> between)) {
+				if (
+				  !isFirst
+				  && (separator instanceof final Separator.Between<OutputSeparator, Input> between)
+				) {
 					if (!between.trailingAccepted()) {
 						logger.trace(
 						  "separator without following element propagated"
@@ -184,8 +188,8 @@ public final class CardinalParser<Output, OutputSeparator, Input>
 	}
 
 	private void enforceCardinality(
-	  final List<Output> results,
-	  final @Nullable ParserError  lastElementError
+	  final List<Output>          results,
+	  final @Nullable ParserError lastElementError
 	) throws ParserError {
 		final boolean needsAtLeastOne = switch (cardinality) {
 			case final Cardinality.ZeroOrMore<Output, Input> _ -> false;
@@ -206,9 +210,11 @@ public final class CardinalParser<Output, OutputSeparator, Input>
 			    );
 		}
 
-		if (cardinality
-		      instanceof Cardinality.Exactly<Output, Input>(final var count)
-		    && results.size() != count) {
+		if (
+		  cardinality
+		    instanceof Cardinality.Exactly<Output, Input>(final var count)
+		  && results.size() != count
+		) {
 			throw lastElementError != null
 			  ? lastElementError
 			  : new InsufficientMatchError(

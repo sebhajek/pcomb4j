@@ -395,7 +395,8 @@ public final class CardinalParserBuilder {
 			final var result = delegate.parse(parserInput);
 			logger.trace("`discard` parser succeeded");
 			@SuppressWarnings("NullAway")
-			final var voidResult = new ParserResult<>((Void) null, result.remainder());
+			final var voidResult =
+			  new ParserResult<>((Void) null, result.remainder());
 			return voidResult;
 		}
 
