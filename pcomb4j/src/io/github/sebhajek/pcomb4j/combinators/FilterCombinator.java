@@ -1,8 +1,8 @@
 package io.github.sebhajek.pcomb4j.combinators;
 
 import io.github.sebhajek.pcomb4j.ParserCombinator;
-import io.github.sebhajek.pcomb4j.interfaces.CombinatorParser;
-import io.github.sebhajek.pcomb4j.interfaces.DelegateParser;
+import io.github.sebhajek.pcomb4j.parsers.CombinatorParser;
+import io.github.sebhajek.pcomb4j.parsers.DelegateParser;
 import io.github.sebhajek.pcomb4j.parsers.filter.FilterParser;
 
 import java.util.function.Predicate;

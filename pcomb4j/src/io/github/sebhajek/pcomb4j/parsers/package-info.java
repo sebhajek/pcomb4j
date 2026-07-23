@@ -17,7 +17,7 @@
  * parsers whose choice depends on a prior parse result. <li>{@link
  * io.github.sebhajek.pcomb4j.parsers.sequence.AndParser} — sequences two parsers and
  * collects both results. <li>{@link
- * io.github.sebhajek.pcomb4j.parsers.OrParser} — tries the left parser first,
+ * io.github.sebhajek.pcomb4j.parsers.choice.OrParser} — tries the left parser first,
  * falling back to the right on failure. <li>{@link
  * io.github.sebhajek.pcomb4j.parsers.decorator.OptionalParser} — wraps a parser's result
  * in an
@@ -38,6 +38,28 @@
  *
  * <p>All types in this package are null-marked; see {@link
  * org.jspecify.annotations.NullMarked}.
+ *
+ * Provides abstract base classes and mixin interfaces for building parser
+ *  implementations.
+ *
+ *  <p>The central element is {@link
+ *  io.github.sebhajek.pcomb4j.parsers.CombinatorParser}, a mixin that
+ *  assembles all combinator interfaces ({@code map}, {@code flatMap}, {@code
+ *  filter}, {@code and}, {@code or}, etc.) into a single type.
+ *
+ *  <p>Concrete parsers typically extend one of the abstract classes:
+ *
+ *  <ul>
+ *    <li>{@link io.github.sebhajek.pcomb4j.parsers.AbstractParser} — for
+ *  standalone parsers. <li>{@link
+ *  io.github.sebhajek.pcomb4j.parsers.AbstractSourcedParser} — for parsers
+ *  that delegate to a single inner parser. <li>{@link
+ *  io.github.sebhajek.pcomb4j.parsers.AbstractPairParser} — for parsers that
+ *  combine two inner parsers.
+ *  </ul>
+ *
+ *  <p>All types in this package are null-marked; see {@link
+ *  org.jspecify.annotations.NullMarked}.
  */
 @NullMarked
 package io.github.sebhajek.pcomb4j.parsers;

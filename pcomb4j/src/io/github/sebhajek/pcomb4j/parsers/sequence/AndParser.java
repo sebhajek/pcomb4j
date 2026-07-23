@@ -6,7 +6,7 @@ import io.github.sebhajek.pcomb4j.ParserInput;
 import io.github.sebhajek.pcomb4j.ParserResult;
 import io.github.sebhajek.pcomb4j.ParserResult.Sequence;
 import io.github.sebhajek.pcomb4j.combinators.AndCombinator;
-import io.github.sebhajek.pcomb4j.interfaces.AbstractPairParser;
+import io.github.sebhajek.pcomb4j.parsers.AbstractPairParser;
 
 import org.jspecify.annotations.NonNull;
 

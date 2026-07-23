@@ -2,8 +2,8 @@ package io.github.sebhajek.pcomb4j.combinators;
 
 import io.github.sebhajek.pcomb4j.ParserError;
 import io.github.sebhajek.pcomb4j.ParserInput;
-import io.github.sebhajek.pcomb4j.interfaces.CombinatorParser;
-import io.github.sebhajek.pcomb4j.interfaces.DelegateParser;
+import io.github.sebhajek.pcomb4j.parsers.CombinatorParser;
+import io.github.sebhajek.pcomb4j.parsers.DelegateParser;
 import io.github.sebhajek.pcomb4j.parsers.decorator.ErrorParser;
 
 import java.util.function.BiFunction;

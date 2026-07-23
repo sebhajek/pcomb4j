@@ -2,9 +2,9 @@ package io.github.sebhajek.pcomb4j.combinators;
 
 import io.github.sebhajek.pcomb4j.Parser;
 import io.github.sebhajek.pcomb4j.ParserResult;
-import io.github.sebhajek.pcomb4j.interfaces.CombinatorParser;
-import io.github.sebhajek.pcomb4j.interfaces.DelegateParser;
-import io.github.sebhajek.pcomb4j.parsers.OrParser;
+import io.github.sebhajek.pcomb4j.parsers.CombinatorParser;
+import io.github.sebhajek.pcomb4j.parsers.DelegateParser;
+import io.github.sebhajek.pcomb4j.parsers.choice.OrParser;
 
 /**
  * Combinator that tries this parser first and, on failure, falls back to one or

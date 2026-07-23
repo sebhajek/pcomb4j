@@ -1,7 +1,7 @@
 package io.github.sebhajek.pcomb4j.combinators;
 
 import io.github.sebhajek.pcomb4j.Parser;
-import io.github.sebhajek.pcomb4j.interfaces.DelegateParser;
+import io.github.sebhajek.pcomb4j.parsers.DelegateParser;
 import io.github.sebhajek.pcomb4j.parsers.cardinal.CardinalParserBuilder;
 import io.github.sebhajek.pcomb4j.parsers.cardinal.CardinalParserBuilder.SeparatorOptional;
 

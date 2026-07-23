@@ -1,4 +1,4 @@
-package io.github.sebhajek.pcomb4j.interfaces;
+package io.github.sebhajek.pcomb4j.parsers;
 
 import io.github.sebhajek.pcomb4j.Parser;
 

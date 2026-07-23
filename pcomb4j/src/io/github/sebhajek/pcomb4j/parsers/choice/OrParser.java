@@ -1,11 +1,11 @@
-package io.github.sebhajek.pcomb4j.parsers;
+package io.github.sebhajek.pcomb4j.parsers.choice;
 
 import io.github.sebhajek.pcomb4j.Parser;
 import io.github.sebhajek.pcomb4j.ParserError;
 import io.github.sebhajek.pcomb4j.ParserInput;
 import io.github.sebhajek.pcomb4j.ParserResult;
-import io.github.sebhajek.pcomb4j.interfaces.AbstractPairParser;
 
+import io.github.sebhajek.pcomb4j.parsers.AbstractPairParser;
 import org.jspecify.annotations.NonNull;
 
 import org.slf4j.Logger;

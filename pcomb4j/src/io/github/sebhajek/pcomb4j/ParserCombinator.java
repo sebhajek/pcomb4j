@@ -1,7 +1,7 @@
 package io.github.sebhajek.pcomb4j;
 
-import io.github.sebhajek.pcomb4j.interfaces.CombinatorParser;
-import io.github.sebhajek.pcomb4j.interfaces.DelegateParser;
+import io.github.sebhajek.pcomb4j.parsers.CombinatorParser;
+import io.github.sebhajek.pcomb4j.parsers.DelegateParser;
 
 import org.jspecify.annotations.NonNull;
 
