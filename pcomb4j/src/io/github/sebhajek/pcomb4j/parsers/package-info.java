@@ -10,7 +10,7 @@
  *   <li>{@link io.github.sebhajek.pcomb4j.parsers.primitive.AnyParser} — consumes any
  * single element. <li>{@link io.github.sebhajek.pcomb4j.parsers.primitive.LiteralParser}
  * — matches an exact value. <li>{@link
- * io.github.sebhajek.pcomb4j.parsers.FilterParser} — forwards the inner result
+ * io.github.sebhajek.pcomb4j.parsers.filter.FilterParser} — forwards the inner result
  * only if a predicate is satisfied. <li>{@link
  * io.github.sebhajek.pcomb4j.parsers.map.MapParser} — transforms the parsed value.
  *   <li>{@link io.github.sebhajek.pcomb4j.parsers.map.FlatMapParser} — sequences

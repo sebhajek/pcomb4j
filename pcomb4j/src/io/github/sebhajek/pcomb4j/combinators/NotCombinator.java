@@ -3,7 +3,7 @@ package io.github.sebhajek.pcomb4j.combinators;
 import io.github.sebhajek.pcomb4j.Parser;
 import io.github.sebhajek.pcomb4j.interfaces.CombinatorParser;
 import io.github.sebhajek.pcomb4j.interfaces.DelegateParser;
-import io.github.sebhajek.pcomb4j.parsers.NotParser;
+import io.github.sebhajek.pcomb4j.parsers.filter.NotParser;
 
 /**
  * Combinator that succeeds only when its inner parser succeeds <em>and</em> a

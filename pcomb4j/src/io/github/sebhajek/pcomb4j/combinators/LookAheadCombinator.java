@@ -3,7 +3,7 @@ package io.github.sebhajek.pcomb4j.combinators;
 import io.github.sebhajek.pcomb4j.Parser;
 import io.github.sebhajek.pcomb4j.interfaces.CombinatorParser;
 import io.github.sebhajek.pcomb4j.interfaces.DelegateParser;
-import io.github.sebhajek.pcomb4j.parsers.LookAheadParser;
+import io.github.sebhajek.pcomb4j.parsers.filter.LookAheadParser;
 
 /**
  * Combinator that first succeeds a source parser, then validates the remainder
