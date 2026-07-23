@@ -16,10 +16,10 @@ import org.slf4j.Logger;
  * <p>Two concrete subclasses are provided:
  *
  * <ul>
- *   <li>{@link OrParser} -- both branches must produce the same output type; the
- * result is just {@code Output}.
- *   <li>{@link EitherParser} -- the branches may produce different types; the
- * result is a {@link io.github.sebhajek.pcomb4j.ParserResult.Either}.
+ *   <li>{@link OrParser} -- both branches must produce the same output type;
+ * the result is just {@code Output}. <li>{@link EitherParser} -- the branches
+ * may produce different types; the result is a {@link
+ * io.github.sebhajek.pcomb4j.ParserResult.Either}.
  * </ul>
  *
  * @param <Output> the type of value produced by this parser

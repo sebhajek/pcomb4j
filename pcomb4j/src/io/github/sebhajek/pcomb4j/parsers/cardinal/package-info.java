@@ -6,12 +6,12 @@
  *       element parser repeatedly, governed by a {@link Cardinality} policy
  *       and a {@link Separator} policy.
  *   <li>{@link Cardinality} -- sealed interface with policies {@link
- *       CardinalityZeroOrMore}, {@link CardinalityOneOrMore}, {@link
- *       CardinalityExactly}, and {@link CardinalityUntil}.
+ *       Cardinality.ZeroOrMore}, {@link Cardinality.OneOrMore}, {@link
+ *       Cardinality.Exactly}, and {@link Cardinality.Until}.
  *   <li>{@link Separator} -- sealed interface with policies {@link
- *       SeparatorNone} and {@link SeparatorBetween}.
+ *       Separator.None} and {@link Separator.Between}.
  *   <li>{@link Sentinel} -- sealed interface for sentinel-based termination
- *       ({@link SentinelPredicateBased}, {@link SentinelParserBased}).
+ *       ({@link Sentinel.PredicateBased}, {@link Sentinel.ParserBased}).
  *   <li>{@link CardinalParserBuilder} -- type-safe staged builder for
  *       constructing {@link CardinalParser} instances.
  * </ul>

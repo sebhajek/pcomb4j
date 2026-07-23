@@ -5,9 +5,9 @@
  * <ul>
  *   <li>{@link ChainParser} -- applies an ordered list of parsers, collecting
  * all results. <li>{@link AssociativeChainParser} -- base for {@link
- * ChainParserLeft} and
- *       {@link ChainParserRight} which parse {@code term (operator term)*} and
- *       fold left or right respectively.
+ * AssociativeChainParserLeft} and
+ *       {@link AssociativeChainParserRight} which parse {@code term (operator
+ * term)*} and fold left or right respectively.
  * </ul>
  *
  * <p>All types in this package are null-marked; see {@link

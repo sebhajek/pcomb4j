@@ -23,8 +23,8 @@
  * io.github.sebhajek.pcomb4j.parsers.decorator.OptionalParser} -- wraps a
  * parser's result in an
  *       {@link java.util.Optional}.
- *   <li>{@link io.github.sebhajek.pcomb4j.parsers.CardinalParser} -- applies a
- * parser zero-or-more or one-or-more times. <li>{@link
+ *   <li>{@link io.github.sebhajek.pcomb4j.parsers.cardinal.CardinalParser} --
+ * applies a parser zero-or-more or one-or-more times. <li>{@link
  * io.github.sebhajek.pcomb4j.parsers.chain.ChainParser} -- applies a fixed
  * sequence of parsers in order. <li>{@link
  * io.github.sebhajek.pcomb4j.parsers.decorator.LazyParser} -- defers parser

@@ -1,8 +1,8 @@
 package io.github.sebhajek.pcomb4j;
 
-import org.slf4j.LoggerFactory;
-
 import io.github.sebhajek.pcomb4j.parsers.primitive.LiteralParserNotMatched;
+
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,15 +48,15 @@ public class ExampleTest {
 		final var factory = ParserFactory.withLogger(logger);
 
 		// Parser for a single digit: 0-9
-		final var term = factory.<Character>any()
-		    .filter(Character::isDigit)
-		    .map(c -> c - '0');
+		final var term =
+		  factory.<Character>any().filter(Character::isDigit).map(c -> c - '0');
 
 		// Parser for sum: 1+2+3 evaluates as ((1+2)+3) = 6
-		final var sum = term.chainLeft(factory.literal('+'), (a, op, b) -> a + b);
+		final var sum =
+		  term.chainLeft(factory.literal('+'), (a, op, b) -> a + b);
 
 		final var result = sum.parse(ParserInput.fromString("1+2+3"));
-		assert result.result() == 6;
+		assert    result.result() == 6;
 	}
 
 	@Test
@@ -65,17 +65,33 @@ public class ExampleTest {
 		final var factory = ParserFactory.withLogger(logger);
 
 		// Match any hexadecimal digit
-		final var hexDigit = factory.anyOf('0', '1', '2', '3', '4', '5', '6', '7',
-		    '8', '9', 'a', 'b', 'c', 'd', 'e', 'f');
+		final var hexDigit = factory.anyOf(
+		  '0',
+		  '1',
+		  '2',
+		  '3',
+		  '4',
+		  '5',
+		  '6',
+		  '7',
+		  '8',
+		  '9',
+		  'a',
+		  'b',
+		  'c',
+		  'd',
+		  'e',
+		  'f'
+		);
 
 		// Match any character that is NOT a vowel
 		final var consonant = factory.noneOf('a', 'e', 'i', 'o', 'u');
 
 		final var r1 = hexDigit.parse(ParserInput.fromString("f"));
-		assert r1.result() == 'f';
+		assert    r1.result() == 'f';
 
 		final var r2 = consonant.parse(ParserInput.fromString("z"));
-		assert r2.result() == 'z';
+		assert    r2.result() == 'z';
 	}
 
 	@Test
@@ -83,23 +99,25 @@ public class ExampleTest {
 		final var logger  = LoggerFactory.getLogger("ParserLogger");
 		final var factory = ParserFactory.withLogger(logger);
 
-		final var digit = factory.<Character>any().filter(Character::isDigit).map(c -> c - '0');
+		final var digit =
+		  factory.<Character>any().filter(Character::isDigit).map(c -> c - '0');
 
 		// Mandatory parentheses around a digit: (5)
-		final var paren = digit.surround(factory.literal('('), factory.literal(')'));
+		final var paren =
+		  digit.surround(factory.literal('('), factory.literal(')'));
 
 		// Optional square brackets around a digit: [5] or just 5
-		final var bracket = digit.surroundOptional(factory.literal('['),
-		    factory.literal(']'));
+		final var bracket =
+		  digit.surroundOptional(factory.literal('['), factory.literal(']'));
 
 		final var r1 = paren.parse(ParserInput.fromString("(5)"));
-		assert r1.result() == 5;
+		assert    r1.result() == 5;
 
 		final var r2 = bracket.parse(ParserInput.fromString("[3]"));
-		assert r2.result() == 3;
+		assert    r2.result() == 3;
 
 		final var r3 = bracket.parse(ParserInput.fromString("7"));
-		assert r3.result() == 7;
+		assert    r3.result() == 7;
 	}
 
 	@Test
@@ -108,17 +126,18 @@ public class ExampleTest {
 		final var factory = ParserFactory.withLogger(logger);
 
 		// Parse a leading character, then expect a matching closing bracket
-		final var matchingBrackets = factory.<Character>any().flatMap(opener -> {
-		    if (opener == '(') return factory.literal(')');
-		    if (opener == '[') return factory.literal(']');
-		    if (opener == '{') return factory.literal('}');
-		    return factory.alwaysFails(() -> new LiteralParserNotMatched());
-		});
+		final var matchingBrackets =
+		  factory.<Character>any().flatMap(opener -> {
+			  if (opener == '(') return factory.literal(')');
+			  if (opener == '[') return factory.literal(']');
+			  if (opener == '{') return factory.literal('}');
+			  return factory.alwaysFails(() -> new LiteralParserNotMatched());
+		  });
 
 		final var r1 = matchingBrackets.parse(ParserInput.fromString("()"));
-		assert r1.result() == ')';
+		assert    r1.result() == ')';
 
 		final var r2 = matchingBrackets.parse(ParserInput.fromString("[]"));
-		assert r2.result() == ']';
+		assert    r2.result() == ']';
 	}
 }

@@ -17,9 +17,10 @@ import java.util.List;
  * A {@link Parser} that applies a fixed, ordered list of parsers in sequence,
  * collecting all of their results into a {@link List}.
  *
- * <p>Unlike {@link CardinalParser}, the parsers in the chain may be different
- * instances, but they must all share the same output and input types. The list
- * is built in encounter order and returned as-is (mutable).
+ * <p>Unlike {@link io.github.sebhajek.pcomb4j.parsers.cardinal.CardinalParser},
+ * the parsers in the chain may be different instances, but they must all share
+ * the same output and input types. The list is built in encounter order and
+ * returned as-is (mutable).
  *
  * @param <Output> the output type shared by all parsers in the chain
  * @param <Input> the type of element consumed from the input

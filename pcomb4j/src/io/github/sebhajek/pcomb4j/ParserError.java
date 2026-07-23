@@ -14,8 +14,8 @@ import java.util.List;
  *   <li>{@link Leaf} -- a terminal error with a simple message and no child
  * errors (e.g. "literal not matched", "end of file"). <li>{@link Branch} -- a
  * composite error that records <em>two</em> child errors, typically from the
- * left and right branches of an alternation ({@code or}). <li>{@link Wrapped} --
- * a wrapper error that adds a contextual message around a single inner error
+ * left and right branches of an alternation ({@code or}). <li>{@link Wrapped}
+ * -- a wrapper error that adds a contextual message around a single inner error
  * (e.g. a label applied via {@code labelError}).
  * </ul>
  *

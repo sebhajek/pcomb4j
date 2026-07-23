@@ -10,10 +10,9 @@
  *       same input (negative lookahead).
  *   <li>{@link LookAheadParser} -- validates the remainder against a second
  *       ahead parser.
- *   <li>{@link FilterParserNotSatisfied} -- error thrown when a filter predicate
- *       is not met.
- *   <li>{@link NotParserNegativeParserSuccess} -- error thrown when the negative
- *       parser unexpectedly succeeds.
+ *   <li>{@link FilterParserNotSatisfied} -- error thrown when a filter
+ * predicate is not met. <li>{@link NotParserNegativeParserSuccess} -- error
+ * thrown when the negative parser unexpectedly succeeds.
  * </ul>
  *
  * <p>All types in this package are null-marked; see
