@@ -2,7 +2,7 @@ package io.github.sebhajek.pcomb4j.combinators;
 
 import io.github.sebhajek.pcomb4j.interfaces.CombinatorParser;
 import io.github.sebhajek.pcomb4j.interfaces.DelegateParser;
-import io.github.sebhajek.pcomb4j.parsers.OptionalParser;
+import io.github.sebhajek.pcomb4j.parsers.decorator.OptionalParser;
 
 import java.util.Optional;
 

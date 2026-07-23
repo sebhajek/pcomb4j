@@ -2,7 +2,7 @@ package io.github.sebhajek.pcomb4j.combinators;
 
 import io.github.sebhajek.pcomb4j.interfaces.CombinatorParser;
 import io.github.sebhajek.pcomb4j.interfaces.DelegateParser;
-import io.github.sebhajek.pcomb4j.parsers.TraceParser;
+import io.github.sebhajek.pcomb4j.parsers.decorator.TraceParser;
 
 import org.slf4j.Logger;
 

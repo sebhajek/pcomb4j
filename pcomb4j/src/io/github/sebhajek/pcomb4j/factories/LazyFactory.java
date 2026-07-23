@@ -1,7 +1,7 @@
 package io.github.sebhajek.pcomb4j.factories;
 
 import io.github.sebhajek.pcomb4j.Parser;
-import io.github.sebhajek.pcomb4j.parsers.LazyParser;
+import io.github.sebhajek.pcomb4j.parsers.decorator.LazyParser;
 
 import java.util.function.Supplier;
 
