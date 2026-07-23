@@ -5,8 +5,8 @@ import io.github.sebhajek.pcomb4j.ParserResult;
 import io.github.sebhajek.pcomb4j.ParserResult.Sequence;
 import io.github.sebhajek.pcomb4j.parsers.CombinatorParser;
 import io.github.sebhajek.pcomb4j.parsers.DelegateParser;
-import io.github.sebhajek.pcomb4j.parsers.sequence.AndParser;
 import io.github.sebhajek.pcomb4j.parsers.map.MapParser;
+import io.github.sebhajek.pcomb4j.parsers.sequence.AndParser;
 
 /**
  * Combinator that sequences two parsers, collecting both of their results.
@@ -53,15 +53,16 @@ public interface AndCombinator<OutputLeft, Input>
 	 * @param parserOther the parser to run after this one; never {@code null}
 	 * @param <OutputRight> the type of value produced by the second parser
 	 *   (discarded)
-	 * @return a {@link MapParser.Transform} that produces {@code OutputLeft}
+	 * @return a {@link
+	 *   io.github.sebhajek.pcomb4j.parsers.map.MapParserTransform} that
+	 *   produces {@code OutputLeft}
 	 */
 	public default<OutputRight> CombinatorParser<OutputLeft, Input> andFirst(
 	  final Parser<OutputRight, Input> parserOther
 	) {
 		final var andParser = this.and(parserOther);
-		if (
-		  andParser instanceof AndParser<OutputLeft, OutputRight, Input> parser
-		) {
+		if (andParser
+		    instanceof AndParser<OutputLeft, OutputRight, Input> parser) {
 			return parser.map(parser::discardSecond);
 		} else throw new IllegalStateException();
 	}
@@ -72,15 +73,16 @@ public interface AndCombinator<OutputLeft, Input>
 	 *
 	 * @param parserOther the parser to run after this one; never {@code null}
 	 * @param <OutputRight> the type of value produced by the second parser
-	 * @return a {@link MapParser.Transform} that produces {@code OutputRight}
+	 * @return a {@link
+	 *   io.github.sebhajek.pcomb4j.parsers.map.MapParserTransform} that
+	 *   produces {@code OutputRight}
 	 */
 	public default<OutputRight> CombinatorParser<OutputRight, Input> andSecond(
 	  final Parser<OutputRight, Input> parserOther
 	) {
 		final var andParser = this.and(parserOther);
-		if (
-		  andParser instanceof AndParser<OutputLeft, OutputRight, Input> parser
-		) {
+		if (andParser
+		    instanceof AndParser<OutputLeft, OutputRight, Input> parser) {
 			return parser.map(parser::discardFirst);
 		} else throw new IllegalStateException();
 	}

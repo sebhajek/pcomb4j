@@ -3,7 +3,9 @@ package io.github.sebhajek.pcomb4j.combinators;
 import io.github.sebhajek.pcomb4j.Parser;
 import io.github.sebhajek.pcomb4j.parsers.CombinatorParser;
 import io.github.sebhajek.pcomb4j.parsers.DelegateParser;
-import io.github.sebhajek.pcomb4j.parsers.chain.AssociativeChainParser;
+import io.github.sebhajek.pcomb4j.parsers.chain.AssociativeChainParserCombiner;
+import io.github.sebhajek.pcomb4j.parsers.chain.AssociativeChainParserLeft;
+import io.github.sebhajek.pcomb4j.parsers.chain.AssociativeChainParserRight;
 
 /**
  * Combinator that parses a left-associative or right-associative chain of
@@ -16,10 +18,10 @@ import io.github.sebhajek.pcomb4j.parsers.chain.AssociativeChainParser;
  * <p>Example — parsing a sum of digits with {@code +} (left fold):
  *
  * <pre>{@code
- * Parser<Integer, Character> digit = /* … * /;
+ * Parser<Integer, Character> digit = /* ... *\/;
  * Parser<Integer, Character> sum =
  *     digit.chainLeft(factory.literal('+'), (a, op, b) -> a + b);
- * // "1+2+3" → 6  parsed as ((1+2)+3)
+ * // "1+2+3" -> 6  parsed as ((1+2)+3)
  * }</pre>
  *
  * @param <Output> the type of value produced by each term and by the result
@@ -38,18 +40,18 @@ public interface AssociativeChainCombinator<Output, Input>
 	 *
 	 * @param parserInfix the parser for the infix operator; never {@code null}
 	 * @param combiner the function that combines a left operand, an operator,
-	 *   and a right operand
-	 *     into a new result; never {@code null}
+	 *   and a right operand into a new result; never {@code null}
 	 * @param <OutputInfix> the type of value produced by the operator parser
 	 * @return a new {@link CombinatorParser} wrapping this parser
 	 */
+	@SuppressWarnings("unchecked")
 	public default<OutputInfix> CombinatorParser<Output, Input> chainLeft(
 	  final Parser<OutputInfix, Input> parserInfix,
-	  final AssociativeChainParser.Combiner<Output, OutputInfix> combiner
+	  final AssociativeChainParserCombiner<Output, OutputInfix> combiner
 	) {
 		final var logger = getLogger();
 		logger.info("building `chainLeft` parser");
-		return new AssociativeChainParser.Left<>(
+		return new AssociativeChainParserLeft<Output, OutputInfix, Input>(
 		  DelegateParser.getDelegate(getParser()), parserInfix, combiner, logger
 		);
 	}
@@ -64,18 +66,18 @@ public interface AssociativeChainCombinator<Output, Input>
 	 *
 	 * @param parserInfix the parser for the infix operator; never {@code null}
 	 * @param combiner the function that combines a left operand, an operator,
-	 *   and a right operand
-	 *     into a new result; never {@code null}
+	 *   and a right operand into a new result; never {@code null}
 	 * @param <OutputInfix> the type of value produced by the operator parser
 	 * @return a new {@link CombinatorParser} wrapping this parser
 	 */
+	@SuppressWarnings("unchecked")
 	public default<OutputInfix> CombinatorParser<Output, Input> chainRight(
 	  final Parser<OutputInfix, Input> parserInfix,
-	  final AssociativeChainParser.Combiner<Output, OutputInfix> combiner
+	  final AssociativeChainParserCombiner<Output, OutputInfix> combiner
 	) {
 		final var logger = getLogger();
 		logger.info("building `chainRight` parser");
-		return new AssociativeChainParser.Right<>(
+		return new AssociativeChainParserRight<Output, OutputInfix, Input>(
 		  DelegateParser.getDelegate(getParser()), parserInfix, combiner, logger
 		);
 	}

@@ -17,7 +17,8 @@ import java.util.function.Predicate;
  * A type-driven staged builder that enforces method-call ordering at compile
  * time.
  *
- * <p>Usage: {@code CardinalParserBuilder.of(element).logger(logger).zeroOrMore()…}
+ * <p>Usage: {@code
+ * CardinalParserBuilder.of(element).logger(logger).zeroOrMore()…}
  *
  * <p>The stages are:
  * <ol>
@@ -97,8 +98,10 @@ public final class CardinalParserBuilder {
 		 */
 		public SeparatorOptional<Output, Void, Input> zeroOrMore() {
 			return new SeparatorOptional<>(
-			  element, new Cardinality.ZeroOrMore<>(),
-			  new Separator.None<>(), logger
+			  element,
+			  new Cardinality.ZeroOrMore<>(),
+			  new Separator.None<>(),
+			  logger
 			);
 		}
 
@@ -109,8 +112,10 @@ public final class CardinalParserBuilder {
 		 */
 		public SeparatorOptional<Output, Void, Input> oneOrMore() {
 			return new SeparatorOptional<>(
-			  element, new Cardinality.OneOrMore<>(),
-			  new Separator.None<>(), logger
+			  element,
+			  new Cardinality.OneOrMore<>(),
+			  new Separator.None<>(),
+			  logger
 			);
 		}
 
@@ -122,8 +127,10 @@ public final class CardinalParserBuilder {
 		 */
 		public SeparatorOptional<Output, Void, Input> exactly(final int count) {
 			return new SeparatorOptional<>(
-			  element, new Cardinality.Exactly<>(count),
-			  new Separator.None<>(), logger
+			  element,
+			  new Cardinality.Exactly<>(count),
+			  new Separator.None<>(),
+			  logger
 			);
 		}
 
@@ -143,7 +150,8 @@ public final class CardinalParserBuilder {
 			  new Cardinality.Until<>(
 			    new Sentinel.PredicateBased<>(predicate), false
 			  ),
-			  new Separator.None<>(), logger
+			  new Separator.None<>(),
+			  logger
 			);
 		}
 
@@ -163,7 +171,8 @@ public final class CardinalParserBuilder {
 			  new Cardinality.Until<>(
 			    new Sentinel.PredicateBased<>(predicate), true
 			  ),
-			  new Separator.None<>(), logger
+			  new Separator.None<>(),
+			  logger
 			);
 		}
 
@@ -183,7 +192,8 @@ public final class CardinalParserBuilder {
 			  new Cardinality.Until<>(
 			    new Sentinel.ParserBased<>(sentinelParser), false
 			  ),
-			  new Separator.None<>(), logger
+			  new Separator.None<>(),
+			  logger
 			);
 		}
 
@@ -203,7 +213,8 @@ public final class CardinalParserBuilder {
 			  new Cardinality.Until<>(
 			    new Sentinel.ParserBased<>(sentinelParser), true
 			  ),
-			  new Separator.None<>(), logger
+			  new Separator.None<>(),
+			  logger
 			);
 		}
 	}
@@ -218,16 +229,19 @@ public final class CardinalParserBuilder {
 	 *   parser
 	 * @param <Input> the type of element consumed from the input
 	 */
-	public static final class SeparatorOptional<Output, OutputSeparator, Input> {
-		private final Parser<Output, Input>             element;
-		private final Cardinality<Output, Input>        cardinality;
-		private final Separator<OutputSeparator, Input>  separator;
+	public static final class SeparatorOptional<
+	  Output,
+	  OutputSeparator,
+	  Input> {
+		private final Parser<Output, Input> element;
+		private final Cardinality<Output, Input> cardinality;
+		private final Separator<OutputSeparator, Input> separator;
 		private final Logger                            logger;
 
 		private SeparatorOptional(
-		  final Parser<Output, Input>             element,
-		  final Cardinality<Output, Input>        cardinality,
-		  final Separator<OutputSeparator, Input>  separator,
+		  final Parser<Output, Input> element,
+		  final Cardinality<Output, Input> cardinality,
+		  final Separator<OutputSeparator, Input> separator,
 		  final Logger                            logger
 		) {
 			this.element     = element;
@@ -265,12 +279,13 @@ public final class CardinalParserBuilder {
 		}
 
 		private <NewSeparator> SeparatorFixed<Output, NewSeparator, Input>
-		separatedBy(
-		  final Parser<NewSeparator, Input> separatorParser,
-		  final boolean                     trailingAccepted
-		) {
+		                       separatedBy(
+		                         final Parser<NewSeparator, Input> separatorParser,
+		                         final boolean                     trailingAccepted
+		                       ) {
 			return new SeparatorFixed<>(
-			  element, cardinality,
+			  element,
+			  cardinality,
 			  new Separator.Between<>(separatorParser, trailingAccepted),
 			  logger
 			);
@@ -311,15 +326,15 @@ public final class CardinalParserBuilder {
 	 * @param <Input> the type of element consumed from the input
 	 */
 	public static final class SeparatorFixed<Output, OutputSeparator, Input> {
-		private final Parser<Output, Input>             element;
-		private final Cardinality<Output, Input>        cardinality;
-		private final Separator<OutputSeparator, Input>  separator;
+		private final Parser<Output, Input> element;
+		private final Cardinality<Output, Input> cardinality;
+		private final Separator<OutputSeparator, Input> separator;
 		private final Logger                            logger;
 
 		private SeparatorFixed(
-		  final Parser<Output, Input>             element,
-		  final Cardinality<Output, Input>        cardinality,
-		  final Separator<OutputSeparator, Input>  separator,
+		  final Parser<Output, Input> element,
+		  final Cardinality<Output, Input> cardinality,
+		  final Separator<OutputSeparator, Input> separator,
 		  final Logger                            logger
 		) {
 			this.element     = element;
@@ -379,13 +394,19 @@ public final class CardinalParserBuilder {
 			logger.debug("processing `discard` parser");
 			final var result = delegate.parse(parserInput);
 			logger.trace("`discard` parser succeeded");
-			return new ParserResult<>((Void) null, result.remainder());
+			@SuppressWarnings("NullAway")
+			final var voidResult = new ParserResult<>((Void) null, result.remainder());
+			return voidResult;
 		}
 
 		@Override
-		public Parser<Void, Input> getParser() { return this; }
+		public Parser<Void, Input> getParser() {
+			return this;
+		}
 
 		@Override
-		public Logger getLogger() { return logger; }
+		public Logger getLogger() {
+			return logger;
+		}
 	}
 }

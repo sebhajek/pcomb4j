@@ -3,7 +3,8 @@ package io.github.sebhajek.pcomb4j.combinators;
 import io.github.sebhajek.pcomb4j.Parser;
 import io.github.sebhajek.pcomb4j.parsers.CombinatorParser;
 import io.github.sebhajek.pcomb4j.parsers.DelegateParser;
-import io.github.sebhajek.pcomb4j.parsers.sequence.SurroundParser;
+import io.github.sebhajek.pcomb4j.parsers.sequence.SurroundParserMandatory;
+import io.github.sebhajek.pcomb4j.parsers.sequence.SurroundParserOptional;
 
 /**
  * Combinator that wraps this parser's result with surrounding delimiters,
@@ -35,7 +36,7 @@ public interface SurroundCombinator<Output, Input>
 	 * @param parserRight the required right delimiter; never {@code null}
 	 * @param <DiscardLeft> the output type of the left delimiter
 	 * @param <DiscardRight> the output type of the right delimiter
-	 * @return a new {@link SurroundParser.Mandatory} wrapping this parser
+	 * @return a new {@link SurroundParserMandatory} wrapping this parser
 	 */
 	public default<DiscardLeft, DiscardRight> CombinatorParser<Output, Input>
 	                                          surround(
@@ -45,7 +46,7 @@ public interface SurroundCombinator<Output, Input>
 
 		final var logger = getLogger();
 		logger.info("building `surround` parser");
-		return new SurroundParser.Mandatory<>(
+		return new SurroundParserMandatory<>(
 		  DelegateParser.getDelegate(getParser()),
 		  DelegateParser.getDelegate(parserLeft),
 		  DelegateParser.getDelegate(parserRight),
@@ -62,7 +63,7 @@ public interface SurroundCombinator<Output, Input>
 	 *
 	 * @param parserOuter the delimiter used on both sides; never {@code null}
 	 * @param <Discard> the output type of the delimiter
-	 * @return a new {@link SurroundParser.Mandatory} wrapping this parser
+	 * @return a new {@link SurroundParserMandatory} wrapping this parser
 	 */
 	public default<Discard> CombinatorParser<Output, Input> surround(
 	  final Parser<Discard, Input> parserOuter
@@ -83,7 +84,7 @@ public interface SurroundCombinator<Output, Input>
 	 * @param parserRight the optional right delimiter; never {@code null}
 	 * @param <DiscardLeft> the output type of the left delimiter
 	 * @param <DiscardRight> the output type of the right delimiter
-	 * @return a new {@link SurroundParser.Optional} wrapping this parser
+	 * @return a new {@link SurroundParserOptional} wrapping this parser
 	 */
 	public default<DiscardLeft, DiscardRight> CombinatorParser<Output, Input>
 	                                          surroundOptional(
@@ -93,7 +94,7 @@ public interface SurroundCombinator<Output, Input>
 
 		final var logger = getLogger();
 		logger.info("building `surroundOptional` parser");
-		return new SurroundParser.Optional<>(
+		return new SurroundParserOptional<>(
 		  DelegateParser.getDelegate(getParser()),
 		  DelegateParser.getDelegate(parserLeft),
 		  DelegateParser.getDelegate(parserRight),
@@ -110,7 +111,7 @@ public interface SurroundCombinator<Output, Input>
 	 *
 	 * @param parserOuter the delimiter used on both sides; never {@code null}
 	 * @param <Discard> the output type of the delimiter
-	 * @return a new {@link SurroundParser.Optional} wrapping this parser
+	 * @return a new {@link SurroundParserOptional} wrapping this parser
 	 */
 	public default<Discard> CombinatorParser<Output, Input> surroundOptional(
 	  final Parser<Discard, Input> parserOuter

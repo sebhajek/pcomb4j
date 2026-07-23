@@ -14,87 +14,14 @@ import java.util.function.Predicate;
 
 /**
  * A {@link Parser} that delegates to an inner parser and then checks the result
- * against a predicate, failing with {@link NotSatisfied} when the predicate is
- * not met.
+ * against a predicate, failing with {@link FilterParserNotSatisfied} when the
+ * predicate is not met.
  *
  * @param <Output> the type of value produced by both the inner and this parser
  * @param <Input> the type of element consumed from the input
  */
 public class FilterParser<Output, Input>
   extends AbstractSourcedParser<Output, Output, Input> {
-
-	/**
-	 * Thrown when the inner parser succeeds but its result does not satisfy
-	 * the predicate.
-	 */
-	public static class NotSatisfied extends ParserError.Leaf {
-
-		/** Creates a new {@code NotSatisfied} error. */
-		public NotSatisfied() { super("Not satisfied"); }
-	}
-
-	/**
-	 * A {@link Parser} that delegates to an inner parser and then checks the
-	 * <em>next</em> input element (the first unconsumed element after the inner
-	 * parse) against a predicate, without consuming it.
-	 *
-	 * <p>This is a <em>look-ahead</em> filter: the inner parser runs normally
-	 * and advances the input; the element immediately following the inner
-	 * parser's match is tested. If the predicate holds the inner result is
-	 * returned unchanged (the look-ahead element is <strong>not</strong>
-	 * consumed). If the predicate fails, a {@link NotSatisfied} error is thrown.
-	 *
-	 * @param <Output> the type of value produced by both the inner and this
-	 *   parser
-	 * @param <Input> the type of element consumed from the input
-	 */
-	public static class LookAhead<Output, Input>
-	  extends AbstractSourcedParser<Output, Output, Input> {
-		private final Predicate<Input> predicate;
-
-		/**
-		 * Creates a new {@code LookAhead} parser.
-		 *
-		 * @param parserSource the inner parser that produces the base result;
-		 *   never {@code null}
-		 * @param predicate the condition the <em>next</em> input element must
-		 *   satisfy; never {@code null}
-		 * @param logger the logger used for debug output; never {@code null}
-		 */
-		public LookAhead(
-		  final Parser<Output, Input> parserSource,
-		  final Predicate<Input> predicate,
-		  final Logger           logger
-		) {
-
-			super(parserSource, logger);
-			this.predicate = predicate;
-		}
-
-		@Override
-		public ParserResult<Output, Input> parse(
-		  @NonNull final ParserInput<Input> parserInput
-		) throws ParserError {
-			final var logger = getLogger();
-			logger.debug("processing `filterLookAhead` parser");
-			final var parserResult = getParserSource().parse(parserInput);
-			if (getPredicate().test(parserResult.remainder().getCurrent())) {
-				logger.trace(
-				  "`filterLookAhead` parser succeeded: {}",
-				  parserResult.remainder()
-				);
-				return parserResult;
-			} else {
-				logger.trace(
-				  "`filterLookAhead` parser failed: {}",
-				  parserResult.remainder().getCurrent()
-				);
-				throw new NotSatisfied();
-			}
-		}
-
-		private Predicate<Input> getPredicate() { return predicate; }
-	}
 
 	private final Predicate<Output> predicate;
 
@@ -140,7 +67,7 @@ public class FilterParser<Output, Input>
 			logger.trace(
 			  "`filter` parser failed: {}", parserInput.getCurrent()
 			);
-			throw new NotSatisfied();
+			throw new FilterParserNotSatisfied();
 		}
 	}
 

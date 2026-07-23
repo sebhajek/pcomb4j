@@ -14,42 +14,27 @@ import org.slf4j.Logger;
  * A {@link Parser} that applies a source parser to the input and, if that
  * succeeds, validates the remainder against a second "ahead" parser.
  *
- * <p>If the ahead parser fails, a {@link ParseAheadFailed} error is thrown. If
+ * <p>If the ahead parser fails, a {@link LookAheadParserParseAheadFailed} error
+ * is thrown. If
  * it succeeds, the ahead parser's result is discarded: only the source parser's
- * result and remainder are returned. The ahead parser does not consume any input.
+ * result and remainder are returned. The ahead parser does not consume any
+ * input.
  *
- * @param <Output> the output type of this parser (same as the source parser's output)
+ * @param <Output> the output type of this parser (same as the source parser's
+ *   output)
  * @param <OutputAhead> the output type of the ahead parser
  * @param <Input> the type of element consumed from the input
  */
 public class LookAheadParser<Output, OutputAhead, Input>
   extends AbstractSourcedParser<Output, Output, Input> {
 
-	/**
-	 * Error thrown when the ahead parser fails, indicating that the look-ahead
-	 * condition was violated.
-	 */
-	static final class ParseAheadFailed extends ParserError.Wrapped {
-		/**
-		 * Creates a new {@code ParseAheadFailed} error.
-		 *
-		 * @param message a description of the look-ahead failure; never {@code null}
-		 * @param errorInner the inner error from the failed ahead parser; never {@code null}
-		 */
-		public ParseAheadFailed(
-		  final String      message,
-		  final ParserError errorInner
-		) {
-			super(message, errorInner);
-		}
-	}
-
 	private final Parser<OutputAhead, Input> parserAhead;
 
 	/**
 	 * Creates a new {@code LookAheadParser}.
 	 *
-	 * @param parserSource the source parser providing the result; never {@code null}
+	 * @param parserSource the source parser providing the result; never {@code
+	 *   null}
 	 * @param parserAhead the ahead parser that validates the remainder; never
 	 *          {@code null}
 	 * @param logger the logger used for debug output; never {@code null}
@@ -79,15 +64,20 @@ public class LookAheadParser<Output, OutputAhead, Input>
 		final var logger = getLogger();
 		logger.debug("processing `lookAhead` parser");
 		final var result = getParserSource().parse(parserInput);
-		logger.trace("`lookAhead` source parser succeeded: {}", result.result());
+		logger.trace(
+		  "`lookAhead` source parser succeeded: {}", result.result()
+		);
 		try {
-			final var remainder = result.remainder();
+			final var remainder   = result.remainder();
 			final var resultAhead = getParserAhead().parse(remainder);
 			logger.trace(
-			  "`lookAhead` ahead parser succeeded: {}", resultAhead.result());
+			  "`lookAhead` ahead parser succeeded: {}", resultAhead.result()
+			);
 		} catch (final ParserError error) {
 			logger.trace("`lookAhead` ahead parser failed", error);
-			throw new ParseAheadFailed("look ahead failed", error);
+			throw new LookAheadParserParseAheadFailed(
+			  "look ahead failed", error
+			);
 		}
 		logger.debug("`lookAhead` parser returning result");
 		return result;

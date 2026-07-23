@@ -21,21 +21,12 @@ import java.util.Optional;
  * <p>Equality is tested either via {@link Object#equals(Object)} (the default)
  * or via a custom
  * {@link Comparator} supplied at construction time. On success the matched
- * element is returned; on failure a {@link LiteralNotMatched} error is thrown.
+ * element is returned; on failure a {@link LiteralParserNotMatched} error is
+ * thrown.
  *
  * @param <Input> the type of element to match (also used as the output type)
  */
 public class LiteralParser<Input> extends AbstractParser<Input, Input> {
-
-	/**
-	 * Thrown when the current input element does not match the expected
-	 * literal value.
-	 */
-	public static final class LiteralNotMatched extends ParserError.Leaf {
-
-		/** Creates a new {@code LiteralNotMatched} error. */
-		public LiteralNotMatched() { super("Literal not matched."); }
-	}
 
 	private final Input literal;
 
@@ -91,14 +82,14 @@ public class LiteralParser<Input> extends AbstractParser<Input, Input> {
 		final var current    = parserInput.getCurrent();
 		var       logger     = getLogger();
 		var       comparison = comparator.isPresent()
-		  ? comparator.orElseThrow().compare(current, literal) == 0
-		  : literal.equals(current);
+		        ? comparator.orElseThrow().compare(current, literal) == 0
+		        : literal.equals(current);
 		if (comparison) {
 			logger.trace("getting `literal`: {} == {}", current, literal);
 			return new ParserResult<>(current, parserInput.advance());
 		} else {
 			logger.trace("getting `literal`: {} != {}", current, literal);
-			throw new LiteralNotMatched();
+			throw new LiteralParserNotMatched();
 		}
 	}
 }

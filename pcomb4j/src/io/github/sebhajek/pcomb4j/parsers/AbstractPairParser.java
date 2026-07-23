@@ -18,7 +18,8 @@ import org.slf4j.Logger;
  * @param <Input> the type of element consumed from the input
  */
 public abstract class AbstractPairParser<Output, OutputLeft, OutputRight, Input>
-  extends AbstractParser<Output, Input> implements PairParser<Output, OutputLeft, OutputRight, Input> {
+  extends    AbstractParser<Output, Input>
+  implements PairParser<Output, OutputLeft, OutputRight, Input> {
 
 	private final Parser<OutputLeft, Input> parserLeft;
 
@@ -42,7 +43,9 @@ public abstract class AbstractPairParser<Output, OutputLeft, OutputRight, Input>
 	}
 
 	@Override
-	public Parser<OutputLeft, Input> getParserLeft() { return parserLeft; }
+	public Parser<OutputLeft, Input> getParserLeft() {
+		return parserLeft;
+	}
 
 	@Override
 	public Parser<OutputRight, Input> getParserRight() {

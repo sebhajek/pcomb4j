@@ -4,13 +4,15 @@ import io.github.sebhajek.pcomb4j.ParserCombinator;
 import io.github.sebhajek.pcomb4j.parsers.CombinatorParser;
 import io.github.sebhajek.pcomb4j.parsers.DelegateParser;
 import io.github.sebhajek.pcomb4j.parsers.filter.FilterParser;
+import io.github.sebhajek.pcomb4j.parsers.filter.FilterParserLookAhead;
 
 import java.util.function.Predicate;
 
 /**
  * Combinator that forwards this parser's result only when a predicate is
  * satisfied, failing with
- * {@link FilterParser.NotSatisfied} otherwise.
+ * {@link io.github.sebhajek.pcomb4j.parsers.filter.FilterParserNotSatisfied}
+ * otherwise.
  *
  * @param <Output> the type of value produced by a successful parse
  * @param <Input> the type of element consumed from the input
@@ -76,14 +78,14 @@ public interface FilterCombinator<Output, Input>
 	 *
 	 * @param predicate the condition the next input element must satisfy; never
 	 *   {@code null}
-	 * @return a new {@link FilterParser.LookAhead} wrapping this parser
+	 * @return a new {@link FilterParserLookAhead} wrapping this parser
 	 */
 	public default CombinatorParser<Output, Input> filterLookAhead(
 	  final Predicate<Input> predicate
 	) {
 		final var logger = getLogger();
 		logger.info("building `filterLookAhead` parser");
-		return new FilterParser.LookAhead<>(
+		return new FilterParserLookAhead<>(
 		  DelegateParser.getDelegate(getParser()), predicate, logger
 		);
 	}
@@ -96,14 +98,14 @@ public interface FilterCombinator<Output, Input>
 	 * equality checks.
 	 *
 	 * @param value the exact value the next input element must match
-	 * @return a new {@link FilterParser.LookAhead} wrapping this parser
+	 * @return a new {@link FilterParserLookAhead} wrapping this parser
 	 */
 	public default CombinatorParser<Output, Input> filterLookAhead(
 	  final Input value
 	) {
 		final var logger = getLogger();
 		logger.info("building `filterLookAhead` parser");
-		return new FilterParser.LookAhead<>(
+		return new FilterParserLookAhead<>(
 		  DelegateParser.getDelegate(getParser()), value::equals, logger
 		);
 	}

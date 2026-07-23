@@ -23,16 +23,6 @@ import org.slf4j.Logger;
 public class EofParser<Input> extends AbstractParser<Void, Input> {
 
 	/**
-	 * Error thrown when the input is not empty, indicating that the EOF
-	 * condition was not matched.
-	 */
-	public static final class EofNotMatched extends ParserError.Leaf {
-
-		/** Creates a new {@code EofNotMatched} error. */
-		public EofNotMatched() { super("Expected EOF."); }
-	}
-
-	/**
 	 * Creates a new {@code EofParser}.
 	 *
 	 * @param logger the logger used for debug output; never {@code null}
@@ -59,6 +49,6 @@ public class EofParser<Input> extends AbstractParser<Void, Input> {
 			return new ParserResult<>(null, parserInput);
 		}
 		logger.trace("`eof` parser failed: input still contains elements");
-		throw new EofNotMatched();
+		throw new EofParserNotMatched();
 	}
 }

@@ -35,6 +35,5 @@ public interface CombinatorParser<Output, Input>
           OrCombinator<Output, Input>, OptionalCombinator<Output, Input>,
           CardinalityCombinator<Output, Input>, ErrorCombinator<Output, Input>,
           TraceCombinator<Output, Input>, NotCombinator<Output, Input>,
-          LookAheadCombinator<Output, Input>,
-          SurroundCombinator<Output, Input>,
+          LookAheadCombinator<Output, Input>, SurroundCombinator<Output, Input>,
           AssociativeChainCombinator<Output, Input> {}

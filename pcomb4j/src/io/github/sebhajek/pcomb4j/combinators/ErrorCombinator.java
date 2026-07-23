@@ -4,7 +4,9 @@ import io.github.sebhajek.pcomb4j.ParserError;
 import io.github.sebhajek.pcomb4j.ParserInput;
 import io.github.sebhajek.pcomb4j.parsers.CombinatorParser;
 import io.github.sebhajek.pcomb4j.parsers.DelegateParser;
-import io.github.sebhajek.pcomb4j.parsers.decorator.ErrorParser;
+import io.github.sebhajek.pcomb4j.parsers.decorator.ErrorParserLabel;
+import io.github.sebhajek.pcomb4j.parsers.decorator.ErrorParserMessage;
+import io.github.sebhajek.pcomb4j.parsers.decorator.ErrorParserSupplied;
 
 import java.util.function.BiFunction;
 
@@ -28,34 +30,36 @@ public interface ErrorCombinator<Output, Input>
   extends DelegateParser<Output, Input> {
 
 	/**
-	 * Creates a parser that, on failure, wraps the original error in a {@link
-	 * ErrorParser.LabeledError} with the given fixed {@code label}.
+	 * Creates a parser that, on failure, wraps the original error in an {@link
+	 * io.github.sebhajek.pcomb4j.parsers.decorator.ErrorLabeledError} with the
+	 * given fixed {@code label}.
 	 *
 	 * @param label a static human-readable description of what was expected
-	 * @return a new {@link ErrorParser.Label} wrapping this parser
+	 * @return a new {@link ErrorParserLabel} wrapping this parser
 	 */
 	public default CombinatorParser<Output, Input> labelError(
 	  final String label
 	) {
-		return new ErrorParser.Label<>(
+		return new ErrorParserLabel<>(
 		  label, DelegateParser.getDelegate(getParser()), getLogger()
 		);
 	}
 
 	/**
-	 * Creates a parser that, on failure, wraps the original error in a {@link
-	 * ErrorParser.LabeledError} whose message is computed dynamically from the
-	 * current input and the original error.
+	 * Creates a parser that, on failure, wraps the original error in an {@link
+	 * io.github.sebhajek.pcomb4j.parsers.decorator.ErrorLabeledError} whose
+	 * message is computed dynamically from the current input and the original
+	 * error.
 	 *
 	 * @param messageFactory a function receiving the current {@link
 	 *   ParserInput} and the original
 	 *     {@link ParserError}, returning a message string
-	 * @return a new {@link ErrorParser.Message} wrapping this parser
+	 * @return a new {@link ErrorParserMessage} wrapping this parser
 	 */
 	public default CombinatorParser<Output, Input> labelError(
 	  final BiFunction<ParserInput<Input>, ParserError, String> messageFactory
 	) {
-		return new ErrorParser.Message<>(
+		return new ErrorParserMessage<>(
 		  messageFactory, DelegateParser.getDelegate(getParser()), getLogger()
 		);
 	}
@@ -68,13 +72,13 @@ public interface ErrorCombinator<Output, Input>
 	 *   and the original
 	 *     {@link ParserError}, returning the replacement {@link ParserError} to
 	 * throw
-	 * @return a new {@link ErrorParser.Supplied} wrapping this parser
+	 * @return a new {@link ErrorParserSupplied} wrapping this parser
 	 */
 	public default CombinatorParser<Output, Input> withError(
 	  final BiFunction<ParserInput<Input>, ParserError, ParserError>
 	        errorFactory
 	) {
-		return new ErrorParser.Supplied<>(
+		return new ErrorParserSupplied<>(
 		  errorFactory, DelegateParser.getDelegate(getParser()), getLogger()
 		);
 	}

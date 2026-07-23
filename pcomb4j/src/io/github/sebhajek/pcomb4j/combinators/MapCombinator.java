@@ -2,7 +2,9 @@ package io.github.sebhajek.pcomb4j.combinators;
 
 import io.github.sebhajek.pcomb4j.parsers.CombinatorParser;
 import io.github.sebhajek.pcomb4j.parsers.DelegateParser;
-import io.github.sebhajek.pcomb4j.parsers.map.MapParser;
+import io.github.sebhajek.pcomb4j.parsers.map.MapParserCast;
+import io.github.sebhajek.pcomb4j.parsers.map.MapParserPure;
+import io.github.sebhajek.pcomb4j.parsers.map.MapParserTransform;
 
 import java.util.function.Function;
 
@@ -31,14 +33,14 @@ public interface MapCombinator<Output, Input>
 	 *
 	 * @param value the constant value to return on success; never {@code null}
 	 * @param <OutputMapped> the type of the constant value
-	 * @return a new {@link MapParser.Pure}
+	 * @return a new {@link MapParserPure}
 	 */
 	public default<OutputMapped> CombinatorParser<OutputMapped, Input> pure(
 	  final OutputMapped value
 	) {
 		final var logger = getLogger();
 		logger.info("building `pure` parser");
-		return new MapParser.Pure<>(
+		return new MapParserPure<>(
 		  DelegateParser.getDelegate(getParser()), value, logger
 		);
 	}
@@ -51,14 +53,14 @@ public interface MapCombinator<Output, Input>
 	 *   OutputMapped}; never {@code
 	 *     null}
 	 * @param <OutputMapped> the type of the transformed value
-	 * @return a new {@link MapParser.Transform}
+	 * @return a new {@link MapParserTransform}
 	 */
 	public default<OutputMapped> CombinatorParser<OutputMapped, Input> map(
 	  final Function<Output, OutputMapped> mapper
 	) {
 		final var logger = getLogger();
 		logger.info("building `map` parser");
-		return new MapParser.Transform<>(
+		return new MapParserTransform<>(
 		  DelegateParser.getDelegate(getParser()), mapper, logger
 		);
 	}
@@ -74,14 +76,14 @@ public interface MapCombinator<Output, Input>
 	 *
 	 * @param type the target type; never {@code null}
 	 * @param <OutputMapped> the supertype to widen to
-	 * @return a new {@link MapParser.Cast}
+	 * @return a new {@link MapParserCast}
 	 */
 	public default<OutputMapped> CombinatorParser<OutputMapped, Input> cast(
 	  final Class<OutputMapped> type
 	) {
 		final var logger = getLogger();
 		logger.info("building `cast` parser to {}", type.getName());
-		return new MapParser.Cast<>(
+		return new MapParserCast<>(
 		  DelegateParser.getDelegate(getParser()), type, logger
 		);
 	}

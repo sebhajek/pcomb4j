@@ -1,6 +1,7 @@
 package io.github.sebhajek.pcomb4j.factories;
 
-import io.github.sebhajek.pcomb4j.parsers.primitive.SetParser;
+import io.github.sebhajek.pcomb4j.parsers.primitive.SetParserAny;
+import io.github.sebhajek.pcomb4j.parsers.primitive.SetParserNone;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -24,14 +25,14 @@ public interface SetFactory extends LoggedFactory {
 	 * @param values the set of accepted values (duplicates are ignored); never
 	 *   {@code null}
 	 * @param <Input> the type of element consumed from the input
-	 * @return a new {@link SetParser.Any} parser backed by the factory's logger
+	 * @return a new {@link SetParserAny} parser backed by the factory's logger
 	 */
 	@SuppressWarnings("unchecked")
-	public default<Input> SetParser.Any<Input> anyOf(final Input... values) {
+	public default<Input> SetParserAny<Input> anyOf(final Input... values) {
 		var logger = getLogger();
 		logger.info("building `anyOf` parser");
 		var set = Arrays.stream(values).collect(Collectors.toSet());
-		return new SetParser.Any<>(set, logger);
+		return new SetParserAny<>(set, logger);
 	}
 
 	/**
@@ -41,13 +42,13 @@ public interface SetFactory extends LoggedFactory {
 	 * @param values the collection of accepted values (duplicates are ignored);
 	 *   never {@code null}
 	 * @param <Input> the type of element consumed from the input
-	 * @return a new {@link SetParser.Any} parser backed by the factory's logger
+	 * @return a new {@link SetParserAny} parser backed by the factory's logger
 	 */
-	public default<Input> SetParser.Any<Input> anyOf(Collection<Input> values) {
+	public default<Input> SetParserAny<Input> anyOf(Collection<Input> values) {
 		var logger = getLogger();
 		logger.info("building `anyOf` parser");
 		var set = values.stream().collect(Collectors.toSet());
-		return new SetParser.Any<>(set, logger);
+		return new SetParserAny<>(set, logger);
 	}
 
 	/**
@@ -57,15 +58,15 @@ public interface SetFactory extends LoggedFactory {
 	 * @param values the set of rejected values (duplicates are ignored); never
 	 *   {@code null}
 	 * @param <Input> the type of element consumed from the input
-	 * @return a new {@link SetParser.None} parser backed by the factory's
+	 * @return a new {@link SetParserNone} parser backed by the factory's
 	 *   logger
 	 */
 	@SuppressWarnings("unchecked")
-	public default<Input> SetParser.None<Input> noneOf(final Input... values) {
+	public default<Input> SetParserNone<Input> noneOf(final Input... values) {
 		var logger = getLogger();
 		logger.info("building `noneOf` parser");
 		var set = Arrays.stream(values).collect(Collectors.toSet());
-		return new SetParser.None<>(set, logger);
+		return new SetParserNone<>(set, logger);
 	}
 
 	/**
@@ -75,15 +76,15 @@ public interface SetFactory extends LoggedFactory {
 	 * @param values the collection of rejected values (duplicates are ignored);
 	 *   never {@code null}
 	 * @param <Input> the type of element consumed from the input
-	 * @return a new {@link SetParser.None} parser backed by the factory's
+	 * @return a new {@link SetParserNone} parser backed by the factory's
 	 *   logger
 	 */
-	public default<Input> SetParser.None<Input> noneOf(
+	public default<Input> SetParserNone<Input> noneOf(
 	  Collection<Input> values
 	) {
 		var logger = getLogger();
 		logger.info("building `noneOf` parser");
 		var set = values.stream().collect(Collectors.toSet());
-		return new SetParser.None<>(set, logger);
+		return new SetParserNone<>(set, logger);
 	}
 }

@@ -3,8 +3,8 @@ package io.github.sebhajek.pcomb4j.parsers;
 import io.github.sebhajek.pcomb4j.ParserError;
 import io.github.sebhajek.pcomb4j.ParserFactory;
 import io.github.sebhajek.pcomb4j.ParserInput;
+import io.github.sebhajek.pcomb4j.parsers.primitive.SetParserNotMatched;
 
-import io.github.sebhajek.pcomb4j.parsers.primitive.SetParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +37,7 @@ class SetParserTests {
 		final var parser = PARSER_FACTORY.anyOf('a', 'b', 'c');
 		final var input  = ParserInput.fromString("def");
 
-		assertThatExceptionOfType(SetParser.SetNotMatched.class)
+		assertThatExceptionOfType(SetParserNotMatched.class)
 		  .isThrownBy(() -> parser.parse(input));
 	}
 
@@ -68,7 +68,7 @@ class SetParserTests {
 		final var parser = PARSER_FACTORY.anyOf(List.of('a', 'b', 'c'));
 		final var input  = ParserInput.fromString("def");
 
-		assertThatExceptionOfType(SetParser.SetNotMatched.class)
+		assertThatExceptionOfType(SetParserNotMatched.class)
 		  .isThrownBy(() -> parser.parse(input));
 	}
 
@@ -88,7 +88,7 @@ class SetParserTests {
 		final var parser = PARSER_FACTORY.noneOf('a', 'b', 'c');
 		final var input  = ParserInput.fromString("abc");
 
-		assertThatExceptionOfType(SetParser.SetNotMatched.class)
+		assertThatExceptionOfType(SetParserNotMatched.class)
 		  .isThrownBy(() -> parser.parse(input));
 	}
 
@@ -119,7 +119,7 @@ class SetParserTests {
 		final var parser = PARSER_FACTORY.noneOf(List.of('x', 'y', 'z'));
 		final var input  = ParserInput.fromString("xyz");
 
-		assertThatExceptionOfType(SetParser.SetNotMatched.class)
+		assertThatExceptionOfType(SetParserNotMatched.class)
 		  .isThrownBy(() -> parser.parse(input));
 	}
 }

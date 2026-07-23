@@ -2,6 +2,7 @@ package io.github.sebhajek.pcomb4j.factories;
 
 import io.github.sebhajek.pcomb4j.Parser;
 import io.github.sebhajek.pcomb4j.parsers.decorator.LazyParser;
+import io.github.sebhajek.pcomb4j.parsers.decorator.LazyParserMemoized;
 
 import java.util.function.Supplier;
 
@@ -35,19 +36,19 @@ public interface LazyFactory extends LoggedFactory {
 	}
 
 	/**
-	 * Creates a {@link LazyParser.Memoized} whose inner parser is obtained from
+	 * Creates a {@link LazyParserMemoized} whose inner parser is obtained from
 	 * {@code supplier} on the first parse call and cached thereafter.
 	 *
 	 * @param supplier a supplier of the actual parser; never {@code null}
 	 * @param <Output> the output type of the inner parser
 	 * @param <Input> the type of element consumed from the input
-	 * @return a new {@link LazyParser.Memoized}
+	 * @return a new {@link LazyParserMemoized}
 	 */
 	public default<Output, Input> LazyParser<Output, Input> lazyMemoized(
 	  final Supplier<Parser<Output, Input>> supplier
 	) {
 		final var logger = getLogger();
 		logger.info("building `lazy` parser");
-		return new LazyParser.Memoized<>(supplier, logger);
+		return new LazyParserMemoized<>(supplier, logger);
 	}
 }

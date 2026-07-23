@@ -4,10 +4,10 @@ import io.github.sebhajek.pcomb4j.ParserError;
 import io.github.sebhajek.pcomb4j.ParserFactory;
 import io.github.sebhajek.pcomb4j.ParserInput;
 
-import java.util.function.Predicate;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
@@ -167,7 +167,7 @@ class CardinalParserTests {
 		                     .zeroOrMore()
 		                     .separatedBy(PARSER_FACTORY.literal(','))
 		                     .build();
-		final var input  = ParserInput.fromString("");
+		final var input = ParserInput.fromString("");
 
 		final var result = parser.parse(input);
 
@@ -181,7 +181,7 @@ class CardinalParserTests {
 		                     .zeroOrMore()
 		                     .separatedBy(PARSER_FACTORY.literal(','))
 		                     .build();
-		final var input  = ParserInput.fromString("a");
+		final var input = ParserInput.fromString("a");
 
 		final var result = parser.parse(input);
 
@@ -195,7 +195,7 @@ class CardinalParserTests {
 		                     .zeroOrMore()
 		                     .separatedBy(PARSER_FACTORY.literal(','))
 		                     .build();
-		final var input  = ParserInput.fromString("a,b,c");
+		final var input = ParserInput.fromString("a,b,c");
 
 		final var result = parser.parse(input);
 
@@ -209,7 +209,7 @@ class CardinalParserTests {
 		                     .zeroOrMore()
 		                     .separatedBy(PARSER_FACTORY.literal(','))
 		                     .build();
-		final var input  = ParserInput.fromString("ay");
+		final var input = ParserInput.fromString("ay");
 
 		final var result = parser.parse(input);
 
@@ -223,7 +223,7 @@ class CardinalParserTests {
 		                     .oneOrMore()
 		                     .separatedBy(PARSER_FACTORY.literal(','))
 		                     .build();
-		final var input  = ParserInput.fromString("b");
+		final var input = ParserInput.fromString("b");
 
 		assertThatExceptionOfType(ParserError.class)
 		  .isThrownBy(() -> parser.parse(input));
@@ -235,7 +235,7 @@ class CardinalParserTests {
 		                     .oneOrMore()
 		                     .separatedBy(PARSER_FACTORY.literal(','))
 		                     .build();
-		final var input  = ParserInput.fromString("a");
+		final var input = ParserInput.fromString("a");
 
 		final var result = parser.parse(input);
 
@@ -249,7 +249,7 @@ class CardinalParserTests {
 		                     .oneOrMore()
 		                     .separatedBy(PARSER_FACTORY.literal(','))
 		                     .build();
-		final var input  = ParserInput.fromString("a,b,c");
+		final var input = ParserInput.fromString("a,b,c");
 
 		final var result = parser.parse(input);
 
@@ -264,7 +264,7 @@ class CardinalParserTests {
 		                     .zeroOrMore()
 		                     .separatedByTrailing(PARSER_FACTORY.literal(','))
 		                     .build();
-		final var input  = ParserInput.fromString("a,b,");
+		final var input = ParserInput.fromString("a,b,");
 
 		final var result = parser.parse(input);
 
@@ -278,7 +278,7 @@ class CardinalParserTests {
 		                     .zeroOrMore()
 		                     .separatedByTrailing(PARSER_FACTORY.literal(','))
 		                     .build();
-		final var input  = ParserInput.fromString("a,b");
+		final var input = ParserInput.fromString("a,b");
 
 		final var result = parser.parse(input);
 
@@ -292,7 +292,7 @@ class CardinalParserTests {
 		                     .zeroOrMore()
 		                     .separatedByTrailing(PARSER_FACTORY.literal(','))
 		                     .build();
-		final var input  = ParserInput.fromString("");
+		final var input = ParserInput.fromString("");
 
 		final var result = parser.parse(input);
 
@@ -307,7 +307,7 @@ class CardinalParserTests {
 		                     .oneOrMore()
 		                     .separatedByTrailing(PARSER_FACTORY.literal(','))
 		                     .build();
-		final var input  = ParserInput.fromString("a,b,");
+		final var input = ParserInput.fromString("a,b,");
 
 		final var result = parser.parse(input);
 
@@ -321,7 +321,7 @@ class CardinalParserTests {
 		                     .oneOrMore()
 		                     .separatedByTrailing(PARSER_FACTORY.literal(','))
 		                     .build();
-		final var input  = ParserInput.fromString("b");
+		final var input = ParserInput.fromString("b");
 
 		assertThatExceptionOfType(ParserError.class)
 		  .isThrownBy(() -> parser.parse(input));
@@ -452,9 +452,9 @@ class CardinalParserTests {
 
 	@Test
 	void oneOrMoreUntilPredicateRequiresFirst() {
-		final var parser = PARSER_FACTORY.literal('a').atLeastOne(
-		  (Predicate<Character>) (c -> c == 'x')
-		).build();
+		final var parser = PARSER_FACTORY.literal('a')
+		                     .atLeastOne((Predicate<Character>) (c -> c == 'x'))
+		                     .build();
 		final var input = ParserInput.fromString("b");
 
 		assertThatExceptionOfType(ParserError.class)
@@ -475,9 +475,9 @@ class CardinalParserTests {
 
 	@Test
 	void zeroOrMoreUntilParserEmptyInput() throws ParserError {
-		final var parser = PARSER_FACTORY.<Character>any().until(
-		  PARSER_FACTORY.literal('x')
-		).build();
+		final var parser = PARSER_FACTORY.<Character>any()
+		                     .until(PARSER_FACTORY.literal('x'))
+		                     .build();
 		final var input = ParserInput.fromString("");
 
 		final var result = parser.parse(input);
@@ -488,9 +488,9 @@ class CardinalParserTests {
 
 	@Test
 	void zeroOrMoreUntilParserStopsAtSentinel() throws ParserError {
-		final var parser = PARSER_FACTORY.<Character>any().until(
-		  PARSER_FACTORY.literal('x')
-		).build();
+		final var parser = PARSER_FACTORY.<Character>any()
+		                     .until(PARSER_FACTORY.literal('x'))
+		                     .build();
 		final var input = ParserInput.fromString("abxc");
 
 		final var result = parser.parse(input);
@@ -501,9 +501,9 @@ class CardinalParserTests {
 
 	@Test
 	void zeroOrMoreUntilParserNoSentinel() throws ParserError {
-		final var parser = PARSER_FACTORY.<Character>any().until(
-		  PARSER_FACTORY.literal('x')
-		).build();
+		final var parser = PARSER_FACTORY.<Character>any()
+		                     .until(PARSER_FACTORY.literal('x'))
+		                     .build();
 		final var input = ParserInput.fromString("abc");
 
 		final var result = parser.parse(input);
@@ -514,9 +514,9 @@ class CardinalParserTests {
 
 	@Test
 	void oneOrMoreUntilParserRequiresFirst() {
-		final var parser = PARSER_FACTORY.literal('a').atLeastOne(
-		  PARSER_FACTORY.literal('x')
-		).build();
+		final var parser = PARSER_FACTORY.literal('a')
+		                     .atLeastOne(PARSER_FACTORY.literal('x'))
+		                     .build();
 		final var input = ParserInput.fromString("b");
 
 		assertThatExceptionOfType(ParserError.class)
@@ -525,9 +525,9 @@ class CardinalParserTests {
 
 	@Test
 	void oneOrMoreUntilParserStopsAtSentinel() throws ParserError {
-		final var parser = PARSER_FACTORY.<Character>any().atLeastOne(
-		  PARSER_FACTORY.literal('x')
-		).build();
+		final var parser = PARSER_FACTORY.<Character>any()
+		                     .atLeastOne(PARSER_FACTORY.literal('x'))
+		                     .build();
 		final var input = ParserInput.fromString("abxc");
 
 		final var result = parser.parse(input);

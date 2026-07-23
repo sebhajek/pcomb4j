@@ -3,9 +3,9 @@ package io.github.sebhajek.pcomb4j.parsers;
 import io.github.sebhajek.pcomb4j.ParserError;
 import io.github.sebhajek.pcomb4j.ParserFactory;
 import io.github.sebhajek.pcomb4j.ParserInput;
+import io.github.sebhajek.pcomb4j.parsers.decorator.ErrorLabeledError;
+import io.github.sebhajek.pcomb4j.parsers.primitive.LiteralParserNotMatched;
 
-import io.github.sebhajek.pcomb4j.parsers.decorator.ErrorParser;
-import io.github.sebhajek.pcomb4j.parsers.primitive.LiteralParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,7 +55,7 @@ class ErrorParserTests {
 		  .isThrownBy(() -> parser.parse(input))
 		  .satisfies(e -> {
 			  assertThat(e.getMessage()).contains("Expected char, got");
-			  assertThat(e).isInstanceOf(ErrorParser.LabeledError.class);
+			  assertThat(e).isInstanceOf(ErrorLabeledError.class);
 		  });
 	}
 
@@ -75,7 +75,7 @@ class ErrorParserTests {
 	@Test
 	void suppliedParserReplacesError() {
 		final var parser = PARSER_FACTORY.<Character>any().withError(
-		  (input, err) -> new LiteralParser.LiteralNotMatched()
+		  (input, err) -> new LiteralParserNotMatched()
 		);
 		final var input = ParserInput.fromString("");
 
@@ -83,15 +83,14 @@ class ErrorParserTests {
 		  .isThrownBy(() -> parser.parse(input))
 		  .satisfies(e -> {
 			  assertThat(e.getMessage()).contains("Literal not matched");
-			  assertThat(e)
-			    .isExactlyInstanceOf(LiteralParser.LiteralNotMatched.class);
+			  assertThat(e).isExactlyInstanceOf(LiteralParserNotMatched.class);
 		  });
 	}
 
 	@Test
 	void suppliedParserPreservesInnerResultOnSuccess() throws ParserError {
 		final var parser = PARSER_FACTORY.<Character>any().withError(
-		  (input, err) -> new LiteralParser.LiteralNotMatched()
+		  (input, err) -> new LiteralParserNotMatched()
 		);
 		final var input = ParserInput.fromString("abc");
 

@@ -74,9 +74,9 @@ class FilterParserTests {
 
 	@Test
 	void filterLookAheadAcceptsMatchingRemainder() throws ParserError {
-		final var parser = PARSER_FACTORY.<Character>any()
-		                     .filterLookAhead((c) -> c == 'b');
-		final var input  = ParserInput.fromString("ab");
+		final var parser =
+		  PARSER_FACTORY.<Character>any().filterLookAhead((c) -> c == 'b');
+		final var input = ParserInput.fromString("ab");
 
 		final var result = parser.parse(input);
 
@@ -86,9 +86,9 @@ class FilterParserTests {
 
 	@Test
 	void filterLookAheadRejectsNonMatchingRemainder() {
-		final var parser = PARSER_FACTORY.<Character>any()
-		                     .filterLookAhead((c) -> c == 'c');
-		final var input  = ParserInput.fromString("ab");
+		final var parser =
+		  PARSER_FACTORY.<Character>any().filterLookAhead((c) -> c == 'c');
+		final var input = ParserInput.fromString("ab");
 
 		assertThatExceptionOfType(ParserError.class)
 		  .isThrownBy(() -> parser.parse(input));
@@ -137,9 +137,10 @@ class FilterParserTests {
 
 	@Test
 	void filterLookAheadByTypeNonMatching() {
-		final var parser = PARSER_FACTORY.<Character>any()
-		                     .filterLookAhead(Integer.class::isInstance);
-		final var input  = ParserInput.fromString("ab");
+		final var parser = PARSER_FACTORY.<Character>any().filterLookAhead(
+		  Integer.class ::isInstance
+		);
+		final var input = ParserInput.fromString("ab");
 
 		assertThatExceptionOfType(ParserError.class)
 		  .isThrownBy(() -> parser.parse(input));
@@ -150,7 +151,7 @@ class FilterParserTests {
 		final var parser = PARSER_FACTORY.<Character>literal('a')
 		                     .cast(Object.class)
 		                     .filter(Integer.class);
-		final var input  = ParserInput.fromString("a");
+		final var input = ParserInput.fromString("a");
 
 		assertThatExceptionOfType(ParserError.class)
 		  .isThrownBy(() -> parser.parse(input));

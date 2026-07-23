@@ -4,6 +4,7 @@ import io.github.sebhajek.pcomb4j.Parser;
 import io.github.sebhajek.pcomb4j.ParserResult;
 import io.github.sebhajek.pcomb4j.parsers.CombinatorParser;
 import io.github.sebhajek.pcomb4j.parsers.DelegateParser;
+import io.github.sebhajek.pcomb4j.parsers.choice.EitherParser;
 import io.github.sebhajek.pcomb4j.parsers.choice.OrParser;
 
 /**
@@ -34,7 +35,7 @@ public interface OrCombinator<OutputLeft, Input>
 	 *
 	 * @param parserOthers one or more fallback parsers; none may be {@code
 	 *   null}
-	 * @return a left-associative chain of {@link OrParser.Or} instances
+	 * @return a left-associative chain of {@link OrParser} instances
 	 * @throws IllegalArgumentException if {@code parserOthers} is empty
 	 */
 	@SuppressWarnings("unchecked")
@@ -46,13 +47,13 @@ public interface OrCombinator<OutputLeft, Input>
 		}
 		final var logger = getLogger();
 		logger.info("building `or` parser");
-		var orParser = new OrParser.Or<>(
+		var orParser = new OrParser<>(
 		  DelegateParser.getDelegate(getParser()),
 		  DelegateParser.getDelegate(parserOthers[0]),
 		  logger
 		);
 		for (var idx = 1; idx < parserOthers.length; ++idx) {
-			orParser = new OrParser.Or<>(
+			orParser = new OrParser<>(
 			  orParser, DelegateParser.getDelegate(parserOthers[idx]), logger
 			);
 		}
@@ -64,14 +65,14 @@ public interface OrCombinator<OutputLeft, Input>
 	 * parserOther}.
 	 *
 	 * @param parserOther the fallback parser; never {@code null}
-	 * @return a new {@link OrParser.Or}
+	 * @return a new {@link OrParser}
 	 */
 	public default CombinatorParser<OutputLeft, Input> or(
 	  final Parser<OutputLeft, Input> parserOther
 	) {
 		final var logger = getLogger();
 		logger.info("building `or` parser");
-		return new OrParser.Or<>(
+		return new OrParser<>(
 		  DelegateParser.getDelegate(getParser()),
 		  DelegateParser.getDelegate(parserOther),
 		  logger
@@ -86,14 +87,14 @@ public interface OrCombinator<OutputLeft, Input>
 	 *
 	 * @param parserOther the right (fallback) parser; never {@code null}
 	 * @param <OutputRight> the type produced by the right parser
-	 * @return a new {@link OrParser.Either}
+	 * @return a new {@link EitherParser}
 	 */
 	public default<OutputRight>
 	  CombinatorParser<ParserResult.Either<OutputLeft, OutputRight>, Input>
 	  orElse(final Parser<OutputRight, Input> parserOther) {
 		final var logger = getLogger();
 		logger.info("building `orElse` parser");
-		return new OrParser.Either<>(
+		return new EitherParser<>(
 		  DelegateParser.getDelegate(getParser()),
 		  DelegateParser.getDelegate(parserOther),
 		  logger

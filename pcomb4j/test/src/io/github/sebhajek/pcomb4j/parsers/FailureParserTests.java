@@ -3,8 +3,8 @@ package io.github.sebhajek.pcomb4j.parsers;
 import io.github.sebhajek.pcomb4j.ParserError;
 import io.github.sebhajek.pcomb4j.ParserFactory;
 import io.github.sebhajek.pcomb4j.ParserInput;
+import io.github.sebhajek.pcomb4j.parsers.primitive.LiteralParserNotMatched;
 
-import io.github.sebhajek.pcomb4j.parsers.primitive.LiteralParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +21,7 @@ class FailureParserTests {
 	void alwaysFailsOnEmptyInput() {
 		final var parser =
 		  ParserFactory.withLogger(logger).<Character>alwaysFails(
-		    () -> new LiteralParser.LiteralNotMatched()
+		    () -> new LiteralParserNotMatched()
 		  );
 		final var input = ParserInput.fromString("");
 
@@ -33,7 +33,7 @@ class FailureParserTests {
 	void alwaysFailsOnNonEmptyInput() {
 		final var parser =
 		  ParserFactory.withLogger(logger).<Character>alwaysFails(
-		    () -> new LiteralParser.LiteralNotMatched()
+		    () -> new LiteralParserNotMatched()
 		  );
 		final var input = ParserInput.fromString("abc");
 
