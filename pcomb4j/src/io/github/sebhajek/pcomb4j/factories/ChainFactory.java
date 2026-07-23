@@ -1,7 +1,7 @@
 package io.github.sebhajek.pcomb4j.factories;
 
 import io.github.sebhajek.pcomb4j.Parser;
-import io.github.sebhajek.pcomb4j.parsers.sequence.ChainParser;
+import io.github.sebhajek.pcomb4j.parsers.chain.ChainParser;
 
 import java.util.List;
 

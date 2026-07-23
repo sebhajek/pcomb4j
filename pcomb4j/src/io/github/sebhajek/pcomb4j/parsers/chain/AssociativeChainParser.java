@@ -1,4 +1,4 @@
-package io.github.sebhajek.pcomb4j.parsers.sequence;
+package io.github.sebhajek.pcomb4j.parsers.chain;
 
 import io.github.sebhajek.pcomb4j.Parser;
 import io.github.sebhajek.pcomb4j.ParserError;

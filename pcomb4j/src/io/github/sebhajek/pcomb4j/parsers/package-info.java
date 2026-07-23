@@ -24,7 +24,7 @@
  *       {@link java.util.Optional}.
  *   <li>{@link io.github.sebhajek.pcomb4j.parsers.CardinalParser} — applies a
  * parser zero-or-more or one-or-more times. <li>{@link
- * io.github.sebhajek.pcomb4j.parsers.sequence.ChainParser} — applies a fixed sequence of
+ * io.github.sebhajek.pcomb4j.parsers.chain.ChainParser} — applies a fixed sequence of
  *       parsers in order.
  *   <li>{@link io.github.sebhajek.pcomb4j.parsers.LazyParser} — defers parser
  * construction for recursive grammars. <li>{@link
