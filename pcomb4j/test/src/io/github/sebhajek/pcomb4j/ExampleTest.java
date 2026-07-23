@@ -26,7 +26,7 @@ public class ExampleTest {
 		// 3. Build a CSV parser: one or more items separated by commas
 		// (item + comma) zero or more times, followed by a trailing item
 		final var csvParser =
-		  item.andFirst(comma).zeroOrMore().and(item).map(sequence -> {
+		  item.andFirst(comma).zeroOrMore().build().and(item).map(sequence -> {
 			  final var list = new ArrayList<>(sequence.first());
 			  list.add(sequence.second());
 			  return list;
